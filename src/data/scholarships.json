@@ -1,0 +1,29 @@
+{
+  "merit_scholarships": {
+    "title": "Academic Excellence Scholarship",
+    "undergraduate_eligibility": "Available for top-performing undergraduate (BS) students in each semester, based on academic results and merit rankings.",
+    "graduate_ms_eligibility": "Not eligible for academic excellence scholarships.",
+    "graduate_phd_eligibility": "Not eligible for academic excellence scholarships.",
+    "award_timing": "Awarded and adjusted in the student's ledger after evaluation of semester results, according to the university's scholarship policy."
+  },
+  "admission_scholarships": {
+    "policy": "No scholarship is awarded automatically at the time of admission based on intermediate or entry test scores. All merit scholarships are based on semester performance once the student enrolled."
+  },
+  "financial_aid_options": [
+    {
+      "name": "HEC Need-Based Scholarship",
+      "description": "Financial assistance program for students from low-income families to cover tuition fees and living expenses.",
+      "eligibility": "All newly admitted undergraduate students facing financial difficulties. Selection is based on household income, asset evaluation, and committee interviews."
+    },
+    {
+      "name": "PEEF Scholarship (Punjab Education Endowment Fund)",
+      "description": "Scholarships for talented and needy students who have Punjab domicile.",
+      "eligibility": "Intermediate exam passed from a government institution in Punjab with a minimum of 60% marks, and household income below the prescribed threshold."
+    },
+    {
+      "name": "COMSATS Endowment Fund (CEF) / Merit & Need-Based",
+      "description": "Internal university support system for students facing sudden financial hardships during their degree.",
+      "eligibility": "Enrolled students maintaining a minimum CGPA with verified financial need. Application forms are processed through the campus Financial Aid Office."
+    }
+  ]
+}

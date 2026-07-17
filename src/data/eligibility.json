@@ -1,0 +1,159 @@
+{
+  "undergraduate": {
+    "computing_programs": {
+      "min_percentage": 50,
+      "programs": ["BS Computer Science", "BS Artificial Intelligence", "BS Software Engineering"],
+      "detailed_criteria": "At least 50% marks in Intermediate (HSSC) examination with Mathematics or equivalent qualification with Mathematics, certified by IBCC. OR At least 50% marks in Intermediate (HSSC) examination with Pre-Medical or equivalent qualification, certified by IBCC. Students who have appeared/passed Intermediate with Pre-Med subjects are eligible subject to the students clearing the specified Mathematics courses within two semesters of starting the BS Studies at CUI.",
+      "entry_test_requirement": "Valid NTS test score as per CUI policy."
+    },
+    "engineering_programs": {
+      "min_percentage": 60,
+      "programs": ["BS Computer Engineering", "BS Electrical Engineering", "BS Civil Engineering", "BS Mechanical Engineering"],
+      "detailed_criteria": "Intermediate (HS/HSSC/A-level) Pre-Engineering with Physics, Mathematics and Chemistry with minimum 60% marks or DAE in the same/relevant field with minimum 60% marks or Intermediate with ICS (Physics, Mathematics, Computer Science/Computer Studies) with minimum 60% marks.",
+      "deficiency_policy": "Students passed Intermediate with ICS will have to study Chemistry as remedial course in 1st semester.",
+      "entry_test_requirement": "Valid Entry Test score (minimum 33%) by NTS or by any PEC designated Testing HEIs/entities.",
+      "general_note": "All other term(s) and condition(s) regarding undergraduate program(s) approved by the Competent Authority and/or approved by the Pakistan Engineering Council, if any, amended from time to time shall be applicable."
+    },
+    "other_programs": {
+      "min_percentage": 50,
+      "programs": ["BS Business Administration", "BS Accounting & Finance", "BS Psychology"],
+      "detailed_criteria": "Intermediate or equivalent with minimum 50% marks from an accredited institution.",
+      "entry_test_requirement": "Valid NTS test score as per CUI policy.",
+      "special_accreditations": {
+        "BS Accounting & Finance": "ACCA accredited program"
+      }
+    },
+    "result_awaiting_policy": {
+      "fsc_students": "F.Sc Part-2 result-awaiting candidates can apply on the basis of F.Sc Part-1 results, provided they have no 'F' (failed) grade in any course. Provisional admission will be cancelled immediately if they fail to secure the minimum required percentage in the final complete result.",
+      "a_level_students": "A-Level result-awaiting candidates must apply on the basis of their O-Level equivalence certificate issued by IBCC. Merit will be formulated using the O-Level equivalence score and entrance exam marks.",
+      "supplementary_policy": "Students with a supplementary ('supply') in F.Sc Part-1 cannot apply. They are eligible to apply in subsequent admission sessions once they have fully passed F.Sc."
+    },
+    "nat_categories": {
+      "NAT-IE": {
+        "title": "Pre-Engineering",
+        "description": "Applicable for admission in BS Civil Engineering, Electrical Engineering, Mechanical Engineering, Computer Engineering, Computer Science, Software Engineering, and Artificial Intelligence.",
+        "test_distribution": "English: 20%, Analytical: 20%, Quantitative: 20%, Physics: 10%, Chemistry: 10%, Mathematics: 10% (Total: 90 MCQs)"
+      },
+      "NAT-IM": {
+        "title": "Pre-Medical",
+        "description": "Applicable for admission in BS Computer Science, Software Engineering, Artificial Intelligence (with remedial Math course), Business Administration, Accounting & Finance, and Psychology.",
+        "test_distribution": "English: 20%, Analytical: 20%, Quantitative: 20%, Physics: 10%, Chemistry: 10%, Biology: 10% (Total: 90 MCQs)"
+      },
+      "NAT-ICS": {
+        "title": "Computer Science",
+        "description": "Applicable for admission in BS Computer Science, Software Engineering, Artificial Intelligence, Computer Engineering, Civil/Electrical/Mechanical Engineering (ICS Physics, Math, Computer group with remedial Chemistry), Business Administration, Accounting & Finance, and Psychology.",
+        "test_distribution": "English: 20%, Analytical: 20%, Quantitative: 20%, Physics: 10%, Computer Science: 10%, Mathematics: 10% (Total: 90 MCQs)"
+      },
+      "NAT-ICOM": {
+        "title": "Commerce",
+        "description": "Applicable for admission in BS Business Administration, Accounting & Finance, and Psychology.",
+        "test_distribution": "English: 20%, Analytical: 20%, Quantitative: 20%, Accounting: 10%, Commerce: 10%, Economics: 10% (Total: 90 MCQs)"
+      },
+      "NAT-IA": {
+        "title": "Arts & Humanities",
+        "description": "Applicable for admission in BS Psychology, BS Business Administration, and Accounting & Finance.",
+        "test_distribution": "English: 20%, Analytical: 20%, Quantitative: 20%, Islamiyat: 10%, Pakistan Studies: 10%, General Knowledge: 10% (Total: 90 MCQs)"
+      },
+      "NAT-IGS": {
+        "title": "General Science",
+        "description": "Applicable for admission in BS Computer Science, Software Engineering, Artificial Intelligence, Business Administration, Accounting & Finance, and Psychology.",
+        "test_distribution": "English: 20%, Analytical: 20%, Quantitative: 20%, Mathematics: 10%, Economics: 10%, Statistics: 10% (Total: 90 MCQs)"
+      }
+    }
+  },
+  "graduate_ms": {
+    "min_cgpa": "2.50 / 4.00",
+    "min_percentage": 55,
+    "degree_requirement": "16-year relevant degree from an accredited institution.",
+    "division_rule": "There shall be no 3rd Division throughout the academic career.",
+    "work_experience": "Work experience is not considered in the calculation of the aggregate merit list.",
+    "detailed_criteria": "A minimum CGPA 2.5 out of 4.0 (in the semester system) or 55% marks (in the annual system) in a sixteen-year degree program in the same or relevant field from an HEC-recognized university/HEI is required.",
+    "entry_test_requirement": "NTS/HAT, General/Subject/Equivalent tests conducted by testing bodies accredited by HEC, with a passing score of 50% marks. In addition, CUI may also conduct/accept subject tests provided the test is not conducted by GRE/NTS/HAT for admission to Master of Science (MS) program with a passing score of 60%, if deemed necessary.",
+    "interdisciplinary_policy": "Interdisciplinary admission(s) may be considered as per notification.",
+    "gat_categories": {
+      "GAT-A": {
+        "title": "Business & Engineering",
+        "description": "Required for MS in Electrical Engineering, Mechanical Engineering, Civil Engineering, Management Sciences, and Project Management.",
+        "test_distribution": "Verbal: 30%, Quantitative: 35%, Analytical: 35%"
+      },
+      "GAT-B": {
+        "title": "Arts, Humanities & Social Sciences",
+        "description": "Required for MS in Psychology and English Linguistics.",
+        "test_distribution": "Verbal: 50%, Quantitative: 20%, Analytical: 30%"
+      },
+      "GAT-C": {
+        "title": "Biological, Physical & Computer Sciences",
+        "description": "Required for MS in Computer Science, Cyber Security, Artificial Intelligence, Mathematics, and Artificial Intelligence Engineering.",
+        "test_distribution": "Verbal: 45%, Quantitative: 25%, Analytical: 30%"
+      },
+      "GAT-D": {
+        "title": "Religious Studies",
+        "description": "Required for candidates with a Madrassa background (Shadat-Ul-Aalmiya) and HEC equivalence seeking MS/M.Phil.",
+        "test_distribution": "Verbal: 60%, Quantitative: 10%, Analytical: 30%"
+      }
+    }
+  },
+  "graduate_phd": {
+    "min_cgpa": "3.00 / 4.00",
+    "min_percentage": 60,
+    "degree_requirement": "Respective MS/MPhil program with thesis (non-thesis MS degree holders cannot apply).",
+    "division_rule": "There shall be no 3rd Division throughout the academic career.",
+    "detailed_criteria": "A minimum CGPA of 3.00 out of 4.0 (in the semester system) or 60% marks/1st Division (in the annual system) in an eighteen-year degree program in the same or relevant field from an HEC-recognized university/HEI is required.",
+    "entry_test_requirement": "NTS GAT (Subject) or GRE Subject test with a minimum passing score of 60%. If no NTS/GRE subject test exists for a particular discipline, CUI may conduct its own subject test with a passing score of 70%.",
+    "gat_subject_test": {
+      "test_name": "GAT (Subject) — Graduate Assessment Test",
+      "purpose": "Mandatory for PhD admission at CUI Wah Campus. Evaluates field-specific academic knowledge.",
+      "format": "100 MCQs in 120 minutes (2 hours). Paper-based.",
+      "score_distribution": "General Section: 30% (English/Verbal: 15%, Analytical Reasoning: 15%) | Subject Section: 70% (discipline-specific)",
+      "passing_score_nts_gre": "Minimum 60% marks required (NTS GAT Subject or GRE Subject).",
+      "passing_score_cui_test": "If NTS/GRE Subject test is not available for a discipline, CUI conducts its own test. Passing score: 70%.",
+      "validity": "2 years from the date of the test.",
+      "gre_equivalence": "GRE Subject Test is accepted as an alternative to NTS GAT Subject for PhD admission.",
+      "interview_requirement": "Candidates who qualify the GAT Subject test are then called for a departmental interview/test. Admission is offered only after passing the departmental interview.",
+      "program_subject_mapping": {
+        "PhD Electrical Engineering": {
+          "gat_subject": "Electrical Engineering",
+          "gat_type": "GAT Subject (NTS)"
+        },
+        "PhD Computer Science": {
+          "gat_subject": "Computer Science",
+          "gat_type": "GAT Subject (NTS)"
+        },
+        "PhD Civil Engineering": {
+          "gat_subject": "Civil Engineering",
+          "gat_type": "GAT Subject (NTS)"
+        },
+        "PhD Mechanical Engineering": {
+          "gat_subject": "Mechanical Engineering",
+          "gat_type": "GAT Subject (NTS)"
+        },
+        "PhD Management Sciences": {
+          "gat_subject": "Management Sciences",
+          "gat_type": "GAT Subject (NTS)"
+        },
+        "PhD Mathematics": {
+          "gat_subject": "Mathematics",
+          "gat_type": "GAT Subject (NTS)"
+        }
+      }
+    }
+  },
+  "equivalence_requirements": {
+    "o_level_a_level": "Equivalence certificates for both O-Level (10th grade) and A-Level (12th grade) must be obtained separately from the Inter Board Chairman Committee (IBCC). A combined equivalency is not acceptable.",
+    "foreign_qualifications": "American High School, GED, and other foreign qualifications must obtain equivalent certificates for 10th and 12th grades separately from IBCC before applying. Otherwise, the form will be rejected."
+  },
+  "admission_schedule": {
+    "last_date_to_apply": "August 11",
+    "nts_test_dates": [
+      {
+        "test_name": "NTS Test 1",
+        "date": "July 26"
+      },
+      {
+        "test_name": "NTS Test 2",
+        "date": "August 16"
+      }
+    ],
+    "merit_list_display": "August 18"
+  }
+}

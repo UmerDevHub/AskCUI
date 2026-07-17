@@ -1,0 +1,234 @@
+[
+  {
+    "level": "Undergraduate",
+    "name": "BS Computer Science",
+    "abbreviation": "BS CS",
+    "category": "Computing",
+    "duration": "4 Years (8 Semesters)",
+    "description": "A comprehensive program covering software development, algorithms, databases, and computer systems."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Artificial Intelligence",
+    "abbreviation": "BS AI",
+    "category": "Computing",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Specialized program focused on machine learning, neural networks, data science, and intelligent systems."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Software Engineering",
+    "abbreviation": "BS SE",
+    "category": "Computing (Non-Engineering)",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Focuses on software engineering processes, quality assurance, system design, and project management."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Computer Engineering",
+    "abbreviation": "BS CE",
+    "category": "Engineering",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Combines electrical engineering and computer science to design hardware and software systems."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Electrical Engineering",
+    "abbreviation": "BS EE",
+    "category": "Engineering",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Covers power systems, electronics, telecommunications, signal processing, and control systems."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Civil Engineering",
+    "abbreviation": "BS CVE",
+    "category": "Engineering",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Covers construction design, structural mechanics, fluid dynamics, and environmental engineering."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Mechanical Engineering",
+    "abbreviation": "BS ME",
+    "category": "Engineering",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Covers thermodynamics, fluid mechanics, machine design, robotics, and manufacturing systems."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Business Administration",
+    "abbreviation": "BBA",
+    "category": "Management Sciences",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Covers management, marketing, finance, human resources, and business analytics."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Accounting & Finance",
+    "abbreviation": "BS A&F",
+    "category": "Management Sciences",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Covers corporate finance, financial accounting, audit, taxation, and investment banking."
+  },
+  {
+    "level": "Undergraduate",
+    "name": "BS Psychology",
+    "abbreviation": "BS Psy",
+    "category": "Humanities",
+    "duration": "4 Years (8 Semesters)",
+    "description": "Covers human behavior, cognitive psychology, social interactions, clinical methods, and research."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Computer Science",
+    "abbreviation": "MS CS",
+    "category": "Computing",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Advanced graduate study focusing on computer systems, security, network computing, and AI research."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Artificial Intelligence",
+    "abbreviation": "MS AI",
+    "category": "Computing",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Specialized master's program focusing on advanced machine learning, computer vision, and NLP."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Software Engineering",
+    "abbreviation": "MS SE",
+    "category": "Computing",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Focuses on advanced software architecture, software testing, requirements engineering, and agile methodologies."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Electrical Engineering",
+    "abbreviation": "MS EE",
+    "category": "Engineering",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Advanced electrical engineering disciplines, control systems, electronics, and communication technologies."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Civil Engineering (Structural Engineering & Construction Engineering)",
+    "abbreviation": "MS CVE",
+    "category": "Engineering",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Advanced courses in structural design, concrete structures, soil mechanics, and construction project management."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Mechanical Engineering",
+    "abbreviation": "MS ME",
+    "category": "Engineering",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Advanced study in fluid mechanics, thermodynamics, heat transfer, vibrations, and mechanical design systems."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Cyber Security",
+    "abbreviation": "MS CyS",
+    "category": "Computing",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Advanced master's program focusing on network security, cryptography, malware analysis, and secure software engineering."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Project Management",
+    "abbreviation": "MS PM",
+    "category": "Management Sciences",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Provides the advanced skills required for initiating, planning, executing, controlling, and closing projects."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Artificial Intelligence Engineering",
+    "abbreviation": "MS AIE",
+    "category": "Engineering",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Integrates software artificial intelligence paradigms into physical cyber-physical electrical, civil, and mechanical systems."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Mathematics",
+    "abbreviation": "MS Math",
+    "category": "Natural Sciences",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Advanced studies in pure and applied mathematics, numerical analysis, and mathematical modeling."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Management Sciences",
+    "abbreviation": "MS Mgt",
+    "category": "Management Sciences",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Focuses on advanced business management theories, research methodologies, and corporate governance."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS Psychology",
+    "abbreviation": "MS Psy",
+    "category": "Humanities",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Focuses on therapeutic methods, psychological assessment, and advanced behavioral research."
+  },
+  {
+    "level": "Graduate",
+    "name": "MS English Linguistics",
+    "abbreviation": "MS Eng",
+    "category": "Humanities",
+    "duration": "2 Years (4 Semesters)",
+    "description": "Advanced linguistic theories, sociolinguistics, discourse analysis, and language acquisition studies."
+  },
+  {
+    "level": "PhD",
+    "name": "PhD Electrical Engineering",
+    "abbreviation": "PhD EE",
+    "category": "Engineering",
+    "duration": "3 to 5 Years (6 to 10 Semesters)",
+    "description": "Doctoral research program in electrical systems, electronics, control systems, and communication."
+  },
+  {
+    "level": "PhD",
+    "name": "PhD Computer Science",
+    "abbreviation": "PhD CS",
+    "category": "Computing",
+    "duration": "3 to 5 Years (6 to 10 Semesters)",
+    "description": "Doctoral level research in software engineering, database systems, AI, and cybersecurity."
+  },
+  {
+    "level": "PhD",
+    "name": "PhD Mechanical Engineering",
+    "abbreviation": "PhD ME",
+    "category": "Engineering",
+    "duration": "3 to 5 Years (6 to 10 Semesters)",
+    "description": "Doctoral level research in thermodynamics, mechanical design, aerospace systems, and energy."
+  },
+  {
+    "level": "PhD",
+    "name": "PhD Civil Engineering",
+    "abbreviation": "PhD CVE",
+    "category": "Engineering",
+    "duration": "3 to 5 Years (6 to 10 Semesters)",
+    "description": "Doctoral research in infrastructure design, structural integrity, and earthquake engineering."
+  },
+  {
+    "level": "PhD",
+    "name": "PhD Management Sciences",
+    "abbreviation": "PhD Mgt",
+    "category": "Management Sciences",
+    "duration": "3 to 5 Years (6 to 10 Semesters)",
+    "description": "Doctoral research program focusing on corporate finance, marketing strategies, and organizational behavior."
+  },
+  {
+    "level": "PhD",
+    "name": "PhD Mathematics",
+    "abbreviation": "PhD Math",
+    "category": "Natural Sciences",
+    "duration": "3 to 5 Years (6 to 10 Semesters)",
+    "description": "Doctoral research program covering algebra, analysis, geometry, and mathematical physics."
+  }
+]

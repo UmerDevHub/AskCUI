@@ -1,0 +1,208 @@
+{
+  "program_pathways": [
+    {
+      "program": "BS Software Engineering",
+      "eligible_backgrounds": [
+        "F.Sc Pre-Engineering",
+        "ICS (Mathematics, Physics, Computer Science)",
+        "F.Sc Pre-Medical (Eligible for admission)",
+        "A-Level equivalent with Mathematics or Biology"
+      ]
+    },
+    {
+      "program": "BS Computer Science",
+      "eligible_backgrounds": [
+        "F.Sc Pre-Engineering",
+        "ICS (Mathematics, Physics, Computer Science)",
+        "F.Sc Pre-Medical (Subject to university's mathematical deficit course policy)",
+        "A-Level equivalent with Mathematics or Biology"
+      ]
+    },
+    {
+      "program": "BS Artificial Intelligence",
+      "eligible_backgrounds": [
+        "F.Sc Pre-Engineering",
+        "ICS (Mathematics, Physics, Computer Science)",
+        "F.Sc Pre-Medical",
+        "A-Level equivalent with Mathematics or Biology"
+      ]
+    },
+    {
+      "program": "Engineering Programs (BS Electrical, Mechanical, Civil, Computer)",
+      "eligible_backgrounds": [
+        "F.Sc Pre-Engineering",
+        "ICS (with Mathematics, Physics, and Computer Science and minimum 60% marks)",
+        "DAE in relevant technologies (Electrical, Mechanical, Civil, Computer) approved by PEC",
+        "F.Sc Pre-Medical with Additional Mathematics (must provide affidavit showing they appeared in Additional Maths exam prior to applying)"
+      ]
+    },
+    {
+      "program": "BS Business Administration (BBA) / Accounting & Finance (BAF)",
+      "eligible_backgrounds": [
+        "I.Com",
+        "F.Sc (Pre-Engineering / Pre-Medical)",
+        "ICS",
+        "F.A",
+        "General Science",
+        "A-Level equivalent"
+      ]
+    },
+    {
+      "program": "BS Psychology",
+      "eligible_backgrounds": [
+        "F.A",
+        "F.Sc (Pre-Engineering / Pre-Medical)",
+        "ICS",
+        "I.Com",
+        "General Science",
+        "A-Level equivalent"
+      ]
+    }
+  ],
+  "dae_policy": {
+    "open_merit": "DAE applicants can apply for Engineering programs on open merit in line with the guidelines provided by the Pakistan Engineering Council (PEC) for relevant technologies."
+  },
+  "pre_medical_additional_maths": {
+    "policy": "A Pre-medical student appearing in Additional Mathematics (result awaiting) can apply for Engineering programs. In the online admission form, they must input their F.Sc Part-1 marks and submit an Affidavit on stamp paper stating they appeared in the Additional Maths exam before applying."
+  },
+  "ms_prerequisites": [
+    {
+      "program": "MS Electrical Engineering (MS EE)",
+      "required_degree": "16-year BS/BE in Electrical Engineering or closely related field (Electronics, Telecommunication, Power Systems) from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-A (Business & Engineering)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Civil Engineering — Structural & Construction Engineering",
+      "required_degree": "16-year BS/BE in Civil Engineering or relevant field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-A (Business & Engineering)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Mechanical Engineering (MS ME)",
+      "required_degree": "16-year BS/BE in Mechanical Engineering or relevant field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-A (Business & Engineering)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Computer Science (MS CS)",
+      "required_degree": "16-year BS in Computer Science, Software Engineering, IT, or related computing field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-C (Biological, Physical & Computer Sciences)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Artificial Intelligence (MS AI)",
+      "required_degree": "16-year BS in Computer Science, AI, Software Engineering, or related field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-C (Biological, Physical & Computer Sciences)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Artificial Intelligence Engineering (MS AIE)",
+      "required_degree": "16-year BS/BE in Electrical Engineering, Computer Engineering, AI, or related field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-C (Biological, Physical & Computer Sciences)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Cyber Security (MS CyS)",
+      "required_degree": "16-year BS in Computer Science, Software Engineering, Cyber Security, IT, or related field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-C (Biological, Physical & Computer Sciences)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Management Sciences",
+      "required_degree": "16-year BS/BBA/BCom/BBA (Hons) in Management, Business Administration, Commerce, or related field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-A (Business & Engineering)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Project Management (MS PM)",
+      "required_degree": "16-year BS/BBA/BE or any relevant 16-year degree from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-A (Business & Engineering)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "Multidisciplinary program — graduates from engineering, computing, and management fields are all eligible."
+    },
+    {
+      "program": "MS English Linguistics",
+      "required_degree": "16-year BA/BS in English, Linguistics, Literature, or related humanities field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-B (Arts, Humanities & Social Sciences)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    },
+    {
+      "program": "MS Mathematics",
+      "required_degree": "16-year BS in Mathematics, Applied Mathematics, Statistics, or related field from an HEC-recognized university.",
+      "min_cgpa": "2.50 / 4.00 (semester system) or 55% marks (annual system)",
+      "gat_category": "GAT-C (Biological, Physical & Computer Sciences)",
+      "entry_test_passing": "50% in NTS GAT General or HEC-accredited equivalent. CUI subject test: 60%.",
+      "interdisciplinary": "May be considered on case-by-case basis as per CUI notification."
+    }
+  ],
+  "phd_prerequisites": [
+    {
+      "program": "PhD Electrical Engineering",
+      "required_degree": "18-year MS/MPhil in Electrical Engineering or closely related field WITH thesis. Non-thesis MS holders are NOT eligible.",
+      "min_cgpa": "3.00 / 4.00 (semester system) or 60% marks / 1st Division (annual system)",
+      "gat_subject": "GAT Subject — Electrical Engineering (NTS)",
+      "entry_test_passing": "60% in NTS GAT Subject or GRE Subject. CUI own test (if NTS unavailable): 70%.",
+      "interview": "Departmental interview is mandatory after qualifying the written test. Admission is offered only upon passing the interview."
+    },
+    {
+      "program": "PhD Computer Science",
+      "required_degree": "18-year MS/MPhil in Computer Science, Software Engineering, or related computing field WITH thesis. Non-thesis MS holders are NOT eligible.",
+      "min_cgpa": "3.00 / 4.00 (semester system) or 60% marks / 1st Division (annual system)",
+      "gat_subject": "GAT Subject — Computer Science (NTS)",
+      "entry_test_passing": "60% in NTS GAT Subject or GRE Subject. CUI own test (if NTS unavailable): 70%.",
+      "interview": "Departmental interview is mandatory after qualifying the written test. Admission is offered only upon passing the interview."
+    },
+    {
+      "program": "PhD Civil Engineering",
+      "required_degree": "18-year MS/MPhil in Civil Engineering or related field WITH thesis. Non-thesis MS holders are NOT eligible.",
+      "min_cgpa": "3.00 / 4.00 (semester system) or 60% marks / 1st Division (annual system)",
+      "gat_subject": "GAT Subject — Civil Engineering (NTS)",
+      "entry_test_passing": "60% in NTS GAT Subject or GRE Subject. CUI own test (if NTS unavailable): 70%.",
+      "interview": "Departmental interview is mandatory after qualifying the written test. Admission is offered only upon passing the interview."
+    },
+    {
+      "program": "PhD Mechanical Engineering",
+      "required_degree": "18-year MS/MPhil in Mechanical Engineering or related field WITH thesis. Non-thesis MS holders are NOT eligible.",
+      "min_cgpa": "3.00 / 4.00 (semester system) or 60% marks / 1st Division (annual system)",
+      "gat_subject": "GAT Subject — Mechanical Engineering (NTS)",
+      "entry_test_passing": "60% in NTS GAT Subject or GRE Subject. CUI own test (if NTS unavailable): 70%.",
+      "interview": "Departmental interview is mandatory after qualifying the written test. Admission is offered only upon passing the interview."
+    },
+    {
+      "program": "PhD Management Sciences",
+      "required_degree": "18-year MS/MPhil in Management Sciences, Business Administration, or related field WITH thesis. Non-thesis MS holders are NOT eligible.",
+      "min_cgpa": "3.00 / 4.00 (semester system) or 60% marks / 1st Division (annual system)",
+      "gat_subject": "GAT Subject — Management Sciences (NTS)",
+      "entry_test_passing": "60% in NTS GAT Subject or GRE Subject. CUI own test (if NTS unavailable): 70%.",
+      "interview": "Departmental interview is mandatory after qualifying the written test. Admission is offered only upon passing the interview."
+    },
+    {
+      "program": "PhD Mathematics",
+      "required_degree": "18-year MS/MPhil in Mathematics, Applied Mathematics, or related field WITH thesis. Non-thesis MS holders are NOT eligible.",
+      "min_cgpa": "3.00 / 4.00 (semester system) or 60% marks / 1st Division (annual system)",
+      "gat_subject": "GAT Subject — Mathematics (NTS)",
+      "entry_test_passing": "60% in NTS GAT Subject or GRE Subject. CUI own test (if NTS unavailable): 70%.",
+      "interview": "Departmental interview is mandatory after qualifying the written test. Admission is offered only upon passing the interview."
+    }
+  ]
+}

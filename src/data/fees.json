@@ -1,0 +1,98 @@
+{
+  "semester": "Fall 2026",
+  "structures": [
+    {
+      "category": "Undergraduate Engineering",
+      "programs_included": ["BS Computer Engineering", "BS Electrical Engineering", "BS Civil Engineering", "BS Mechanical Engineering"],
+      "admission_fee": 27000,
+      "registration_fee": 7000,
+      "tuition_fee_per_semester": 159500,
+      "total_at_admission": 193500,
+      "subsequent_semesters": 166500
+    },
+    {
+      "category": "Undergraduate Computer Science",
+      "programs_included": ["BS Computer Science", "BS Artificial Intelligence", "BS Software Engineering"],
+      "admission_fee": 27000,
+      "registration_fee": 7000,
+      "tuition_fee_per_semester": 153500,
+      "total_at_admission": 187500,
+      "subsequent_semesters": 160500
+    },
+    {
+      "category": "Undergraduate Management Sciences & Humanities",
+      "programs_included": ["BS Business Administration", "BS Accounting & Finance", "BS Psychology"],
+      "admission_fee": 27000,
+      "registration_fee": 7000,
+      "tuition_fee_per_semester": 141500,
+      "total_at_admission": 175500,
+      "subsequent_semesters": 148500
+    },
+    {
+      "category": "Graduate Programs (MS)",
+      "programs_included": [
+        "MS Computer Science",
+        "MS Artificial Intelligence",
+        "MS Software Engineering",
+        "MS Electrical Engineering",
+        "MS Civil Engineering (Structural Engineering & Construction Engineering)",
+        "MS Mechanical Engineering",
+        "MS Cyber Security",
+        "MS Project Management",
+        "MS Mathematics",
+        "MS Management Sciences",
+        "MS Psychology",
+        "MS English Linguistics",
+        "MS Artificial Intelligence Engineering"
+      ],
+      "admission_fee": 27000,
+      "registration_fee": 7000,
+      "tuition_fee_per_semester": 85500,
+      "total_at_admission": 119500,
+      "subsequent_semesters": 92500
+    },
+    {
+      "category": "Graduate Programs (PhD)",
+      "programs_included": ["PhD Electrical Engineering", "PhD Computer Science", "PhD Mechanical Engineering", "PhD Civil Engineering", "PhD Management Sciences", "PhD Mathematics"],
+      "admission_fee": 27000,
+      "registration_fee": 7000,
+      "tuition_fee_per_semester": 94300,
+      "total_at_admission": 127000,
+      "subsequent_semesters": 100000
+    }
+  ],
+  "policies": {
+    "payment_timing": "Tuition fee is payable at the beginning of each semester.",
+    "revision_note": "University reserves the right to revise fees and other charges.",
+    "exclusion_note": "Hostel and transport charges are separate.",
+    "installments": "CUI Islamabad Campus does not provide installments at the time of admission; however, this option is available at some of the other campuses.",
+    "application_processing_fee": "The mandatory admission processing fee is Rs. 2,500 (non-refundable).",
+    "application_processing_fee_amount": 2500,
+    "nts_test_fee": "The NTS test fee for CUI Wah is Rs. 800.",
+    "nts_test_fee_amount": 800
+  },
+  "refund_policy": {
+    "table": [
+      {
+        "refund_percentage": "100% (Full Refund)",
+        "timeline": "Up to 10th Day of Commencement of Classes",
+        "details": "Applies to all fee components except Admission fee, Registration fee, and Endowment Fund."
+      },
+      {
+        "refund_percentage": "50% (Half Refund)",
+        "timeline": "From 11th to 15th Day of Commencement of Classes",
+        "details": "Applies to all fee components except Admission fee, Registration fee, and Endowment Fund."
+      },
+      {
+        "refund_percentage": "0% (No Refund)",
+        "timeline": "From 16th day of Commencement of Classes onwards",
+        "details": "No refund issued."
+      }
+    ],
+    "notes": [
+      "The percentage of fee refund is applicable on tuition fee and security, whereas Admission Fee, Registration Fee, and Endowment Fund are non-refundable.",
+      "The timeline is calculated continuously, covering both weekdays and weekends.",
+      "Refund cases are initiated in the first week of classes and take approximately two (02) weeks to process."
+    ]
+  }
+}
