@@ -44,7 +44,7 @@ export default function App() {
     } else if (DEFAULT_COHERE_KEY) {
       return {
         provider: 'cohere',
-        model: 'command-r-plus',
+        model: 'command-a-plus-05-2026',
         apiKey: DEFAULT_COHERE_KEY
       };
     } else if (DEFAULT_OPENROUTER_KEY) {

@@ -21,7 +21,7 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
     if (newProvider === 'groq') {
       setModel('llama-3.3-70b-versatile');
     } else if (newProvider === 'cohere') {
-      setModel('command-r-plus');
+      setModel('command-a-plus-05-2026');
     } else if (newProvider === 'openrouter') {
       setModel('meta-llama/llama-3.3-70b-instruct:free');
     } else {
@@ -158,8 +158,10 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
                 )}
                 {provider === 'cohere' && (
                   <>
-                    <option value="command-r-plus">Command R+ (High-end Reasoning & RAG)</option>
-                    <option value="command-r">Command R (Fast & Context-optimized)</option>
+                    <option value="command-a-plus-05-2026">Command A+ MoE (Flagship Reasoning & Vision)</option>
+                    <option value="command-a-03-2025">Command A (Enterprise Agentic & RAG)</option>
+                    <option value="command-r-plus-08-2024">Command R+ (Classic RAG & Tool Use)</option>
+                    <option value="command-r-08-2024">Command R (Classic Fast RAG)</option>
                   </>
                 )}
                 {provider === 'openrouter' && (
