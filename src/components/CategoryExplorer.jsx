@@ -52,6 +52,7 @@ const itemVariants = {
 
 export default function CategoryExplorer({ category, onAskQuestion }) {
   const [expandedFaqId, setExpandedFaqId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
   
   // Merit Calculator State
   const [matricObt, setMatricObt] = useState('');
