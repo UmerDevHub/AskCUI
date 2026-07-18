@@ -83,81 +83,86 @@ export default function Sidebar({
         </button>
       </div>
 
-      {/* Categories */}
-      <div className="px-3 pb-2 border-b border-warm-200/60 dark:border-slate-800/40">
-        <p className="px-2 pb-2 text-[9.5px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-600">
-          Knowledge Base
-        </p>
-        <nav className="space-y-0.5">
-          {CATEGORIES.map((cat) => {
-            const Icon = cat.icon;
-            const isActive = activeCategory === cat.name;
-            return (
-              <button
-                key={cat.name}
-                onClick={() => onSelectCategory(cat.name)}
-                className={`flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-[13px] font-medium transition-all ${
-                  isActive
-                    ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/25 dark:text-blue-400'
-                    : 'text-slate-600 hover:bg-warm-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50 dark:hover:text-slate-300'
-                }`}
-              >
-                <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md ${isActive ? cat.bg : ''}`}>
-                  <Icon className={`h-3.5 w-3.5 ${isActive ? cat.color : 'text-slate-400 dark:text-slate-500'}`} />
-                </span>
-                {cat.name}
-                {isActive && (
-                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue-500" />
-                )}
-              </button>
-            );
-          })}
-        </nav>
-      </div>
+      {/* Categories + Conversations - unified scrollable area */}
+      <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
 
-      {/* Conversation History */}
-      <div className="flex-1 overflow-y-auto px-3 py-4">
-        <p className="px-2 pb-2.5 text-[9.5px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-600">
-          Recent Chats
-        </p>
-        <div className="space-y-0.5">
-          {conversations.length === 0 ? (
-            <div className="py-6 text-center text-xs text-slate-400 dark:text-slate-500">
-              No conversations yet
-            </div>
-          ) : (
-            conversations.map((conv) => {
-              const isActive = activeConversationId === conv.id;
+        {/* Categories */}
+        <div className="px-3 pt-1 pb-3 border-b border-warm-200/60 dark:border-slate-800/40 shrink-0">
+          <p className="px-2 pb-2 text-[9.5px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-600">
+            Knowledge Base
+          </p>
+          <nav className="space-y-0.5">
+            {CATEGORIES.map((cat) => {
+              const Icon = cat.icon;
+              const isActive = activeCategory === cat.name;
               return (
-                <div
-                  key={conv.id}
-                  className={`group relative flex items-center rounded-lg px-2.5 py-2 text-[13px] transition-all cursor-pointer ${
+                <button
+                  key={cat.name}
+                  onClick={() => onSelectCategory(cat.name)}
+                  className={`flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-[13px] font-medium transition-all ${
                     isActive
-                      ? 'bg-slate-100 text-slate-800 dark:bg-slate-800/70 dark:text-slate-200'
-                      : 'text-slate-500 hover:bg-warm-100 dark:text-slate-400 dark:hover:bg-slate-800/40'
+                      ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/25 dark:text-blue-400'
+                      : 'text-slate-600 hover:bg-warm-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50 dark:hover:text-slate-300'
                   }`}
                 >
-                  <button
-                    onClick={() => onSelectConversation(conv.id)}
-                    className="flex flex-1 items-center gap-2.5 text-left outline-none min-w-0"
-                  >
-                    <MessageSquare className="h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-600" />
-                    <span className="truncate font-medium text-[12.5px]">
-                      {conv.title || 'New Chat'}
-                    </span>
-                  </button>
-                  <button
-                    onClick={() => onDeleteConversation(conv.id)}
-                    className="ml-1 shrink-0 opacity-0 p-0.5 rounded hover:text-red-500 group-hover:opacity-100 transition-all dark:hover:text-red-400"
-                    title="Delete"
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </button>
-                </div>
+                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md ${isActive ? cat.bg : ''}`}>
+                    <Icon className={`h-3.5 w-3.5 ${isActive ? cat.color : 'text-slate-400 dark:text-slate-500'}`} />
+                  </span>
+                  {cat.name}
+                  {isActive && (
+                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue-500" />
+                  )}
+                </button>
               );
-            })
-          )}
+            })}
+          </nav>
         </div>
+
+        {/* Conversation History */}
+        <div className="px-3 py-4 flex-1">
+          <p className="px-2 pb-2.5 text-[9.5px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-600">
+            Recent Chats
+          </p>
+          <div className="space-y-0.5">
+            {conversations.length === 0 ? (
+              <div className="py-4 text-center text-xs text-slate-400 dark:text-slate-500">
+                No conversations yet
+              </div>
+            ) : (
+              conversations.map((conv) => {
+                const isActive = activeConversationId === conv.id;
+                return (
+                  <div
+                    key={conv.id}
+                    className={`group relative flex items-center rounded-lg px-2.5 py-2 text-[13px] transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-slate-100 text-slate-800 dark:bg-slate-800/70 dark:text-slate-200'
+                        : 'text-slate-500 hover:bg-warm-100 dark:text-slate-400 dark:hover:bg-slate-800/40'
+                    }`}
+                  >
+                    <button
+                      onClick={() => onSelectConversation(conv.id)}
+                      className="flex flex-1 items-center gap-2.5 text-left outline-none min-w-0"
+                    >
+                      <MessageSquare className="h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-600" />
+                      <span className="truncate font-medium text-[12.5px]">
+                        {conv.title || 'New Chat'}
+                      </span>
+                    </button>
+                    <button
+                      onClick={() => onDeleteConversation(conv.id)}
+                      className="ml-1 shrink-0 opacity-0 p-0.5 rounded hover:text-red-500 group-hover:opacity-100 transition-all dark:hover:text-red-400"
+                      title="Delete"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </div>
+
       </div>
 
       {/* Footer */}

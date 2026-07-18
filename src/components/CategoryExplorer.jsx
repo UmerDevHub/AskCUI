@@ -1645,7 +1645,7 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
                 href="https://admissions.comsats.edu.pk/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-xs md:text-sm font-extrabold text-blue-750 shadow-sm transition-all hover:bg-slate-50 hover:scale-102 active:scale-98"
+                className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-xs md:text-sm font-extrabold text-blue-700 shadow-sm transition-all hover:bg-slate-50"
               >
                 Go to admissions.comsats.edu.pk
                 <ExternalLink className="h-4 w-4" />
