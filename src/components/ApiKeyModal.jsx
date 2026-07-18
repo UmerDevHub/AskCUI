@@ -3,25 +3,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Key, Shield, Check, AlertTriangle, Cpu } from 'lucide-react';
 
 export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
-  const [provider, setProvider] = useState(config.provider || 'gemini');
+  const [provider, setProvider] = useState(config.provider || 'groq');
   const [apiKey, setApiKey] = useState(config.apiKey || '');
-  const [model, setModel] = useState(config.model || 'gemini-2.0-flash');
+  const [model, setModel] = useState(config.model || 'llama-3.3-70b-versatile');
   const [showKey, setShowKey] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    setProvider(config.provider || 'gemini');
+    setProvider(config.provider || 'groq');
     setApiKey(config.apiKey || '');
-    setModel(config.model || 'gemini-2.0-flash');
+    setModel(config.model || 'llama-3.3-70b-versatile');
   }, [config, isOpen]);
 
   // Handle provider changes to set sensible default models
   const handleProviderChange = (newProvider) => {
     setProvider(newProvider);
-    if (newProvider === 'gemini') {
-      setModel('gemini-2.0-flash-lite');
-    } else if (newProvider === 'groq') {
+    if (newProvider === 'groq') {
       setModel('llama-3.3-70b-versatile');
+    } else if (newProvider === 'cohere') {
+      setModel('command-r-plus');
+    } else if (newProvider === 'openrouter') {
+      setModel('meta-llama/llama-3.3-70b-instruct:free');
     } else {
       setModel('gpt-4o-mini');
     }
@@ -84,19 +86,7 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
               <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                 AI Service Provider
               </label>
-              <div className="mt-2 grid grid-cols-3 gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleProviderChange('gemini')}
-                  className={`flex flex-col items-center justify-center rounded-xl border py-2 text-xs font-medium transition-all ${
-                    provider === 'gemini'
-                      ? 'border-blue-600 bg-blue-50/50 text-blue-600 dark:border-blue-500 dark:bg-blue-950/20 dark:text-blue-400'
-                      : 'border-slate-200 bg-transparent text-slate-650 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
-                  }`}
-                >
-                  <span className="font-bold">Google</span>
-                  <span>Gemini</span>
-                </button>
+              <div className="mt-2 grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => handleProviderChange('groq')}
@@ -107,19 +97,43 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
                   }`}
                 >
                   <span className="font-bold">Groq</span>
-                  <span>Llama / Gemma</span>
+                  <span>Llama / Gemma (Free)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleProviderChange('cohere')}
+                  className={`flex flex-col items-center justify-center rounded-xl border py-2 text-xs font-medium transition-all ${
+                    provider === 'cohere'
+                      ? 'border-indigo-600 bg-indigo-50/50 text-indigo-605 dark:border-indigo-500 dark:bg-indigo-950/20 dark:text-indigo-400'
+                      : 'border-slate-200 bg-transparent text-slate-650 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
+                  }`}
+                >
+                  <span className="font-bold">Cohere</span>
+                  <span>Command-R (Free Trial)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleProviderChange('openrouter')}
+                  className={`flex flex-col items-center justify-center rounded-xl border py-2 text-xs font-medium transition-all ${
+                    provider === 'openrouter'
+                      ? 'border-purple-650 bg-purple-50/50 text-purple-650 dark:border-purple-500 dark:bg-purple-950/20 dark:text-purple-400'
+                      : 'border-slate-200 bg-transparent text-slate-650 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
+                  }`}
+                >
+                  <span className="font-bold">OpenRouter</span>
+                  <span>Free Models</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => handleProviderChange('openai')}
                   className={`flex flex-col items-center justify-center rounded-xl border py-2 text-xs font-medium transition-all ${
                     provider === 'openai'
-                      ? 'border-emerald-600 bg-emerald-50/50 text-emerald-600 dark:border-emerald-500 dark:bg-emerald-950/20 dark:text-emerald-400'
+                      ? 'border-emerald-600 bg-emerald-50/50 text-emerald-605 dark:border-emerald-500 dark:bg-emerald-950/20 dark:text-emerald-400'
                       : 'border-slate-200 bg-transparent text-slate-650 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
                   }`}
                 >
                   <span className="font-bold">OpenAI</span>
-                  <span>GPT</span>
+                  <span>GPT (Paid/Own Key)</span>
                 </button>
               </div>
             </div>
@@ -135,19 +149,24 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
                 onChange={(e) => setModel(e.target.value)}
                 className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:focus:border-blue-400 dark:focus:bg-slate-900"
               >
-                {provider === 'gemini' && (
-                  <>
-                    <option value="gemini-2.0-flash">Gemini 2.0 Flash ⚡ (Free — Recommended)</option>
-                    <option value="gemini-2.0-flash-lite">Gemini 2.0 Flash Lite (Fastest)</option>
-                    <option value="gemini-1.5-flash">Gemini 1.5 Flash (Legacy)</option>
-                    <option value="gemini-1.5-pro">Gemini 1.5 Pro (Legacy Pro)</option>
-                  </>
-                )}
                 {provider === 'groq' && (
                   <>
                     <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Smartest Free)</option>
                     <option value="llama-3.1-8b-instant">Llama 3.1 8B Instant (Ultra Fast Free)</option>
                     <option value="gemma2-9b-it">Gemma 2 9B IT (Balanced Free)</option>
+                  </>
+                )}
+                {provider === 'cohere' && (
+                  <>
+                    <option value="command-r-plus">Command R+ (High-end Reasoning & RAG)</option>
+                    <option value="command-r">Command R (Fast & Context-optimized)</option>
+                  </>
+                )}
+                {provider === 'openrouter' && (
+                  <>
+                    <option value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B Free (Smartest)</option>
+                    <option value="google/gemma-2-9b-it:free">Gemma 2 9B Free (Balanced)</option>
+                    <option value="meta-llama/llama-3.1-8b-instruct:free">Llama 3.1 8B Free (Fastest)</option>
                   </>
                 )}
                 {provider === 'openai' && (
@@ -179,10 +198,12 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
                 placeholder={
-                  provider === 'gemini'
-                    ? 'AIzaSy... or AQ...'
-                    : provider === 'groq'
+                  provider === 'groq'
                     ? 'gsk_...'
+                    : provider === 'cohere'
+                    ? 'Trial or Production API key'
+                    : provider === 'openrouter'
+                    ? 'sk-or-...'
                     : 'sk-proj-...'
                 }
                 className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:focus:border-blue-400 dark:focus:bg-slate-900"

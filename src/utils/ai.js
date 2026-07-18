@@ -123,70 +123,55 @@ ${context}`;
   messages.push({ role: 'user', content: query });
 
   try {
-    if (provider === 'gemini') {
-      const promptText = `${systemPrompt}\n\nUser Question: ${query}\n\nProvide JSON response:`;
-
-      // Both AQ. (auth keys) and AIzaSy (standard keys) are passed as ?key= query param
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: promptText }] }],
-          generationConfig: { responseMimeType: 'application/json' }
-        })
-      });
-
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error?.message || `Gemini API returned status ${response.status}`);
-      }
-
-      const data = await response.json();
-      const textResult = data.candidates?.[0]?.content?.parts?.[0]?.text;
-      
-      if (!textResult) {
-        throw new Error("No response content received from Gemini.");
-      }
-
-      return JSON.parse(textResult);
-
-    } else if (provider === 'openai' || provider === 'groq') {
-      // Both OpenAI and Groq share the OpenAI API structure
-      const url = provider === 'openai' 
-        ? 'https://api.openai.com/v1/chat/completions' 
-        : 'https://api.groq.com/openai/v1/chat/completions';
-
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          model: model,
-          messages: messages,
-          response_format: { type: 'json_object' }
-        })
-      });
-
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error?.message || `${provider.toUpperCase()} API returned status ${response.status}`);
-      }
-
-      const data = await response.json();
-      const textResult = data.choices?.[0]?.message?.content;
-
-      if (!textResult) {
-        throw new Error(`No response content received from ${provider.toUpperCase()}.`);
-      }
-
-      return JSON.parse(textResult);
-    } else {
-      throw new Error("Invalid AI provider selected.");
+    const providers = ['groq', 'cohere', 'openrouter', 'openai'];
+    if (!providers.includes(provider)) {
+      throw new Error(`Invalid AI provider: ${provider}`);
     }
+
+    let url = '';
+    if (provider === 'groq') {
+      url = 'https://api.groq.com/openai/v1/chat/completions';
+    } else if (provider === 'cohere') {
+      url = 'https://api.cohere.ai/compatibility/v1/chat/completions';
+    } else if (provider === 'openrouter') {
+      url = 'https://openrouter.ai/api/v1/chat/completions';
+    } else if (provider === 'openai') {
+      url = 'https://api.openai.com/v1/chat/completions';
+    }
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    };
+
+    if (provider === 'openrouter') {
+      headers['HTTP-Referer'] = window.location.origin || 'http://localhost:5173';
+      headers['X-Title'] = 'CUI Admission Assistant';
+    }
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({
+        model: model,
+        messages: messages,
+        response_format: { type: 'json_object' }
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.error?.message || `${provider.toUpperCase()} API returned status ${response.status}`);
+    }
+
+    const data = await response.json();
+    const textResult = data.choices?.[0]?.message?.content;
+
+    if (!textResult) {
+      throw new Error(`No response content received from ${provider.toUpperCase()}.`);
+    }
+
+    return JSON.parse(textResult);
   } catch (error) {
     console.error("AI Error:", error);
     return {
