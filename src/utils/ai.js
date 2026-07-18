@@ -49,33 +49,43 @@ export function getRelevantContext(query, selectedCategory = 'All') {
     sourcesUsed.push('scholarships.json');
   }
 
-  // 6. Check FAQs (Filter FAQs based on keywords to keep context concise and highly relevant)
+  // 6. Hostel & Transport — dedicated keyword trigger
+  const hasHostelTransportKeywords = lowerQuery.match(/(hostel|transport|bus|route|accommodation|room|mess|warden|pick.?up|drop.?off|travel|commute|timing|shuttle|van|vehicle|35k|55k|security deposit)/);
+  if (selectedCategory === 'Hostel & Transport' || hasHostelTransportKeywords) {
+    const hostelFaqs = faqsData.filter(f => f.category === 'Hostel & Transport');
+    if (hostelFaqs.length > 0) {
+      contextParts.push(`### Hostel & Transport (CUI Wah Campus Specific):\n${JSON.stringify(hostelFaqs, null, 2)}`);
+      if (!sourcesUsed.includes('faqs.json')) sourcesUsed.push('faqs.json');
+    }
+  }
+
+  // 7. General FAQ matching
   const queryWords = lowerQuery.split(/\s+/).filter(w => w.length > 3);
   let relevantFaqs = faqsData;
 
   if (selectedCategory !== 'All' && selectedCategory !== 'FAQs') {
-    // If a specific category is chosen, filter FAQs by that category
-    relevantFaqs = faqsData.filter(faq => faq.category.toLowerCase().includes(selectedCategory.toLowerCase()));
+    // Partial match to handle 'Hostel & Transport' and similar
+    relevantFaqs = faqsData.filter(faq =>
+      faq.category.toLowerCase() === selectedCategory.toLowerCase() ||
+      faq.category.toLowerCase().replace(' & ', ' ').includes(selectedCategory.toLowerCase().replace(' & ', ''))
+    );
   } else if (queryWords.length > 0) {
-    // Otherwise, find FAQs matching query words
     relevantFaqs = faqsData.filter(faq => {
-      return queryWords.some(word => 
-        faq.question.toLowerCase().includes(word) || 
+      return queryWords.some(word =>
+        faq.question.toLowerCase().includes(word) ||
         faq.answer.toLowerCase().includes(word)
       );
     });
   }
 
-  // Fallback to top FAQs if no words match
   if (relevantFaqs.length === 0) {
     relevantFaqs = faqsData.slice(0, 10);
   } else {
-    // Limit to top 25 matches to avoid overloading context
-    relevantFaqs = relevantFaqs.slice(0, 25);
+    relevantFaqs = relevantFaqs.slice(0, 30);
   }
 
-  contextParts.push(`### Relevant Frequently Asked Questions:\n${JSON.stringify(relevantFaqs, null, 2)}`);
-  sourcesUsed.push('faqs.json');
+  contextParts.push(`### Relevant FAQs:\n${JSON.stringify(relevantFaqs, null, 2)}`);
+  if (!sourcesUsed.includes('faqs.json')) sourcesUsed.push('faqs.json');
 
   return {
     context: contextParts.join('\n\n'),
@@ -86,22 +96,24 @@ export function getRelevantContext(query, selectedCategory = 'All') {
 export async function askAI({ provider, apiKey, model, query, category, chatHistory = [] }) {
   const { context, sources } = getRelevantContext(query, category);
 
-  const systemPrompt = `You are the official AI Admission Assistant for COMSATS University Islamabad (CUI).
-Your goal is to answer the user's questions about admissions, programs, fees, eligibility, prerequisites, scholarships, and campus facilities.
+  const systemPrompt = `You are the official AI Admission Assistant for COMSATS University Islamabad (CUI) Wah Campus ONLY.
+Your ONLY job is to answer questions using the specific CUI Wah Campus JSON data provided below.
 
 CRITICAL RULES:
-1. Answer ONLY using the provided JSON context. Do not invent, assume, or extrapolate any information.
-2. If the answer is not explicitly found in the context, you MUST respond exactly with: "I couldn't find this information in the knowledge base." Do not attempt to give advice, suggest checking the website, or provide contact numbers unless they are in the context.
-3. Keep the response factual, concise, and helpful. Use clear markdown formatting (bold, bullet points, headers) for readability.
-4. You must output your response in JSON format matching this schema:
+1. ALWAYS use the provided JSON context. It contains specific, accurate CUI Wah Campus data — fees in Rs., hostel details, transport routes, merit cutoffs, timings, etc.
+2. NEVER give generic or vague answers like "contact the admission office" if the specific answer is in the context.
+3. When hostel/transport data is available, state the exact fee (Rs. 55,000 hostel, Rs. 35,000 transport), room types, routes, timings, etc.
+4. If the answer is truly not in the context, respond: "I couldn't find this information in the knowledge base."
+5. Use clear markdown: bold headings, bullet points, numbered steps.
+6. Output ONLY valid JSON:
 {
-  "answer": "Your detailed answer in markdown format. Use list, bold text, etc., where appropriate.",
-  "sources": ["list", "of", "json", "files", "actually", "used", "to", "answer", "this", "question"]
+  "answer": "Your detailed markdown answer with specific figures.",
+  "sources": ["list of source files used"]
 }
-Only list sources from the context that actually contained the information used to write the answer. If the answer was not found, return empty sources array [].
 
-JSON CONTEXT PROVIDED:
+CUI WAH CAMPUS DATA:
 ${context}`;
+
 
   const messages = [
     { role: 'system', content: systemPrompt }
