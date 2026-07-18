@@ -75,8 +75,8 @@ export default function ChatContainer({
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden bg-slate-50 dark:bg-[#0b0e14] w-full max-w-full">
-      {/* Messages area */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 md:px-8 max-w-full">
+      {/* Messages area - scrollable, momentum on iOS */}
+      <div className="flex-1 overflow-y-auto scroll-touch px-4 py-6 md:px-8 max-w-full">
         {activeCategory !== 'All' ? (
           /* Category Explorer View */
           <div className="mx-auto max-w-4xl py-4 pb-12">
@@ -157,7 +157,7 @@ export default function ChatContainer({
                   )}
 
                   {/* Message Bubble Container */}
-                  <div className={`relative flex flex-col max-w-[85%] ${isUser ? 'items-end' : 'items-start'} overflow-hidden`}>
+                  <div className={`relative flex flex-col max-w-[90%] md:max-w-[80%] ${isUser ? 'items-end' : 'items-start'} overflow-hidden`}>
                     <div
                       className={`rounded-2xl px-4.5 py-3 shadow-sm break-words w-full max-w-full ${
                         isUser
@@ -245,8 +245,8 @@ export default function ChatContainer({
         )}
       </div>
 
-      {/* Input container */}
-      <div className="border-t border-slate-200 bg-white/80 backdrop-blur-md p-4 dark:border-slate-800/80 dark:bg-[#0b0e14]/80 shrink-0 w-full">
+      {/* Input container - sticky bottom, safe area for notched phones */}
+      <div className="border-t border-slate-200 bg-white/95 backdrop-blur-md p-3 md:p-4 pb-safe dark:border-slate-800/80 dark:bg-[#0b0e14]/95 shrink-0 w-full">
         <form onSubmit={handleSubmit} className="mx-auto max-w-3xl">
           <div className="relative flex items-center overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/10 dark:border-slate-800 dark:bg-[#151a28] dark:focus-within:border-blue-400 dark:focus-within:ring-blue-400/10 transition-all duration-300">
             <input

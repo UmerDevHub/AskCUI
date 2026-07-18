@@ -1412,7 +1412,71 @@
     "question": "What are the important rules and guidelines for CUI Wah online admission?",
     "answer": "Key guidelines for applying:\n- The form submission is 100% ONLINE; no campus visit is needed.\n- All steps must be completed in the correct order.\n- The admission processing fee is non-refundable.\n- Applications with false information will be rejected immediately.\n- Candidates with a supplementary (supply) in HSSC Part-I or Part-II cannot apply.\n- HSSC improvement candidates cannot apply as result-awaiting; they must use their previously declared result if it meets eligibility.\n- Result-awaited A-Level candidates are evaluated on O-Level equivalence score.\n- Result-awaited 3rd-year DAE candidates are assigned a flat 60% intermediate score for merit calculation.\n- Intermediate (Pre-Medical) students who gave an additional Mathematics paper must apply as result-awaiting based on Part-I.\n- Cambridge/Edexcel (O-Level/A-Level) applicants must produce IBCC equivalence certificate.",
     "source": "CUI Admissions Portal"
+  },
+  {
+    "id": "wah_hostel_application_process",
+    "category": "Hostel & Transport",
+    "question": "How do I apply for hostel accommodation at CUI Wah Campus?",
+    "answer": "Hostel at CUI Wah Campus is allocated on a first-come, first-served basis. To apply:\n1. Log in to the CUI Student Information System (SIS) portal after receiving your admission offer.\n2. Navigate to the 'Hostel' or 'Accommodation' section.\n3. Submit your hostel application online.\n4. Seats are limited — apply as early as possible after admission confirmation.\n5. You will be notified by the hostel office upon approval.\n\nNote: Hostel availability is NOT guaranteed. Priority is given to students who apply earliest.",
+    "source": "CUI Wah Hostel Office"
+  },
+  {
+    "id": "wah_hostel_room_facilities",
+    "category": "Hostel & Transport",
+    "question": "What are the room types and facilities at CUI Wah Campus hostel?",
+    "answer": "CUI Wah Campus hostel provides the following:\n\nRoom Types:\n- Shared rooms (2–4 students per room) are the standard allocation.\n- Single rooms may be available on request, subject to availability and a higher fee.\n\nFacilities:\n- 24/7 warden-supervised environment\n- Mess (cafeteria) with daily meals included in the hostel package\n- Clean washrooms and bathrooms (shared per block)\n- Study rooms / common areas\n- Wi-Fi connectivity\n- Power backup\n- Security cameras and controlled entry\n\nFee: Rs. 55,000 per semester (includes mess) + Rs. 2,000 one-time refundable security deposit.",
+    "source": "CUI Wah Hostel Office"
+  },
+  {
+    "id": "wah_transport_return_times",
+    "category": "Hostel & Transport",
+    "question": "What are the return/departure transport timings from CUI Wah Campus?",
+    "answer": "CUI Wah Campus transport service runs routes covering Islamabad, Rawalpindi, and Attock districts.\n\nMorning Arrival (Pickup from city → Campus): All routes arrive at campus by 8:25 AM.\n\nEvening Departure (Campus → City): The university bus departs from campus after the end of classes, typically around 4:30 PM – 5:00 PM for the morning session, and around 8:30 PM – 9:00 PM for the evening MS/PhD session.\n\nTransport Fee: Rs. 35,000 per semester (covers both directions, all covered routes).\n\nRoutes covered: Rawalpindi (Saddar, Chaklala, Jhanda Chichi, Pirwadhi), Islamabad (G-10, G-11, Peshawar Mor, Zero Point, Karachi Company), Attock (Khana Pull, Gangal, Karal Chowk, Gulzar-e-Quaid, Airport PSO), Wah Cantt (local stops), and Taxila.",
+    "source": "CUI Wah Transport Office"
+  },
+  {
+    "id": "wah_merit_formula_example",
+    "category": "Eligibility",
+    "question": "Can you give a worked example of how the CUI admission aggregate is calculated?",
+    "answer": "The official CUI aggregate formula is:\nAggregate = (Matric % × 10%) + (Intermediate % × 40%) + (NTS NAT Score × 50%)\n\nWorked Example:\n- Matric: 950 out of 1100 → 86.36% → contributes 8.636\n- Intermediate: 890 out of 1100 → 80.90% → contributes 32.36\n- NTS NAT Score: 78 out of 100 → contributes 39.0\n\nFinal Aggregate = 8.636 + 32.36 + 39.0 = 79.996% ≈ 80.0%\n\nThis aggregate would place you at the borderline for BSCS (80.1% cutoff in 2024). A higher NTS score is the most effective way to improve your aggregate since it carries 50% weight.",
+    "source": "CUI Admissions Formula Guide"
+  },
+  {
+    "id": "wah_spring_intake_merit",
+    "category": "Eligibility",
+    "question": "Is the merit cutoff lower in the Spring semester intake at CUI Wah?",
+    "answer": "Yes, generally. The Spring semester (February intake) typically attracts fewer applicants than the Fall semester (September intake), which results in a slightly lower closing merit.\n\nFor example, if BSCS closed at 80.1% in Fall 2024, the same program in Spring 2025 may close around 77%–79% depending on applicant volume.\n\nThis makes Spring intake a strategic option if your aggregate falls 1%–3% below the Fall cutoff. However, not all programs offer Spring intake — computing programs (BSCS, BSSE, BSAI) are more likely to have Spring admissions than engineering programs.",
+    "source": "CUI Wah Admissions Office"
+  },
+  {
+    "id": "wah_ms_phd_eligibility",
+    "category": "Eligibility",
+    "question": "What are the eligibility requirements for MS and PhD programs at CUI Wah Campus?",
+    "answer": "MS (Graduate) Programs:\n- Minimum 16 years of education (BS/B.Tech/BE or equivalent 4-year degree)\n- Minimum CGPA of 2.0/4.0 (or 45% marks for annual system graduates)\n- Valid GAT-General score (NTS) of at least 50/100 OR CUI institutional GAT\n- Some programs require a subject-specific GAT (e.g. GAT-Computer for MSCS)\n\nPhD Programs:\n- Minimum 18 years of education (MS/M.Phil or equivalent)\n- Minimum CGPA of 3.0/4.0 in MS\n- Valid GRE or GAT-Subject score (NTS)\n- Research proposal may be required\n- Interview with the departmental committee is mandatory\n\nGAT-General validity: 2 years from test date. Students can retake GAT at any time.",
+    "source": "CUI HEC Graduate Admissions Policy"
+  },
+  {
+    "id": "wah_after_merit_list",
+    "category": "FAQs",
+    "question": "What do I do after my name appears on the CUI Wah merit list?",
+    "answer": "After your name appears on the merit list, follow these steps:\n\n1. Check Your Position: Log in to the admissions portal at admissions.comsats.edu.pk to verify your name and allocated program.\n\n2. Pay Admission Fee: Generate and pay the admission fee challan within the deadline mentioned (usually 3–5 days). Missing the deadline forfeits your seat.\n\n3. Submit Original Documents: Visit the CUI Wah Campus Admission Office with:\n   - Original Matric/O-Level certificate and marks sheet\n   - Original Intermediate/A-Level certificate or marks sheet\n   - CNIC / B-Form (original + 2 copies)\n   - 4 passport-size photographs\n   - NTS result card\n   - Domicile certificate\n\n4. Registration: Complete your course registration on the SIS student portal for the first semester.\n\n5. Hostel/Transport: Apply for hostel or transport separately if needed (first come, first served).",
+    "source": "CUI Wah Admissions Office"
+  },
+  {
+    "id": "wah_nts_gat_difference",
+    "category": "Prerequisites",
+    "question": "What is the difference between NTS NAT and NTS GAT? Which one does CUI require?",
+    "answer": "NTS NAT (National Aptitude Test):\n- Required for UNDERGRADUATE (BS/BBA) admissions\n- Tests English, Analytical Reasoning, and subject knowledge\n- Score range: 0–100\n- Valid for 1 year from the test date\n- CUI uses NAT-IE (for Engineering/Computing) or NAT-IM (for Management)\n\nNTS GAT-General:\n- Required for GRADUATE (MS/MBA) admissions\n- Tests Verbal, Quantitative, and Analytical skills\n- Minimum passing score for CUI MS admission: 50/100\n- Valid for 2 years from the test date\n\nNTS GAT-Subject:\n- Required for PhD admissions\n- Subject-specific test (e.g. GAT-Computer, GAT-Engineering)\n\nFor undergrad BS programs, only NAT is required. For MS programs, GAT-General is required. For PhD, GAT-Subject is required.",
+    "source": "CUI Wah Admissions Policy & NTS Pakistan"
+  },
+  {
+    "id": "wah_domicile_requirement",
+    "category": "Eligibility",
+    "question": "Is a Punjab domicile required to apply to CUI Wah Campus?",
+    "answer": "No. CUI Wah Campus is a federal university (COMSATS is under HEC federal charter), so it does NOT require a specific provincial domicile. Students from any province (Punjab, KPK, Sindh, Balochistan, AJK, GB) can apply on open merit.\n\nHowever, for HEC need-based scholarships that are province-specific (e.g. FATA/Balochistan scholarships), a domicile from that region is required to qualify for that specific scholarship category.",
+    "source": "CUI Prospectus & HEC Guidelines"
   }
 ]
+
 
 

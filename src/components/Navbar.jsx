@@ -7,7 +7,7 @@ export default function Navbar({
   onToggleMobileSidebar 
 }) {
   return (
-    <header className="flex items-center justify-between border-b border-warm-200 dark:border-slate-800/60 bg-white dark:bg-[#10151f] px-4 py-3 md:px-6">
+    <header className="sticky top-0 z-30 flex items-center justify-between border-b border-warm-200 dark:border-slate-800/60 bg-white/95 dark:bg-[#10151f]/95 backdrop-blur-md px-4 py-3 md:px-6 shrink-0 shadow-sm dark:shadow-slate-900/40">
       
       {/* Left side */}
       <div className="flex items-center gap-3">
@@ -21,12 +21,13 @@ export default function Navbar({
 
         {/* Mobile brand */}
         <div className="flex items-center gap-2 md:hidden">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 font-bold text-white text-xs">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 font-bold text-white text-xs shadow-sm">
             C
           </div>
-          <span className="font-semibold text-slate-800 dark:text-slate-100 text-sm">
-            CUI Admissions
-          </span>
+          <div>
+            <span className="font-bold text-slate-800 dark:text-slate-100 text-sm leading-none block">CUI Wah</span>
+            <span className="text-[10px] text-slate-400 dark:text-slate-500 leading-none">Admission Guide</span>
+          </div>
         </div>
 
         {/* Desktop breadcrumb */}

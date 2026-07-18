@@ -97,22 +97,34 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
 
   // --- 1. RENDER PROGRAMS ---
   const renderPrograms = () => {
-    const filtered = programsData.filter(p => {
-      const matchesTab = activeTab === 'All' || p.level === activeTab;
-      const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            p.abbreviation.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            p.category.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesTab && matchesSearch;
-    });
+    const levels = ['Undergraduate', 'Graduate', 'PhD'];
+    const levelConfig = {
+      Undergraduate: { label: 'Undergraduate Programs', sublabel: 'BS / BBA / B.Arch — 4 Year Degrees', color: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-50 dark:bg-indigo-950/40', border: 'border-indigo-100 dark:border-indigo-900/30', dot: 'bg-indigo-500' },
+      Graduate:      { label: 'Graduate Programs (MS)', sublabel: 'MS / MBA / M.Arch — 2 Year Postgraduate Degrees', color: 'text-violet-600 dark:text-violet-400', bg: 'bg-violet-50 dark:bg-violet-950/40', border: 'border-violet-100 dark:border-violet-900/30', dot: 'bg-violet-500' },
+      PhD:           { label: 'PhD Programs', sublabel: 'Doctor of Philosophy — Research Degrees', color: 'text-rose-600 dark:text-rose-400', bg: 'bg-rose-50 dark:bg-rose-950/40', border: 'border-rose-100 dark:border-rose-900/30', dot: 'bg-rose-500' },
+    };
+
+    const grouped = levels.reduce((acc, lv) => {
+      acc[lv] = programsData.filter(p =>
+        p.level === lv &&
+        (
+          !searchQuery ||
+          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.abbreviation.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.category.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      );
+      return acc;
+    }, {});
 
     return (
       <motion.div 
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="space-y-6 max-w-full"
+        className="space-y-8 max-w-full"
       >
-        {/* Programs Header & Tabs */}
+        {/* Header */}
         <motion.div variants={itemVariants} className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
@@ -121,25 +133,9 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
               </span>
               Degree Programs Offered
             </h2>
-            <p className="text-sm text-slate-50500 dark:text-slate-400 mt-1 max-w-xl">
-              Explore undergraduate and graduate degree options. Click an option below to query the AI assistant.
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-xl">
+              Undergraduate, graduate, and PhD programs at CUI Wah Campus — click any card to ask the AI.
             </p>
-          </div>
-          {/* Level Tabs */}
-          <div className="flex rounded-xl bg-slate-100/80 p-1 dark:bg-slate-800/80 shrink-0 self-start border border-slate-200/40 dark:border-slate-700/30">
-            {['All', 'Undergraduate', 'Graduate', 'PhD'].map(tab => (
-              <button
-                key={tab}
-                onClick={() => { setActiveTab(tab); setSearchQuery(''); }}
-                className={`rounded-lg px-3 py-1.5 text-xs font-bold transition-all duration-200 ${
-                  activeTab === tab 
-                    ? 'bg-white text-indigo-600 shadow-sm dark:bg-slate-900 dark:text-indigo-400'
-                    : 'text-slate-500 hover:text-slate-850 dark:text-slate-400 dark:hover:text-slate-200'
-                }`}
-              >
-                {tab === 'Graduate' ? 'MS Graduate' : tab}
-              </button>
-            ))}
           </div>
         </motion.div>
 
@@ -151,63 +147,84 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
             placeholder="Search programs by name, abbreviation, or group..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-2xl border border-slate-200/80 bg-white py-3 pl-11 pr-4 text-sm outline-none transition-all duration-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 dark:border-slate-800 dark:bg-slate-900 dark:focus:border-indigo-400 dark:focus:ring-indigo-400/10"
+            className="w-full rounded-2xl border border-slate-200/80 bg-white py-3 pl-11 pr-4 text-sm outline-none transition-all duration-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 dark:border-slate-800 dark:bg-slate-900 dark:focus:border-indigo-400"
           />
         </motion.div>
 
-        {/* Programs Grid */}
-        {filtered.length === 0 ? (
-          <motion.div variants={itemVariants} className="py-16 text-center text-sm text-slate-450 dark:text-slate-500">
-            No programs match your search criteria. Try another keyword.
-          </motion.div>
-        ) : (
-          <motion.div 
-            variants={containerVariants}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {filtered.map((p, idx) => (
-              <motion.div 
-                key={idx}
-                variants={itemVariants}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="group flex flex-col justify-between rounded-2xl border border-slate-200/70 bg-white p-5 transition-all duration-300 hover:border-indigo-200 hover:shadow-lg dark:border-slate-800 dark:bg-[#151a28] dark:hover:border-indigo-900/60 dark:hover:shadow-indigo-950/20"
-              >
-                <div className="space-y-3.5">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="rounded-lg bg-indigo-50 px-2.5 py-1 text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider dark:bg-indigo-950/40 dark:text-indigo-400 border border-indigo-100/40 dark:border-indigo-900/20 whitespace-nowrap shrink-0">
-                      {p.level}
-                    </span>
-                    <span className="text-[11px] font-bold text-slate-455 dark:text-slate-500 flex items-center gap-1 whitespace-nowrap shrink-0">
-                      <Clock className="h-3 w-3" />
-                      {p.duration}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-850 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-base leading-snug">
-                      {p.name}
-                    </h3>
-                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-wider">
-                      {p.abbreviation} • {p.category}
-                    </p>
-                  </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
-                    {p.description}
-                  </p>
+        {/* Grouped Sections */}
+        {levels.map(lv => {
+          const programs = grouped[lv];
+          if (programs.length === 0) return null;
+          const cfg = levelConfig[lv];
+          return (
+            <motion.div key={lv} variants={itemVariants} className="space-y-4">
+              {/* Section Heading */}
+              <div className="flex items-center gap-3">
+                <span className={`h-2 w-2 rounded-full ${cfg.dot}`} />
+                <div>
+                  <h3 className={`text-base font-extrabold ${cfg.color}`}>{cfg.label}</h3>
+                  <p className="text-[10.5px] text-slate-450 dark:text-slate-500 font-medium">{cfg.sublabel}</p>
                 </div>
-                <button
-                  onClick={() => onAskQuestion(`What are the details, eligibility criteria, and requirements for ${p.name} (${p.abbreviation})?`, 'Programs')}
-                  className="mt-5 flex w-full items-center justify-between rounded-xl bg-slate-50 border border-slate-200/50 px-4 py-2.5 text-xs font-bold text-slate-700 transition-all duration-200 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-100/50 dark:bg-slate-900/60 dark:border-slate-800 dark:text-slate-355 dark:hover:bg-indigo-950/30 dark:hover:text-indigo-400 dark:hover:border-indigo-900/30"
-                >
-                  <span>Ask Admission AI</span>
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </button>
-              </motion.div>
-            ))}
+                <span className={`ml-auto text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full border ${cfg.bg} ${cfg.color} ${cfg.border}`}>
+                  {programs.length} {programs.length === 1 ? 'Program' : 'Programs'}
+                </span>
+              </div>
+
+              {/* Cards Grid */}
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {programs.map((p, idx) => (
+                  <motion.div 
+                    key={idx}
+                    variants={itemVariants}
+                    whileHover={{ y: -3, transition: { duration: 0.18 } }}
+                    className="group flex flex-col justify-between rounded-2xl border border-slate-200/70 bg-white p-5 transition-all duration-300 hover:border-indigo-200 hover:shadow-lg dark:border-slate-800 dark:bg-[#151a28] dark:hover:border-indigo-900/60"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`rounded-lg px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wider border ${cfg.bg} ${cfg.color} ${cfg.border} whitespace-nowrap`}>
+                          {p.abbreviation}
+                        </span>
+                        <span className="text-[11px] font-bold text-slate-455 dark:text-slate-500 flex items-center gap-1 whitespace-nowrap">
+                          <Clock className="h-3 w-3" />
+                          {p.duration}
+                        </span>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-850 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-sm leading-snug">
+                          {p.name}
+                        </h4>
+                        <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-0.5 uppercase tracking-wider">
+                          {p.category}
+                        </p>
+                      </div>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
+                        {p.description}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => onAskQuestion(`What are the details, eligibility, and requirements for ${p.name} (${p.abbreviation})?`, 'Programs')}
+                      className="mt-4 flex w-full items-center justify-between rounded-xl bg-slate-50 border border-slate-200/50 px-4 py-2.5 text-xs font-bold text-slate-700 transition-all hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-100/50 dark:bg-slate-900/60 dark:border-slate-800 dark:text-slate-355 dark:hover:bg-indigo-950/30 dark:hover:text-indigo-400"
+                    >
+                      <span>Ask Admission AI</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </button>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          );
+        })}
+
+        {/* Empty search state */}
+        {levels.every(lv => grouped[lv].length === 0) && (
+          <motion.div variants={itemVariants} className="py-16 text-center text-sm text-slate-450 dark:text-slate-500">
+            No programs match your search. Try another keyword.
           </motion.div>
         )}
       </motion.div>
     );
   };
+
 
   // --- 2. RENDER FEES ---
   const renderFees = () => {
