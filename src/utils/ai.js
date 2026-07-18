@@ -123,60 +123,111 @@ ${context}`;
   messages.push({ role: 'user', content: query });
 
   try {
-    const providers = ['groq', 'cohere', 'openrouter', 'openai'];
-    if (!providers.includes(provider)) {
-      throw new Error(`Invalid AI provider: ${provider}`);
+    return await callSingleProvider(provider, apiKey, model, messages);
+  } catch (primaryError) {
+    console.warn(`Primary provider (${provider}) failed. Attempting automatic fallback... Error:`, primaryError.message);
+
+    // Fallback options loaded from environment
+    const envGroq = import.meta.env.VITE_GROQ_API_KEY || '';
+    const envCohere = import.meta.env.VITE_COHERE_API_KEY || '';
+    const envOpenRouter = import.meta.env.VITE_OPENROUTER_API_KEY || '';
+
+    // List of candidates to try if primary provider fails
+    const candidates = [];
+    if (envGroq && provider !== 'groq') {
+      candidates.push({ provider: 'groq', key: envGroq, model: 'llama-3.3-70b-versatile' });
+    }
+    if (envCohere && provider !== 'cohere') {
+      candidates.push({ provider: 'cohere', key: envCohere, model: 'command-a-plus-05-2026' });
+    }
+    if (envOpenRouter && provider !== 'openrouter') {
+      candidates.push({ provider: 'openrouter', key: envOpenRouter, model: 'meta-llama/llama-3.3-70b-instruct:free' });
     }
 
-    let url = '';
-    if (provider === 'groq') {
-      url = 'https://api.groq.com/openai/v1/chat/completions';
-    } else if (provider === 'cohere') {
-      url = 'https://api.cohere.ai/compatibility/v1/chat/completions';
-    } else if (provider === 'openrouter') {
-      url = 'https://openrouter.ai/api/v1/chat/completions';
-    } else if (provider === 'openai') {
-      url = 'https://api.openai.com/v1/chat/completions';
+    // Attempt fallbacks sequentially
+    for (const candidate of candidates) {
+      try {
+        console.log(`Fallback: Trying ${candidate.provider} with model ${candidate.model}...`);
+        const result = await callSingleProvider(candidate.provider, candidate.key, candidate.model, messages);
+        if (result && result.answer) {
+          result.answer += `\n\n*— Response served via fallback provider (${
+            candidate.provider === 'cohere' 
+              ? 'Cohere' 
+              : candidate.provider === 'openrouter' 
+              ? 'OpenRouter' 
+              : 'Groq'
+          }) due to temporary rate limits on the primary provider.*`;
+        }
+        return result;
+      } catch (fallbackError) {
+        console.warn(`Fallback to ${candidate.provider} failed:`, fallbackError.message);
+      }
     }
 
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    };
-
-    if (provider === 'openrouter') {
-      headers['HTTP-Referer'] = window.location.origin || 'http://localhost:5173';
-      headers['X-Title'] = 'CUI Admission Assistant';
-    }
-
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({
-        model: model,
-        messages: messages,
-        response_format: { type: 'json_object' }
-      })
-    });
-
-    if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.error?.message || `${provider.toUpperCase()} API returned status ${response.status}`);
-    }
-
-    const data = await response.json();
-    const textResult = data.choices?.[0]?.message?.content;
-
-    if (!textResult) {
-      throw new Error(`No response content received from ${provider.toUpperCase()}.`);
-    }
-
-    return JSON.parse(textResult);
-  } catch (error) {
-    console.error("AI Error:", error);
+    // All candidates failed or were unconfigured
     return {
-      answer: `Error communicating with ${provider.toUpperCase()} API: ${error.message}. Please check your API key, connection, or model settings.`,
+      answer: `Error communicating with ${provider.toUpperCase()} API: ${primaryError.message}. (Temporary rate limit reached; fallback providers were also exhausted or unconfigured).`,
       sources: []
     };
   }
+}
+
+// Single provider request execution helper
+async function callSingleProvider(prov, key, mdl, messages) {
+  let url = '';
+  if (prov === 'groq') {
+    url = 'https://api.groq.com/openai/v1/chat/completions';
+  } else if (prov === 'cohere') {
+    url = 'https://api.cohere.ai/compatibility/v1/chat/completions';
+  } else if (prov === 'openrouter') {
+    url = 'https://openrouter.ai/api/v1/chat/completions';
+  } else if (prov === 'openai') {
+    url = 'https://api.openai.com/v1/chat/completions';
+  } else {
+    throw new Error(`Invalid provider: ${prov}`);
+  }
+
+  if (!key) {
+    throw new Error(`API key is missing for ${prov}`);
+  }
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${key}`
+  };
+
+  if (prov === 'openrouter') {
+    headers['HTTP-Referer'] = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173';
+    headers['X-Title'] = 'CUI Admission Assistant';
+  }
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({
+      model: mdl,
+      messages: messages,
+      response_format: { type: 'json_object' }
+    })
+  });
+
+  if (!response.ok) {
+    let errMsg = '';
+    try {
+      const err = await response.json();
+      errMsg = err.error?.message || `${prov.toUpperCase()} API returned status ${response.status}`;
+    } catch {
+      errMsg = `${prov.toUpperCase()} API returned status ${response.status}`;
+    }
+    throw new Error(errMsg);
+  }
+
+  const data = await response.json();
+  const textResult = data.choices?.[0]?.message?.content;
+
+  if (!textResult) {
+    throw new Error(`No response content received from ${prov.toUpperCase()}.`);
+  }
+
+  return JSON.parse(textResult);
 }
