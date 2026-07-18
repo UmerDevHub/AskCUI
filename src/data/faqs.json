@@ -1363,6 +1363,56 @@
     "question": "Does CUI Wah offer regional, sports, or self-finance seat quotas?",
     "answer": "No. CUI Wah operates strictly on a competitive merit system. All regular local admissions are processed through open merit. However, physical disability fee waivers (100% tuition waiver upon showing a valid certificate) and HEC scholarships for FATA/Balochistan are available. DAE holders compete directly with FSc/ICS on open merit with no quota limits.",
     "source": "CUI Prospectus Guidelines"
+  },
+  {
+    "id": "wah_apply_portal_link",
+    "category": "FAQs",
+    "question": "Where do I apply for admission at COMSATS University Islamabad Wah Campus?",
+    "answer": "The entire admission process is 100% online. You do not need to visit the campus to submit your form. Apply at: https://admissions.comsats.edu.pk/",
+    "source": "CUI Admissions Portal"
+  },
+  {
+    "id": "wah_apply_steps",
+    "category": "FAQs",
+    "question": "What are the steps of the CUI online admission application form?",
+    "answer": "The CUI admission application has 12 steps to be completed in order:\n1. Instructions – Read and accept the portal terms.\n2. Personal Details – Enter name, CNIC/B-Form, and guardian info.\n3. Address Details – Provide permanent and mailing addresses.\n4. Photo Upload – Upload one passport-size photo.\n5. Education Details – Provide Matric/O-Level and Intermediate/A-Level or DAE scores.\n6. NTS Details – Enter your NTS NAT score (valid for 1 year from test date) or register for the on-campus institutional NAT.\n7. Program Choices – Select preferred degree programs in order of priority.\n8. Labour Quota – Upload documents if applying under workers children quota.\n9. Other Details – Mention achievements, sports, or extra information.\n10. Documents Upload – Upload scanned academic transcripts.\n11. Confirm Fee – Print challan, pay in bank, upload paid challan copy.\n12. Submit Application – Finalize and submit for verification.",
+    "source": "CUI Admissions Portal"
+  },
+  {
+    "id": "wah_required_documents",
+    "category": "FAQs",
+    "question": "What documents are required to apply for admission at CUI Wah Campus?",
+    "answer": "The following documents are required:\n1. Passport-Size Photograph: 1 copy with a clear blue/white background.\n2. Matric / O-Level Transcript: Matric marks sheet OR O-Level Equivalence from IBCC.\n3. Intermediate Part-1 Marks Sheet: Required if applying as a result-awaited candidate.\n4. A-Level Marksheet / Equivalency: O-Level equivalence or A-Level transcripts if results are declared.\n5. Part-2 Roll Number Slip: Only needed if your F.Sc Part-2 complete result is still awaited.\n6. NTS NAT Result Card: Must be valid (taken within one year of the application date).",
+    "source": "CUI Admissions Portal"
+  },
+  {
+    "id": "wah_apply_fee_challan",
+    "category": "FAQs",
+    "question": "What is the admission fee for CUI Wah and how do I pay the challan?",
+    "answer": "The total admission and NTS test registration fee is Rs. 3,300 (Rs. 2,500 admission fee + Rs. 800 NTS test fee), applicable if you are taking the NTS NAT through COMSATS.\n\nPayment Steps:\n1. Generate and print the admission challan from the portal.\n2. Pay at the designated bank branches.\n3. Upload a clear scanned or photo copy of the paid challan back to the portal.",
+    "source": "CUI Admissions Portal"
+  },
+  {
+    "id": "wah_nts_improvement",
+    "category": "Prerequisites",
+    "question": "Can I improve my NTS NAT score after applying and how do I do it?",
+    "answer": "Yes. If you have already registered and wish to re-appear for NAT to improve your score, you only need to pay an additional Rs. 800 fee (not the full amount again).\n\nSteps:\n1. Get the improvement challan from your admission portal.\n2. Pay Rs. 800 at the bank.\n3. Email a scanned copy of the paid challan to: zainab@ciitwah.edu.pk\n4. Your new NTS roll number slip will then be displayed on your portal.",
+    "source": "CUI Wah Admissions Office"
+  },
+  {
+    "id": "wah_apply_verification_objection",
+    "category": "FAQs",
+    "question": "What happens after I submit my CUI admission application? What if an objection is raised?",
+    "answer": "After submitting, the CUI Wah Campus admission staff will verify your details and documents.\n\n- If approved: Your NTS Roll Number Slip will be displayed on your portal automatically.\n- If an objection is raised: You will be notified via email and on your portal dashboard. You must log in to your portal and fix the objection (e.g. re-upload correct documents, correct details) to keep your application active.",
+    "source": "CUI Admissions Portal"
+  },
+  {
+    "id": "wah_apply_general_rules",
+    "category": "FAQs",
+    "question": "What are the important rules and guidelines for CUI Wah online admission?",
+    "answer": "Key guidelines for applying:\n- The form submission is 100% ONLINE; no campus visit is needed.\n- All steps must be completed in the correct order.\n- The admission processing fee is non-refundable.\n- Applications with false information will be rejected immediately.\n- Candidates with a supplementary (supply) in HSSC Part-I or Part-II cannot apply.\n- HSSC improvement candidates cannot apply as result-awaiting; they must use their previously declared result if it meets eligibility.\n- Result-awaited A-Level candidates are evaluated on O-Level equivalence score.\n- Result-awaited 3rd-year DAE candidates are assigned a flat 60% intermediate score for merit calculation.\n- Intermediate (Pre-Medical) students who gave an additional Mathematics paper must apply as result-awaiting based on Part-I.\n- Cambridge/Edexcel (O-Level/A-Level) applicants must produce IBCC equivalence certificate.",
+    "source": "CUI Admissions Portal"
   }
 ]
+
 

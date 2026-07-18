@@ -12,7 +12,8 @@ import {
   MessageSquare,
   Globe,
   Home,
-  Calculator
+  Calculator,
+  Clipboard
 } from 'lucide-react';
 
 const CATEGORIES = [
@@ -22,6 +23,7 @@ const CATEGORIES = [
   { name: 'Hostel & Transport', icon: Home,    color: 'text-blue-500',   bg: 'bg-blue-50 dark:bg-blue-950/20' },
   { name: 'Eligibility',   icon: CheckCircle,  color: 'text-amber-600',  bg: 'bg-amber-50 dark:bg-amber-950/20' },
   { name: 'Merit Calculator', icon: Calculator, color: 'text-violet-600', bg: 'bg-violet-50 dark:bg-violet-950/20' },
+  { name: 'How to Apply',  icon: Clipboard,    color: 'text-amber-500',  bg: 'bg-amber-50 dark:bg-amber-950/20' },
   { name: 'Prerequisites', icon: FileText,     color: 'text-violet-500', bg: 'bg-violet-50 dark:bg-violet-950/20' },
   { name: 'Scholarships',  icon: Award,        color: 'text-rose-500',   bg: 'bg-rose-50 dark:bg-rose-950/20' },
   { name: 'FAQs',          icon: HelpCircle,   color: 'text-blue-500',   bg: 'bg-blue-50 dark:bg-blue-950/20' }

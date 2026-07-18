@@ -18,7 +18,12 @@ import {
   Bookmark,
   Home,
   Truck,
-  Calculator
+  Calculator,
+  Clipboard,
+  ExternalLink,
+  Check,
+  AlertCircle,
+  Mail
 } from 'lucide-react';
 
 import programsData from '../data/programs.json';
@@ -54,6 +59,15 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
   const [interObt, setInterObt] = useState('');
   const [interTot, setInterTot] = useState('1100');
   const [natScore, setNatScore] = useState('');
+
+  // Application Steps State
+  const [completedSteps, setCompletedSteps] = useState({});
+  const toggleStep = (step) => {
+    setCompletedSteps(prev => ({
+      ...prev,
+      [step]: !prev[step]
+    }));
+  };
 
   const calculateAggregate = () => {
     const matricObtNum = parseFloat(matricObt);
@@ -1574,6 +1588,268 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
     );
   };
 
+  // --- 5.7. RENDER HOW TO APPLY ---
+  const renderHowToApply = () => {
+    const steps = [
+      { name: 'Instructions', desc: 'Read and accept the portal terms and conditions.' },
+      { name: 'Personal Details', desc: 'Enter name, CNIC/B-Form, guardian info, and gender.' },
+      { name: 'Address Details', desc: 'Provide permanent and mailing addresses with contact numbers.' },
+      { name: 'Photo Upload', desc: 'Upload one passport-size photo with a clear background.' },
+      { name: 'Education Details', desc: 'Provide Matric/O-Level, Intermediate/A-Level, or DAE scores.' },
+      { name: 'NTS Details', desc: 'Enter NTS NAT score details (valid for 1 year) or register for institutional NAT.' },
+      { name: 'Program Choices', desc: 'Select your preferred degree programs in order of priority.' },
+      { name: 'Labour Quota', desc: 'Upload documents if applying under the workers children quota.' },
+      { name: 'Other Details', desc: 'Mention academic achievements, co-curriculars, or extra info.' },
+      { name: 'Documents Upload', desc: 'Upload scanned copies of required academic transcripts.' },
+      { name: 'Confirm Fee', desc: 'Print challan, deposit fee in bank, and upload paid copy.' },
+      { name: 'Submit Application', desc: 'Finalize and submit your online form for verification.' }
+    ];
+
+    const requiredDocs = [
+      { label: 'Passport-Size Photograph', detail: '1 copy with a clean blue/white background.' },
+      { label: 'Matric / O-Level Transcript', detail: 'Matric marks sheet or O-Level Equivalence from IBCC.' },
+      { label: 'Intermediate Part-1 Marks Sheet', detail: 'Required if applying as a result-awaited candidate.' },
+      { label: 'A-Level Marksheet / Equivalency', detail: 'O-Level equivalence or A-Level transcripts if results are declared.' },
+      { label: 'Part-2 Roll Number Slip', detail: 'Only needed if F.Sc Part-2 complete result is awaited.' },
+      { label: 'NTS NAT Result Card', detail: 'Must be valid (taken within one year of applying).' }
+    ];
+
+    const completedCount = Object.values(completedSteps).filter(Boolean).length;
+    const progressPercent = Math.round((completedCount / steps.length) * 100);
+
+    return (
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="space-y-6 max-w-full"
+      >
+        {/* Top Hero and Portal Link */}
+        <motion.div variants={itemVariants} className="relative overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-600 via-indigo-650 to-indigo-750 p-6 md:p-8 text-white shadow-md dark:border-blue-900/40">
+          <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-white/5 blur-2xl" />
+          <div className="relative space-y-4">
+            <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider">
+              Official Admissions Portal
+            </span>
+            <div className="max-w-xl space-y-2">
+              <h2 className="text-2xl md:text-3xl font-black tracking-tight leading-tight">
+                CUI Online Application Guide
+              </h2>
+              <p className="text-xs md:text-sm text-blue-100 leading-relaxed">
+                The entire admission process is completely online. You do not need to visit the campus to submit your application form. Apply directly through the portal linked below:
+              </p>
+            </div>
+            
+            <div className="pt-2">
+              <a
+                href="https://admissions.comsats.edu.pk/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-xs md:text-sm font-extrabold text-blue-750 shadow-sm transition-all hover:bg-slate-50 hover:scale-102 active:scale-98"
+              >
+                Go to admissions.comsats.edu.pk
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {/* Timeline of Steps */}
+          <motion.div 
+            variants={itemVariants} 
+            className="lg:col-span-7 rounded-2xl border border-slate-205 bg-white p-6 dark:border-slate-800 dark:bg-[#151a28] shadow-sm space-y-5"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-extrabold text-slate-800 dark:text-slate-100 text-sm">
+                  Application Checklist & Steps
+                </h3>
+                <p className="text-[11px] text-slate-450 dark:text-slate-500 mt-0.5">
+                  Click on steps to track your progress interactively
+                </p>
+              </div>
+              <div className="text-right">
+                <span className="text-xs font-black text-blue-600 dark:text-blue-400">
+                  {completedCount}/{steps.length} Done ({progressPercent}%)
+                </span>
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-blue-500 to-indigo-650 transition-all duration-300"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+
+            {/* Steps List */}
+            <div className="space-y-3 pt-2">
+              {steps.map((step, idx) => {
+                const isDone = !!completedSteps[step.name];
+                return (
+                  <div 
+                    key={idx}
+                    onClick={() => toggleStep(step.name)}
+                    className={`flex items-start gap-3 p-3 rounded-xl border transition-all cursor-pointer select-none ${
+                      isDone
+                        ? 'border-emerald-100 bg-emerald-50/20 dark:border-emerald-950/20 dark:bg-emerald-950/5'
+                        : 'border-slate-150/60 bg-slate-50/30 hover:bg-slate-50/80 dark:border-slate-850 dark:bg-slate-900/10 dark:hover:bg-slate-900/30'
+                    }`}
+                  >
+                    <div className="mt-0.5">
+                      {isDone ? (
+                        <div className="flex h-5 w-5 items-center justify-center rounded-md bg-emerald-500 text-white">
+                          <Check className="h-3 w-3 stroke-[3]" />
+                        </div>
+                      ) : (
+                        <div className="flex h-5 w-5 items-center justify-center rounded-md border border-slate-300 dark:border-slate-700 text-slate-350 dark:text-slate-650 text-[10px] font-bold">
+                          {idx + 1}
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 space-y-0.5">
+                      <h4 className={`text-xs font-bold ${isDone ? 'text-emerald-700 dark:text-emerald-400 line-through' : 'text-slate-850 dark:text-slate-205'}`}>
+                        {step.name}
+                      </h4>
+                      <p className="text-[10px] text-slate-450 dark:text-slate-500 leading-snug">
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* Right Panel: Required Docs & Fee Structure */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Required Documents */}
+            <motion.div 
+              variants={itemVariants} 
+              className="rounded-2xl border border-slate-205 bg-white p-5 dark:border-slate-800 dark:bg-[#151a28] shadow-sm space-y-4"
+            >
+              <h3 className="font-extrabold text-slate-800 dark:text-slate-100 text-sm flex items-center gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-amber-500 dark:bg-amber-950/40 dark:text-amber-400">
+                  <FileText className="h-4 w-4" />
+                </span>
+                Required Documents
+              </h3>
+              
+              <div className="space-y-3">
+                {requiredDocs.map((doc, idx) => (
+                  <div key={idx} className="flex gap-2.5 items-start">
+                    <div className="h-1.5 w-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
+                    <div className="space-y-0.5">
+                      <h4 className="text-xs font-bold text-slate-850 dark:text-slate-200">{doc.label}</h4>
+                      <p className="text-[10px] text-slate-450 dark:text-slate-500 leading-snug">{doc.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Fee & Payment Details */}
+            <motion.div 
+              variants={itemVariants} 
+              className="rounded-2xl border border-slate-205 bg-white p-5 dark:border-slate-800 dark:bg-[#151a28] shadow-sm space-y-4"
+            >
+              <h3 className="font-extrabold text-slate-800 dark:text-slate-100 text-sm flex items-center gap-2">
+                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-450">
+                  <DollarSign className="h-4 w-4" />
+                </span>
+                Fee & Challan Process
+              </h3>
+
+              <div className="space-y-3.5 text-xs text-slate-650 dark:text-slate-400">
+                <div className="rounded-xl bg-slate-50 dark:bg-slate-900/40 p-3.5 border border-slate-150/40 dark:border-slate-800 space-y-1">
+                  <span className="text-[9.5px] font-extrabold uppercase text-slate-400 block">Total Admission & Test Fee</span>
+                  <div className="text-lg font-black text-slate-850 dark:text-slate-100 font-mono">
+                    Rs. 3,300 <span className="text-xs font-normal text-slate-450">(2500 + 800)</span>
+                  </div>
+                  <p className="text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed mt-1">
+                    Applicable if you are taking the NTS NAT test through COMSATS. 
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="font-bold text-slate-800 dark:text-slate-200 text-xs">How to Complete Payment:</h4>
+                  <ol className="list-decimal list-inside space-y-1.5 text-[10.5px] text-slate-500 dark:text-slate-450 pl-1 leading-relaxed">
+                    <li>Generate and print the admission challan from the portal.</li>
+                    <li>Pay at the designated bank branches.</li>
+                    <li>Upload a clear photo/scanned copy of the paid challan back to the portal.</li>
+                  </ol>
+                </div>
+
+                <div className="space-y-2 border-t border-slate-100 dark:border-slate-800/80 pt-3">
+                  <h4 className="font-bold text-slate-850 dark:text-slate-200 text-xs flex items-center gap-1.5">
+                    <Mail className="h-3.5 w-3.5 text-blue-500" />
+                    NTS Score Improvement:
+                  </h4>
+                  <p className="text-[10.5px] text-slate-550 dark:text-slate-450 leading-relaxed">
+                    If you wish to re-appear for NAT to improve your score after registering, you only need to pay an extra **Rs. 800** fee. Paid challan must be emailed to <strong className="text-blue-600 dark:text-blue-400 font-bold">zainab@ciitwah.edu.pk</strong>. Your NTS roll number slip will then be displayed on your portal.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Verification & Objections */}
+        <motion.div 
+          variants={itemVariants}
+          className="rounded-2xl border border-slate-205 bg-white p-5 dark:border-slate-800 dark:bg-[#151a28] shadow-sm space-y-4"
+        >
+          <h3 className="font-extrabold text-slate-800 dark:text-slate-100 text-sm flex items-center gap-2">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 text-blue-500 dark:bg-blue-950/40 dark:text-blue-400">
+              <Shield className="h-4 w-4" />
+            </span>
+            Verification & Objection Handling
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-550 dark:text-slate-450 leading-relaxed">
+            <div className="space-y-2">
+              <strong className="text-slate-700 dark:text-slate-350 block">1. Form Verification & Roll No Slip</strong>
+              <p>
+                Once you submit the online form, CUI Wah Campus admission desk staff will verify all details and documents. If verified successfully, your NTS Roll Number slip will automatically display on the portal.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <strong className="text-slate-750 dark:text-slate-350 block flex items-center gap-1.5">
+                <AlertCircle className="h-4 w-4 text-amber-500" />
+                2. Handling Objections
+              </strong>
+              <p>
+                If the admission desk finds issues (e.g. incorrect transcripts, low marks, incomplete info), they will raise an objection. You will be notified immediately via **email** and on your **portal dashboard**. You must fix the objection on the portal to keep your application active.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* General Portal Instructions */}
+        <motion.div 
+          variants={itemVariants}
+          className="rounded-2xl border border-slate-205 bg-slate-50/50 p-5 dark:border-slate-800 dark:bg-[#121622]/50 shadow-sm space-y-4"
+        >
+          <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-450 dark:text-slate-500">
+            Important Guidelines & Rules
+          </h3>
+          
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-[10.5px] text-slate-550 dark:text-slate-450 list-disc list-inside leading-relaxed">
+            <li>Form submission is 100% ONLINE; do not visit campus to submit forms.</li>
+            <li>All application steps must be completed in order.</li>
+            <li>Admission process fee is non-refundable.</li>
+            <li>Applications will be rejected instantly in case of false details.</li>
+            <li>Candidates with active supplementaries in HSSC Part-I or Part-II are not eligible to apply.</li>
+            <li>HSSC improvement candidates cannot apply as result-awaiting; they can only apply using their previous result.</li>
+            <li>Result-awaited A-Level candidates are evaluated based on O-Level equivalence scores.</li>
+            <li>Result-awaited 3rd-year DAE candidates are evaluated based on a flat 60% intermediate score representation.</li>
+          </ul>
+        </motion.div>
+      </motion.div>
+    );
+  };
+
   // --- EXPLORER ROUTER ---
   switch (category) {
     case 'Programs':
@@ -1590,6 +1866,8 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
       return renderHostelAndTransport();
     case 'Merit Calculator':
       return renderMeritCalculator();
+    case 'How to Apply':
+      return renderHowToApply();
     case 'FAQs':
       return renderFaqs();
     default:
