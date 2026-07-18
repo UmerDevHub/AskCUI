@@ -17,7 +17,8 @@ import {
   ArrowUpRight,
   Bookmark,
   Home,
-  Truck
+  Truck,
+  Calculator
 } from 'lucide-react';
 
 import programsData from '../data/programs.json';
@@ -45,9 +46,36 @@ const itemVariants = {
 };
 
 export default function CategoryExplorer({ category, onAskQuestion }) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('All'); // For programs
   const [expandedFaqId, setExpandedFaqId] = useState(null);
+  
+  // Merit Calculator State
+  const [matricObt, setMatricObt] = useState('');
+  const [matricTot, setMatricTot] = useState('1100');
+  const [interObt, setInterObt] = useState('');
+  const [interTot, setInterTot] = useState('1100');
+  const [natScore, setNatScore] = useState('');
+
+  const calculateAggregate = () => {
+    const matricObtNum = parseFloat(matricObt);
+    const matricTotNum = parseFloat(matricTot);
+    const interObtNum = parseFloat(interObt);
+    const interTotNum = parseFloat(interTot);
+    const natScoreNum = parseFloat(natScore);
+
+    if (
+      isNaN(matricObtNum) || isNaN(matricTotNum) || matricTotNum <= 0 ||
+      isNaN(interObtNum) || isNaN(interTotNum) || interTotNum <= 0 ||
+      isNaN(natScoreNum) || natScoreNum < 0 || natScoreNum > 100
+    ) {
+      return null;
+    }
+
+    const matricContribution = (matricObtNum / matricTotNum) * 10;
+    const interContribution = (interObtNum / interTotNum) * 40;
+    const natContribution = (natScoreNum / 100) * 50;
+
+    return (matricContribution + interContribution + natContribution).toFixed(3);
+  };
 
   const toggleFaq = (id) => {
     setExpandedFaqId(expandedFaqId === id ? null : id);
@@ -1268,6 +1296,284 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
     );
   };
 
+  // --- 5.6. RENDER MERIT CALCULATOR ---
+  const renderMeritCalculator = () => {
+    const aggregate = calculateAggregate();
+
+    const programCutoffs = [
+      { code: 'BSCS', name: 'BS Computer Science', f24: 80.10, f23: 74.00, est25: '79.5% - 81.0%' },
+      { code: 'BSSE', name: 'BS Software Engineering', f24: 77.00, f23: 72.50, est25: '76.5% - 78.5%' },
+      { code: 'BSAI', name: 'BS Artificial Intelligence', f24: 80.00, f23: null, est25: '79.0% - 80.5%' },
+      { code: 'BSCE', name: 'BS Computer Engineering', f24: 71.20, f23: 66.00, est25: '71.0% - 72.5%' },
+      { code: 'BSEE/BSCE', name: 'BS Civil / Electrical Eng.', f24: 60.00, f23: 60.00, est25: '60.0% - 62.0%' }
+    ];
+
+    const getStatus = (cutoff, estRange) => {
+      if (!aggregate) return { text: 'Awaiting Calculation', color: 'text-slate-400 border-slate-205 bg-slate-50 dark:bg-slate-900/30 dark:border-slate-800' };
+      const aggNum = parseFloat(aggregate);
+      
+      let lowerBound = cutoff;
+      if (estRange) {
+        const match = estRange.match(/([0-9.]+)/);
+        if (match) lowerBound = parseFloat(match[1]);
+      }
+
+      if (aggNum >= lowerBound + 1.0) {
+        return { text: 'Safe / High Chance', color: 'text-emerald-650 dark:text-emerald-400 border-emerald-100 bg-emerald-50/20 dark:bg-emerald-950/10 dark:border-emerald-900/30' };
+      } else if (aggNum >= lowerBound - 1.5) {
+        return { text: 'Borderline / Moderate', color: 'text-amber-655 dark:text-amber-400 border-amber-100 bg-amber-50/20 dark:bg-amber-950/10 dark:border-amber-900/30' };
+      } else {
+        return { text: 'Low Chance', color: 'text-rose-655 dark:text-rose-450 border-rose-100 bg-rose-50/20 dark:bg-rose-950/10 dark:border-rose-900/30' };
+      }
+    };
+
+    return (
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="space-y-6 max-w-full"
+      >
+        <motion.div variants={itemVariants}>
+          <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-600 dark:bg-violet-950/40 dark:text-violet-400">
+              <Calculator className="h-5.5 w-5.5" />
+            </span>
+            Admission Merit Calculator
+          </h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Calculate your aggregate based on the official 10:40:50 weightage formula.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {/* Form Card */}
+          <motion.div 
+            variants={itemVariants} 
+            className="lg:col-span-7 flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-[#151a28] shadow-sm space-y-5"
+          >
+            <div className="space-y-4">
+              <h3 className="font-extrabold text-slate-400 dark:text-slate-500 text-[10.5px] uppercase tracking-wider">
+                Input Academic Scores
+              </h3>
+
+              {/* Matriculation */}
+              <div className="space-y-2">
+                <label className="block text-xs font-bold text-slate-705 dark:text-slate-300">
+                  Matric / O-Level Marks (10% Weightage)
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <span className="text-[10px] text-slate-400 block mb-1">Marks Obtained</span>
+                    <input
+                      type="number"
+                      placeholder="e.g. 950"
+                      value={matricObt}
+                      onChange={(e) => setMatricObt(e.target.value)}
+                      className="w-full rounded-xl border border-slate-205 bg-white px-3 py-2 text-sm outline-none transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 dark:border-slate-800 dark:bg-slate-900 dark:focus:border-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-slate-400 block mb-1">Total Marks</span>
+                    <input
+                      type="number"
+                      placeholder="e.g. 1100"
+                      value={matricTot}
+                      onChange={(e) => setMatricTot(e.target.value)}
+                      className="w-full rounded-xl border border-slate-205 bg-white px-3 py-2 text-sm outline-none transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 dark:border-slate-800 dark:bg-slate-900 dark:focus:border-blue-400"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Intermediate */}
+              <div className="space-y-2">
+                <label className="block text-xs font-bold text-slate-750 dark:text-slate-300">
+                  Intermediate / F.Sc / ICS Marks (40% Weightage)
+                </label>
+                <p className="text-[9.5px] text-slate-400 dark:text-slate-500 -mt-1 leading-snug font-medium">
+                  *If results are awaited, enter F.Sc Part-1 marks.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <span className="text-[10px] text-slate-400 block mb-1">Marks Obtained</span>
+                    <input
+                      type="number"
+                      placeholder="e.g. 880"
+                      value={interObt}
+                      onChange={(e) => setInterObt(e.target.value)}
+                      className="w-full rounded-xl border border-slate-205 bg-white px-3 py-2 text-sm outline-none transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 dark:border-slate-800 dark:bg-slate-900 dark:focus:border-blue-400"
+                    />
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-slate-400 block mb-1">Total Marks</span>
+                    <input
+                      type="number"
+                      placeholder="e.g. 1100"
+                      value={interTot}
+                      onChange={(e) => setInterTot(e.target.value)}
+                      className="w-full rounded-xl border border-slate-205 bg-white px-3 py-2 text-sm outline-none transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 dark:border-slate-800 dark:bg-slate-900 dark:focus:border-blue-400"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Entrance Exam */}
+              <div className="space-y-2">
+                <label className="block text-xs font-bold text-slate-750 dark:text-slate-300">
+                  NTS NAT / CUI Entry Test Score (50% Weightage)
+                </label>
+                <div>
+                  <span className="text-[10px] text-slate-400 block mb-1">Test Score (out of 100)</span>
+                  <input
+                    type="number"
+                    placeholder="e.g. 78"
+                    value={natScore}
+                    onChange={(e) => setNatScore(e.target.value)}
+                    className="w-full rounded-xl border border-slate-205 bg-white px-3 py-2 text-sm outline-none transition-all focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 dark:border-slate-800 dark:bg-slate-900 dark:focus:border-blue-400"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-xl bg-slate-50 dark:bg-slate-900/40 p-4 border border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 space-y-1.5 mt-4">
+              <strong className="text-slate-705 dark:text-slate-300">Official Formula:</strong>
+              <div className="font-mono text-[10.5px] bg-white dark:bg-slate-950 p-2 rounded border border-slate-200/50 dark:border-slate-850 overflow-x-auto text-slate-650 dark:text-slate-400">
+                Aggregate = (Matric Obt / Total * 10) + (Inter Obt / Total * 40) + (NAT Score * 0.5)
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Results Side Panel */}
+          <motion.div 
+            variants={itemVariants} 
+            className="lg:col-span-5 flex flex-col justify-center items-center rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50/50 p-6 dark:border-slate-800 dark:from-[#151a28] dark:to-[#121622] shadow-sm text-center min-h-[300px]"
+          >
+            {aggregate ? (
+              <div className="space-y-5 w-full">
+                <span className="rounded-full bg-violet-50 px-3 py-1 text-[10px] font-extrabold text-violet-600 uppercase tracking-wider dark:bg-violet-950/40 dark:text-violet-400 border border-violet-100/40 dark:border-violet-900/20">
+                  Your Aggregate
+                </span>
+
+                <div className="relative flex items-center justify-center">
+                  <div className="text-5xl font-black text-slate-850 dark:text-slate-100 tracking-tight font-mono">
+                    {aggregate}%
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-500 dark:text-slate-400 px-2 leading-relaxed">
+                  Your calculated admission aggregate is <strong>{aggregate}%</strong>. Compare this with the program cutoff history below.
+                </p>
+
+                <div className="pt-2">
+                  <button
+                    onClick={() => {
+                      setMatricObt('');
+                      setInterObt('');
+                      setNatScore('');
+                    }}
+                    className="text-xs font-bold text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors"
+                  >
+                    Reset Calculator
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4 px-4">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-50 dark:bg-slate-900 text-slate-400 dark:text-slate-700 mx-auto">
+                  <Calculator className="h-7 w-7" />
+                </div>
+                <h3 className="font-extrabold text-slate-700 dark:text-slate-300 text-sm">
+                  Awaiting Academic Inputs
+                </h3>
+                <p className="text-xs text-slate-450 dark:text-slate-500 leading-relaxed px-4">
+                  Please enter your scores on the left to calculate your expected aggregate dynamically.
+                </p>
+              </div>
+            )}
+          </motion.div>
+        </div>
+
+        {/* 3-Year Merit Trends Table */}
+        <motion.div variants={itemVariants} className="space-y-4 pt-2">
+          <div className="flex items-center justify-between">
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-455 dark:text-slate-500 flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
+              CUI Wah Closing Merit History & Chances
+            </h3>
+            <span className="text-[10px] text-slate-400 font-medium">Last 3 Admission Cycles</span>
+          </div>
+
+          <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151a28] shadow-sm">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50/50 text-[10px] font-extrabold uppercase tracking-wider text-slate-455 dark:border-slate-800 dark:bg-slate-900/30 dark:text-slate-500">
+                  <th className="px-4.5 py-3">Degree Program</th>
+                  <th className="px-4 py-3 text-center">Fall 2023</th>
+                  <th className="px-4 py-3 text-center">Fall 2024</th>
+                  <th className="px-4 py-3 text-center">Fall 2025 (Est)</th>
+                  <th className="px-4.5 py-3 text-right">Your Admission Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80">
+                {programCutoffs.map((prog, idx) => {
+                  const status = getStatus(prog.f24, prog.est25);
+                  return (
+                    <tr key={idx} className="hover:bg-slate-50/30 dark:hover:bg-slate-900/10 transition-colors">
+                      <td className="px-4.5 py-3.5 font-bold text-slate-800 dark:text-slate-200">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-[10px] bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-slate-600 dark:text-slate-400">{prog.code}</span>
+                          <span>{prog.name}</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3.5 text-center font-mono font-medium text-slate-500 dark:text-slate-400">
+                        {prog.f23 ? `${prog.f23.toFixed(1)}%` : 'N/A'}
+                      </td>
+                      <td className="px-4 py-3.5 text-center font-mono font-bold text-slate-700 dark:text-slate-350">
+                        {prog.f24.toFixed(1)}%
+                      </td>
+                      <td className="px-4 py-3.5 text-center font-mono text-violet-600 dark:text-violet-400 font-extrabold">
+                        {prog.est25}
+                      </td>
+                      <td className="px-4.5 py-3.5 text-right">
+                        <span className={`inline-block rounded-lg border px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-wide ${status.color}`}>
+                          {status.text}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </motion.div>
+
+        {/* Note Grid */}
+        <motion.div variants={itemVariants} className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-[#151a28] shadow-sm">
+            <h4 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              <Info className="h-4.5 w-4.5 text-indigo-500" />
+              Computing Merit Spike Note
+            </h4>
+            <p className="mt-3 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              In 2023, the BSCS merit closed at <strong>74.0%</strong>. However, due to a massive surge in candidates, the aggregate jumped to <strong>80.1%</strong> in 2024. Plan your NTS prep target accordingly.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-[#151a28] shadow-sm">
+            <h4 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              <Clock className="h-4.5 w-4.5 text-emerald-500" />
+              Spring Admission Intake Advantage
+            </h4>
+            <p className="mt-3 text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              If your current aggregate falls short of the Fall cutoffs by 1% to 2%, consider applying for the **Spring Session** intake. It typically has slightly lower merit cutoffs due to lower applicant volume.
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  };
+
   // --- EXPLORER ROUTER ---
   switch (category) {
     case 'Programs':
@@ -1282,6 +1588,8 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
       return renderScholarships();
     case 'Hostel & Transport':
       return renderHostelAndTransport();
+    case 'Merit Calculator':
+      return renderMeritCalculator();
     case 'FAQs':
       return renderFaqs();
     default:

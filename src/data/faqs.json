@@ -1314,5 +1314,55 @@
     "question": "What is the timeline/stops for Transport Route 9 (Rawalpindi Route - Roshan/Anees Shahzad)?",
     "answer": "Route No. 09 (RLC-8959 Rawalpindi Route):\n- Driver: Roshan / Anees Shahzad (Cell: 0311-0883884)\n- Arrival Schedule:\n  * MH Roomi Park: 7:25 AM\n  * Qasim Market: 7:30 AM\n  * Honda Center: 7:32 AM\n  * Lane No. 4, 5, 6, 7: 7:34 AM\n  * Chour Chowk: 7:36 AM\n  * Pirwadhi Mor: 7:40 AM\n  * Kohinoor Mill: 7:42 AM\n  * Golra Signal: 7:45 AM\n  * Daewoo Stop: 7:47 AM\n  * Sarahy Khrbooza: 7:55 AM\n  * Sang Jani Stop: 8:00 AM\n  * CUI Wah Campus: 8:25 AM",
     "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_merit_trends",
+    "category": "Eligibility",
+    "question": "What are the closing merits for BSCS, BSSE, BSAI, and engineering programs at CUI Wah over the past years?",
+    "answer": "The closing merit trends at CUI Wah highlight a steady rise in competition for computing fields:\n- BS Computer Science (BSCS):\n  * Fall 2023: 74.0%\n  * Fall 2024: 80.1%\n  * Fall 2025 (Est): ~79.5% - 81.0%\n- BS Software Engineering (BSSE):\n  * Fall 2023: 72.5%\n  * Fall 2024: 77.0%\n  * Fall 2025 (Est): ~76.5% - 78.5%\n- BS Artificial Intelligence (BSAI):\n  * Fall 2023: N/A\n  * Fall 2024: 80.0%\n  * Fall 2025 (Est): ~79.0% - 80.5%\n- BS Computer Engineering (BSCE):\n  * Fall 2023: 66.0%\n  * Fall 2024: 71.2%\n  * Fall 2025 (Est): ~71.0% - 72.5%\n- BS Civil & Electrical Engineering:\n  * Fall 2023: 60.0% (Minimum requirement)\n  * Fall 2024: 60.0% (Minimum requirement)\n  * Fall 2025 (Est): ~60.0% - 62.0%",
+    "source": "CUI Wah Merit Archive 2023-2025"
+  },
+  {
+    "id": "wah_merit_formula",
+    "category": "Eligibility",
+    "question": "What is the official merit aggregate formula for CUI Wah admission?",
+    "answer": "The absolute merit formula for admission to all undergraduate programs is a weighted calculation dividing your academic history into a 10:40:50 ratio:\n- Matriculation (SSC) / O-Level: 10%\n- Intermediate (HSSC) / A-Level (or F.Sc Part-1 if awaiting): 40%\n- NTS NAT / CUI Entry Test: 50%\n\nFormula: Aggregate (%) = (Matric Marks / Matric Total * 10) + (Inter Marks / Inter Total * 40) + (NAT Score * 0.5)",
+    "source": "CUI Wah Admissions Office"
+  },
+  {
+    "id": "wah_entry_tests_accepted",
+    "category": "Prerequisites",
+    "question": "Does CUI Wah accept HEC USAT, SAT, NET, or ECAT entry tests?",
+    "answer": "No. CUI Wah operates under a partnership with NTS. Standard monthly NTS NAT (valid for 1 year) or the special on-campus COMSATS Institutional NAT are accepted. Entry tests from other entities like HEC USAT, NUST NET, FAST NU test, or UET ECAT are NOT accepted. International SAT scores are only accepted for international student quota/dual national seats.",
+    "source": "CUI Admissions FAQ 2026"
+  },
+  {
+    "id": "wah_class_timings_shifts",
+    "category": "Programs",
+    "question": "What are the shift options and class timings for BS, MS, and PhD programs at CUI Wah?",
+    "answer": "- Undergraduate (BS Degrees): Morning/Afternoon shift only (Standard hours: 8:30 AM to 4:30 PM, Monday to Friday).\n- Graduate (MS Degrees): Evening (5:30 PM to 8:30 PM, Monday-Friday) and Weekends to support working professionals.\n- Doctoral (PhD Degrees): Evening shift (5:30 PM to 8:30 PM) for course work.\n- Friday Timings: Morning classes wrap up early by 12:30 PM or 1:00 PM for congregational prayers.\n- Ramadan Timings: Timings are shortened (typically 8:00 AM to 2:00 PM).",
+    "source": "CUI Wah Academic Timetable"
+  },
+  {
+    "id": "wah_degree_accreditations",
+    "category": "Programs",
+    "question": "Are CUI Wah engineering and computing degrees accredited by PEC and NCEAC?",
+    "answer": "Yes, all core degrees are fully recognized and accredited:\n- Engineering (Electrical, Civil, Mechanical, Computer Engineering) are accredited by the Pakistan Engineering Council (PEC). BS Electrical and Civil Engineering are accredited under the premium Washington Accord OBE Level II system.\n- Computing (Computer Science, Software Engineering, Artificial Intelligence) are accredited by the National Computing Education Accreditation Council (NCEAC).\n- Business (BSBA) is validated by NBEAC.",
+    "source": "CUI Wah Quality Accreditation Desk"
+  },
+  {
+    "id": "wah_campus_coordinates_location",
+    "category": "FAQs",
+    "question": "Where is the CUI Wah Campus located geographically and what is the address?",
+    "answer": "CUI Wah Campus is located directly on the main Grand Trunk (G.T.) Road (N-5) in the border area separating Wah Cantt and Taxila.\n- Exact Coordinates: 33.7445° N, 72.7867° E\n- Landmarks: The entrance gate faces the main G.T. road service lane.",
+    "source": "CUI Wah Campus Map"
+  },
+  {
+    "id": "wah_quota_reserved_seats",
+    "category": "Eligibility",
+    "question": "Does CUI Wah offer regional, sports, or self-finance seat quotas?",
+    "answer": "No. CUI Wah operates strictly on a competitive merit system. All regular local admissions are processed through open merit. However, physical disability fee waivers (100% tuition waiver upon showing a valid certificate) and HEC scholarships for FATA/Balochistan are available. DAE holders compete directly with FSc/ICS on open merit with no quota limits.",
+    "source": "CUI Prospectus Guidelines"
   }
 ]
+
