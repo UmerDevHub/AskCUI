@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sun, Moon, Menu, Zap } from 'lucide-react';
+import { Menu, Zap } from 'lucide-react';
 
 export default function Navbar({ 
   isDarkMode, 
@@ -46,14 +46,6 @@ export default function Navbar({
 
       {/* Right side controls */}
       <div className="flex items-center gap-2">
-        {/* Theme toggle */}
-        <button
-          onClick={onToggleTheme}
-          className="rounded-lg border border-warm-200 dark:border-slate-700/60 bg-white dark:bg-slate-900 p-2 text-slate-500 dark:text-slate-400 transition-all hover:bg-warm-100 dark:hover:bg-slate-800"
-          title={isDarkMode ? 'Light mode' : 'Dark mode'}
-        >
-          {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-        </button>
       </div>
     </header>
   );

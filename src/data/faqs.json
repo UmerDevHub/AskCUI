@@ -1223,5 +1223,19 @@
     "question": "What is the NTS test fee and admission processing fee at CUI Wah Campus?",
     "answer": "The NTS test fee for CUI Wah Campus is Rs. 800 and the mandatory admission processing fee is Rs. 2,500.",
     "source": "CUI Wah Campus Schedule 2026"
+  },
+  {
+    "id": "wah_hostel_q1",
+    "category": "Hostel & Transport",
+    "question": "Does CUI Wah Campus offer hostel facilities and what is the policy/fee?",
+    "answer": "Yes, CUI Wah Campus offers hostel facilities. The hostel fee is Rs. 55,000 per semester (includes Mess) + a refundable security fee of Rs. 2,000. Note: Hostel accommodation is allotted strictly on a first-come, first-served basis.",
+    "source": "CUI Wah Campus Accommodation 2026"
+  },
+  {
+    "id": "wah_transport_q1",
+    "category": "Hostel & Transport",
+    "question": "Does CUI Wah Campus offer transport facilities, what routes does it cover, and what is the fee?",
+    "answer": "Yes, CUI Wah Campus offers transport facilities. The transport fee is Rs. 35,000 per semester. The transport fleet covers extensive routes across Islamabad, Rawalpindi, and Attock, as well as local Wah and Taxila routes.",
+    "source": "CUI Wah Campus Transport 2026"
   }
 ]

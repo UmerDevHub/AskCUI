@@ -74,19 +74,29 @@
   "refund_policy": {
     "table": [
       {
-        "refund_percentage": "100% (Full Refund)",
-        "timeline": "Up to 10th Day of Commencement of Classes",
+        "refund_percentage": "100% Refund",
+        "timeline": "1 - 10 Days of Commencement of Classes",
         "details": "Applies to all fee components except Admission fee, Registration fee, and Endowment Fund."
       },
       {
-        "refund_percentage": "50% (Half Refund)",
-        "timeline": "From 11th to 15th Day of Commencement of Classes",
-        "details": "Applies to all fee components except Admission fee, Registration fee, and Endowment Fund."
+        "refund_percentage": "80% Refund",
+        "timeline": "11 - 15 Days of Commencement of Classes",
+        "details": "Applies to tuition fee and security deposit only."
+      },
+      {
+        "refund_percentage": "60% Refund",
+        "timeline": "16 - 20 Days of Commencement of Classes",
+        "details": "Applies to tuition fee and security deposit only."
+      },
+      {
+        "refund_percentage": "50% Refund",
+        "timeline": "21 - 30 Days of Commencement of Classes",
+        "details": "Applies to tuition fee and security deposit only."
       },
       {
         "refund_percentage": "0% (No Refund)",
-        "timeline": "From 16th day of Commencement of Classes onwards",
-        "details": "No refund issued."
+        "timeline": "From 31st Day of Commencement of Classes onwards",
+        "details": "No fee refund issued."
       }
     ],
     "notes": [
@@ -94,5 +104,19 @@
       "The timeline is calculated continuously, covering both weekdays and weekends.",
       "Refund cases are initiated in the first week of classes and take approximately two (02) weeks to process."
     ]
+  },
+  "hostel_and_transport": {
+    "hostel": {
+      "semester_fee": 55000,
+      "security_fee": 2000,
+      "includes_mess": true,
+      "offered": true,
+      "policy": "First Come First Served basis (Limited seats)"
+    },
+    "transport": {
+      "semester_fee": 35000,
+      "offered": true,
+      "routes": ["Islamabad", "Rawalpindi", "Attock", "Wah", "Taxila"]
+    }
   }
 }

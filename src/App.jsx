@@ -136,6 +136,7 @@ export default function App() {
     };
     setConversations([newConv, ...conversations]);
     setActiveConversationId(newId);
+    setActiveCategory('All');
     setIsMobileSidebarOpen(false);
   };
 
@@ -155,12 +156,17 @@ export default function App() {
   // Select active conversation
   const handleSelectConversation = (id) => {
     setActiveConversationId(id);
+    setActiveCategory('All');
     setIsMobileSidebarOpen(false);
   };
 
   // Send message handler
   const handleSendMessage = async (text, overrideCategory = null) => {
     const categoryToUse = overrideCategory || activeCategory;
+    
+    // Switch to 'All' to view the chat conversation
+    setActiveCategory('All');
+
     const userMessage = {
       id: 'msg_user_' + Date.now(),
       sender: 'user',
@@ -256,11 +262,11 @@ export default function App() {
             />
             {/* Sidebar drawer content */}
             <motion.div
-              initial={{ x: -280 }}
+              initial={{ x: -288 }}
               animate={{ x: 0 }}
-              exit={{ x: -280 }}
+              exit={{ x: -288 }}
               transition={{ type: 'tween', duration: 0.3 }}
-              className="relative z-50"
+              className="relative z-50 h-full flex"
             >
               <Sidebar
                 activeCategory={activeCategory}
