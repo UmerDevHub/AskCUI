@@ -15,19 +15,34 @@ export default function App() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  // Default key baked in at build time (free Gemini key from .env)
-  const DEFAULT_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
+  // Default keys baked in at build time (from .env)
+  const DEFAULT_GEMINI_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
+  const DEFAULT_GROQ_KEY = import.meta.env.VITE_GROQ_API_KEY || '';
 
-  // AI Configuration State — prefers user's saved key, falls back to default
+  // AI Configuration State — prefers user's saved key, falls back to default keys
   const [config, setConfig] = useState(() => {
     const saved = localStorage.getItem('ai_config');
     if (saved) {
       const parsed = JSON.parse(saved);
-      // If no personal key saved, inject the default key
-      if (!parsed.apiKey) parsed.apiKey = DEFAULT_KEY;
+      // Inject fallback API keys if empty
+      if (!parsed.apiKey) {
+        if (parsed.provider === 'gemini') parsed.apiKey = DEFAULT_GEMINI_KEY;
+        else if (parsed.provider === 'groq') parsed.apiKey = DEFAULT_GROQ_KEY;
+      }
       return parsed;
     }
-    return { provider: 'gemini', model: 'gemini-2.0-flash-lite', apiKey: DEFAULT_KEY };
+    if (DEFAULT_GROQ_KEY) {
+      return { 
+        provider: 'groq', 
+        model: 'llama-3.3-70b-versatile', 
+        apiKey: DEFAULT_GROQ_KEY 
+      };
+    }
+    return { 
+      provider: 'gemini', 
+      model: 'gemini-2.0-flash-lite', 
+      apiKey: DEFAULT_GEMINI_KEY 
+    };
   });
 
 

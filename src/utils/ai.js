@@ -152,9 +152,13 @@ ${context}`;
 
       return JSON.parse(textResult);
 
-    } else if (provider === 'openai') {
-      // Call to OpenAI API
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    } else if (provider === 'openai' || provider === 'groq') {
+      // Both OpenAI and Groq share the OpenAI API structure
+      const url = provider === 'openai' 
+        ? 'https://api.openai.com/v1/chat/completions' 
+        : 'https://api.groq.com/openai/v1/chat/completions';
+
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -169,14 +173,14 @@ ${context}`;
 
       if (!response.ok) {
         const err = await response.json();
-        throw new Error(err.error?.message || `OpenAI API returned status ${response.status}`);
+        throw new Error(err.error?.message || `${provider.toUpperCase()} API returned status ${response.status}`);
       }
 
       const data = await response.json();
       const textResult = data.choices?.[0]?.message?.content;
 
       if (!textResult) {
-        throw new Error("No response content received from OpenAI.");
+        throw new Error(`No response content received from ${provider.toUpperCase()}.`);
       }
 
       return JSON.parse(textResult);
@@ -186,7 +190,7 @@ ${context}`;
   } catch (error) {
     console.error("AI Error:", error);
     return {
-      answer: `Error communicating with ${provider === 'gemini' ? 'Gemini' : 'OpenAI'} API: ${error.message}. Please check your API key, connection, or model settings.`,
+      answer: `Error communicating with ${provider.toUpperCase()} API: ${error.message}. Please check your API key, connection, or model settings.`,
       sources: []
     };
   }

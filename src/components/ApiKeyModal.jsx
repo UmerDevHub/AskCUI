@@ -19,7 +19,9 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
   const handleProviderChange = (newProvider) => {
     setProvider(newProvider);
     if (newProvider === 'gemini') {
-      setModel('gemini-2.0-flash');
+      setModel('gemini-2.0-flash-lite');
+    } else if (newProvider === 'groq') {
+      setModel('llama-3.3-70b-versatile');
     } else {
       setModel('gpt-4o-mini');
     }
@@ -82,28 +84,42 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
               <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
                 AI Service Provider
               </label>
-              <div className="mt-2 grid grid-cols-2 gap-3">
+              <div className="mt-2 grid grid-cols-3 gap-2">
                 <button
                   type="button"
                   onClick={() => handleProviderChange('gemini')}
-                  className={`flex items-center justify-center gap-2 rounded-xl border py-2.5 text-sm font-medium transition-all ${
+                  className={`flex flex-col items-center justify-center rounded-xl border py-2 text-xs font-medium transition-all ${
                     provider === 'gemini'
                       ? 'border-blue-600 bg-blue-50/50 text-blue-600 dark:border-blue-500 dark:bg-blue-950/20 dark:text-blue-400'
-                      : 'border-slate-200 bg-transparent text-slate-600 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
+                      : 'border-slate-200 bg-transparent text-slate-650 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
                   }`}
                 >
-                  <span className="font-bold">Google</span> Gemini
+                  <span className="font-bold">Google</span>
+                  <span>Gemini</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleProviderChange('groq')}
+                  className={`flex flex-col items-center justify-center rounded-xl border py-2 text-xs font-medium transition-all ${
+                    provider === 'groq'
+                      ? 'border-orange-600 bg-orange-50/50 text-orange-600 dark:border-orange-500 dark:bg-orange-950/20 dark:text-orange-400'
+                      : 'border-slate-200 bg-transparent text-slate-650 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
+                  }`}
+                >
+                  <span className="font-bold">Groq</span>
+                  <span>Llama / Gemma</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => handleProviderChange('openai')}
-                  className={`flex items-center justify-center gap-2 rounded-xl border py-2.5 text-sm font-medium transition-all ${
+                  className={`flex flex-col items-center justify-center rounded-xl border py-2 text-xs font-medium transition-all ${
                     provider === 'openai'
                       ? 'border-emerald-600 bg-emerald-50/50 text-emerald-600 dark:border-emerald-500 dark:bg-emerald-950/20 dark:text-emerald-400'
-                      : 'border-slate-200 bg-transparent text-slate-600 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
+                      : 'border-slate-200 bg-transparent text-slate-650 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800/50'
                   }`}
                 >
-                  <span className="font-bold">OpenAI</span> GPT
+                  <span className="font-bold">OpenAI</span>
+                  <span>GPT</span>
                 </button>
               </div>
             </div>
@@ -119,14 +135,22 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
                 onChange={(e) => setModel(e.target.value)}
                 className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:focus:border-blue-400 dark:focus:bg-slate-900"
               >
-                {provider === 'gemini' ? (
+                {provider === 'gemini' && (
                   <>
                     <option value="gemini-2.0-flash">Gemini 2.0 Flash ⚡ (Free — Recommended)</option>
                     <option value="gemini-2.0-flash-lite">Gemini 2.0 Flash Lite (Fastest)</option>
                     <option value="gemini-1.5-flash">Gemini 1.5 Flash (Legacy)</option>
                     <option value="gemini-1.5-pro">Gemini 1.5 Pro (Legacy Pro)</option>
                   </>
-                ) : (
+                )}
+                {provider === 'groq' && (
+                  <>
+                    <option value="llama-3.3-70b-versatile">Llama 3.3 70B Versatile (Smartest Free)</option>
+                    <option value="llama-3.1-8b-instant">Llama 3.1 8B Instant (Ultra Fast Free)</option>
+                    <option value="gemma2-9b-it">Gemma 2 9B IT (Balanced Free)</option>
+                  </>
+                )}
+                {provider === 'openai' && (
                   <>
                     <option value="gpt-4o-mini">GPT-4o Mini (Cost-Effective & Smart)</option>
                     <option value="gpt-4o">GPT-4o (High-End Reasoning)</option>
@@ -154,9 +178,16 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
                 required
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                placeholder={provider === 'gemini' ? 'AIzaSy...' : 'sk-proj-...'}
+                placeholder={
+                  provider === 'gemini'
+                    ? 'AIzaSy... or AQ...'
+                    : provider === 'groq'
+                    ? 'gsk_...'
+                    : 'sk-proj-...'
+                }
                 className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:bg-white dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:focus:border-blue-400 dark:focus:bg-slate-900"
               />
+
             </div>
 
             {/* Privacy Warning */}
