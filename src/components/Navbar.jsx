@@ -1,12 +1,9 @@
 import React from 'react';
-import { Sun, Moon, Settings, Menu, AlertCircle, Zap } from 'lucide-react';
+import { Sun, Moon, Menu, Zap } from 'lucide-react';
 
 export default function Navbar({ 
   isDarkMode, 
   onToggleTheme, 
-  onOpenSettings, 
-  isConfigured, 
-  config,
   onToggleMobileSidebar 
 }) {
   return (
@@ -49,32 +46,6 @@ export default function Navbar({
 
       {/* Right side controls */}
       <div className="flex items-center gap-2">
-        
-        {/* API Status badge */}
-        {isConfigured ? (
-          <div className="flex items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/30 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="hidden sm:inline">
-              {config.provider === 'groq' 
-                ? 'Groq' 
-                : config.provider === 'cohere' 
-                ? 'Cohere' 
-                : config.provider === 'openrouter' 
-                ? 'OpenRouter' 
-                : 'OpenAI'}
-            </span>
-            <span className="sm:hidden">Live</span>
-          </div>
-        ) : (
-          <button
-            onClick={onOpenSettings}
-            className="flex items-center gap-1.5 rounded-full bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-900/30 px-2.5 py-1 text-[11px] font-semibold text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-950/40 transition-colors"
-          >
-            <AlertCircle className="h-3 w-3" />
-            Set API Key
-          </button>
-        )}
-
         {/* Theme toggle */}
         <button
           onClick={onToggleTheme}
@@ -82,15 +53,6 @@ export default function Navbar({
           title={isDarkMode ? 'Light mode' : 'Dark mode'}
         >
           {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-        </button>
-
-        {/* Settings */}
-        <button
-          onClick={onOpenSettings}
-          className="rounded-lg border border-warm-200 dark:border-slate-700/60 bg-white dark:bg-slate-900 p-2 text-slate-500 dark:text-slate-400 transition-all hover:bg-warm-100 dark:hover:bg-slate-800 animate-spin-hover"
-          title="AI Settings"
-        >
-          <Settings className="h-4 w-4" />
         </button>
       </div>
     </header>

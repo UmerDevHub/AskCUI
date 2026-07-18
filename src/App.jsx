@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import ChatContainer from './components/ChatContainer';
-import ApiKeyModal from './components/ApiKeyModal';
 import GlobalSearch from './components/GlobalSearch';
 import { askAI } from './utils/ai';
 
@@ -20,20 +19,8 @@ export default function App() {
   const DEFAULT_COHERE_KEY = import.meta.env.VITE_COHERE_API_KEY || '';
   const DEFAULT_OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 
-  // AI Configuration State — prefers user's saved key, falls back to default keys
-  const [config, setConfig] = useState(() => {
-    const saved = localStorage.getItem('ai_config');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      // Inject fallback API keys if empty
-      if (!parsed.apiKey) {
-        if (parsed.provider === 'groq') parsed.apiKey = DEFAULT_GROQ_KEY;
-        else if (parsed.provider === 'cohere') parsed.apiKey = DEFAULT_COHERE_KEY;
-        else if (parsed.provider === 'openrouter') parsed.apiKey = DEFAULT_OPENROUTER_KEY;
-      }
-      return parsed;
-    }
-    
+  // AI Configuration State — locked to code-defined default keys from environment
+  const [config] = useState(() => {
     // Choose the first available default key
     if (DEFAULT_GROQ_KEY) {
       return { 
@@ -77,7 +64,6 @@ export default function App() {
 
   // UI Panels / Modals
   const [activeCategory, setActiveCategory] = useState('All');
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -94,12 +80,6 @@ export default function App() {
       localStorage.setItem('theme', 'light');
     }
   }, [isDarkMode]);
-
-  // Sync AI Config with LocalStorage
-  const handleSaveConfig = (newConfig) => {
-    setConfig(newConfig);
-    localStorage.setItem('ai_config', JSON.stringify(newConfig));
-  };
 
   // Sync Conversations with LocalStorage
   useEffect(() => {
@@ -180,12 +160,6 @@ export default function App() {
 
   // Send message handler
   const handleSendMessage = async (text, overrideCategory = null) => {
-    // If API Key is not configured, prevent submission and prompt settings modal
-    if (!config.apiKey) {
-      setIsSettingsOpen(true);
-      return;
-    }
-
     const categoryToUse = overrideCategory || activeCategory;
     const userMessage = {
       id: 'msg_user_' + Date.now(),
@@ -251,7 +225,6 @@ export default function App() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const isConfigured = !!config.apiKey;
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-slate-100 text-slate-600 dark:bg-slate-950 dark:text-slate-400 font-sans">
@@ -316,9 +289,6 @@ export default function App() {
         <Navbar
           isDarkMode={isDarkMode}
           onToggleTheme={handleToggleTheme}
-          onOpenSettings={() => setIsSettingsOpen(true)}
-          isConfigured={isConfigured}
-          config={config}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(true)}
         />
 
@@ -334,14 +304,6 @@ export default function App() {
           onCopyAnswer={handleCopyAnswer}
         />
       </div>
-
-      {/* Modals & Dialogs */}
-      <ApiKeyModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        config={config}
-        onSaveConfig={handleSaveConfig}
-      />
 
       <GlobalSearch
         isOpen={isSearchOpen}
