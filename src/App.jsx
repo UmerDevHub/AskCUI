@@ -18,7 +18,7 @@ export default function App() {
   // Default keys baked in at build time (from .env)
   const DEFAULT_GROQ_KEY = import.meta.env.VITE_GROQ_API_KEY || '';
   const DEFAULT_COHERE_KEY = import.meta.env.VITE_COHERE_API_KEY || '';
-  const DEFAULT_OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_KEY || '';
+  const DEFAULT_OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 
   // AI Configuration State — prefers user's saved key, falls back to default keys
   const [config, setConfig] = useState(() => {
