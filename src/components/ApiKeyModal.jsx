@@ -167,8 +167,8 @@ export default function ApiKeyModal({ isOpen, onClose, config, onSaveConfig }) {
                 {provider === 'openrouter' && (
                   <>
                     <option value="meta-llama/llama-3.3-70b-instruct:free">Llama 3.3 70B Free (Smartest)</option>
-                    <option value="google/gemma-2-9b-it:free">Gemma 2 9B Free (Balanced)</option>
-                    <option value="meta-llama/llama-3.1-8b-instruct:free">Llama 3.1 8B Free (Fastest)</option>
+                    <option value="google/gemma-4-31b-it:free">Gemma 4 31B Free (Latest Google)</option>
+                    <option value="meta-llama/llama-3.2-3b-instruct:free">Llama 3.2 3B Free (Fastest)</option>
                   </>
                 )}
                 {provider === 'openai' && (
