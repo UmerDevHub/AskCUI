@@ -1228,14 +1228,91 @@
     "id": "wah_hostel_q1",
     "category": "Hostel & Transport",
     "question": "Does CUI Wah Campus offer hostel facilities and what is the policy/fee?",
-    "answer": "Yes, CUI Wah Campus offers hostel facilities. The hostel fee is Rs. 55,000 per semester (includes Mess) + a refundable security fee of Rs. 2,000. Note: Hostel accommodation is allotted strictly on a first-come, first-served basis.",
-    "source": "CUI Wah Campus Accommodation 2026"
+    "answer": "Yes, CUI Wah Campus offers hostel facilities. The hostel accommodation charges are Rs. 53,200 per semester (non-refundable) + a refundable security fee of Rs. 2,000. Allotments are made on a sharing-room and first-come, first-served basis due to a limited number of seats. Separate girls' hostel is available just 5 minutes walking distance from the campus.",
+    "source": "CUI Wah Campus Hostel Guide"
   },
   {
     "id": "wah_transport_q1",
     "category": "Hostel & Transport",
     "question": "Does CUI Wah Campus offer transport facilities, what routes does it cover, and what is the fee?",
-    "answer": "Yes, CUI Wah Campus offers transport facilities. The transport fee is Rs. 35,000 per semester. The transport fleet covers extensive routes across Islamabad, Rawalpindi, and Attock, as well as local Wah and Taxila routes.",
-    "source": "CUI Wah Campus Transport 2026"
+    "answer": "Yes, pick-and-drop transport is available for students from Islamabad, Rawalpindi, and Attock on specified routes. The transport fee is Rs. 35,000 per semester (non-refundable once paid).",
+    "source": "CUI Wah Campus Transport Guide"
+  },
+  {
+    "id": "wah_hostel_details",
+    "category": "Hostel & Transport",
+    "question": "What are the features, facilities, and contact details of CUI Wah Hostels?",
+    "answer": "CUI Wah Campus hostels provide a highly secured and caring environment managed by a designated Faculty Member as Hostel Warden. Key facilities include:\n- Limited seats allocated on a sharing-room & first-come, first-served basis.\n- On-campus/close-proximity location (separate Girls Hostel is a 5-minute walk from the campus).\n- 24 Hours security guard & security cameras.\n- Free Internet facility for all hostel boarders.\n- Application: Apply online for room reservation at https://sis.cuiwah.edu.pk/ or at the time of admission. Payments are made at Askari Bank Limited Wah Cantt or via Online transfer.\n- Contact: Mr. Basit Mehmood, Office Assistant Hostel (Email: basitmehmood@ciitwah.edu.pk, Cell: 0313-5027356).",
+    "source": "CUI Wah Campus Hostel Guide"
+  },
+  {
+    "id": "wah_transport_details",
+    "category": "Hostel & Transport",
+    "question": "Who should I contact for CUI Wah transport queries or registration?",
+    "answer": "For transport facility registration and queries:\n- Application: Apply soon after admission and submit the semester fee of Rs. 35,000 (payable at Askari Bank Limited Wah Cantt or via Online transfer).\n- Transport Supervisor: Mr. Imran Shahzad (Cell: 0315-9832514)\n- Coordinator/Supervisor: Mr. Muhammad Azam (Cell: 0313-5283719)\n- You may also contact the campus Admissions Office for assistance.",
+    "source": "CUI Wah Campus Transport Guide"
+  },
+  {
+    "id": "wah_transport_route_1",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 1 (Rawalpindi - Sardar Ali)?",
+    "answer": "Route No. 01 (RLC-8960 Rawalpindi Route):\n- Driver: Sardar Ali (Cell: 0322-5746836)\n- Arrival Schedule:\n  * MH Roomi Park: 7:25 AM\n  * Qasim Market: 7:30 AM\n  * Honda Center: 7:32 AM\n  * Lane No. 4, 5, 6, 7: 7:34 AM\n  * Chour Chowk: 7:36 AM\n  * Pirwadhi Mor: 7:40 AM\n  * Kohinoor Mill: 7:42 AM\n  * Golra Signal: 7:45 AM\n  * Daewoo Stop: 7:47 AM\n  * Sarahy Khrbooza: 7:55 AM\n  * Sang Jani Stop: 8:00 AM\n  * CUI Wah Campus: 8:25 AM",
+    "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_transport_route_2",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 2 (Rawalpindi - Muhammad Akhter)?",
+    "answer": "Route No. 02 (Rawalpindi Route):\n- Driver: Muhammad Akhter (Cell: 0344-4114906)\n- Arrival Schedule:\n  * Rawal Chowk: 6:55 AM\n  * Highway: 7:03 AM\n  * Iqbal Town: 7:05 AM\n  * Zia Masjad: 7:07 AM\n  * Chaklala Station: 7:20 AM\n  * Jhanda Chichi: 7:22 AM\n  * Kachehry Chowk: 7:25 AM\n  * Saddar: 7:30 AM\n  * CUI Wah Campus: 8:25 AM",
+    "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_transport_route_3",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 3 (Murree Road - Sardar Pervaiz)?",
+    "answer": "Route No. 03 (RIA-1398 Murree Road Route):\n- Driver: Sardar Pervaiz (Cell: 0321-5048908)\n- Arrival Schedule:\n  * Faizabad: 7:00 AM\n  * Barani University: 7:03 AM\n  * 6th Road: 7:05 AM\n  * Sadiq Abad: 7:08 AM\n  * Chandni Chowk: 7:10 AM\n  * Liaqat Bagh: 7:17 AM\n  * Mareer Chowk: 7:20 AM\n  * Depu Stop: 7:43 AM\n  * Jhangi Saydian: 7:52 AM\n  * Sangjani Toll Plaza: 7:56 AM\n  * Toyota Motors: 8:00 AM\n  * D-7: 8:05 AM\n  * CUI Wah Campus: 8:25 AM",
+    "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_transport_route_4",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 4 (Islamabad - Najabat Ali)?",
+    "answer": "Route No. 04 (RIA-460 Islamabad Route):\n- Driver: Najabat Ali (Cell: 0321-5048906)\n- Arrival Schedule:\n  * Zero Point K-Highway: 6:48 AM\n  * Peshawar Mor: 7:15 AM\n  * Karachi Company: 7:20 AM\n  * G-10 College Stop: 7:25 AM\n  * G-11: 7:28 AM\n  * CUI Wah Campus: 8:25 AM",
+    "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_transport_route_5",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 5 (Airport Route - Muhammad Iqbal)?",
+    "answer": "Route No. 05 (RIA-419 / RIA-1397 Airport Route):\n- Driver: Muhammad Iqbal (Cell: 0321-5048911)\n- Arrival Schedule:\n  * Khana Pull: 7:00 AM\n  * Gangal Stop: 7:03 AM\n  * Karal Chowk: 7:10 AM\n  * Gulzar-e-Quaid: 7:12 AM\n  * Airport PSO Pump: 7:14 AM\n  * Ammar Chowk: 7:20 AM\n  * 26.No: 7:45 AM\n  * CUI Wah Campus: 8:25 AM",
+    "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_transport_route_6",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 6 (Hino Bus Islamabad Route - Sami Ullah)?",
+    "answer": "Route No. 06 (RIB-395 Hino Bus Islamabad Route):\n- Driver: Sami Ullah (Cell: 0313-9335631)\n- Arrival Schedule:\n  * H-8: 7:00 AM\n  * I-8: 7:07 AM\n  * Double Signal: 7:10 AM\n  * Katariyan: 7:15 AM\n  * CDA: 7:20 AM\n  * Mandi Mor: 7:25 AM\n  * Police Line: 7:35 AM\n  * G-11 Signal: 7:40 AM\n  * Golra Chowk: 7:42 AM\n  * Toll Plaza: 7:45 AM\n  * CUI Wah Campus: 8:25 AM",
+    "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_transport_route_7",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 7 (Attock Route - Taj Muhammad)?",
+    "answer": "Route No. 07 (RIA-2035 Coaster Attock Route):\n- Driver: Taj Muhammad (Cell: 0321-5048912)\n- Arrival Schedule:\n  * Kachery: 7:00 AM\n  * Shell Pump: 7:05 AM\n  * 3 Miles: 7:10 AM\n  * Pari Gate: 7:15 AM\n  * Karf Colony: 7:20 AM\n  * Qutba Mor: 7:25 AM\n  * Hattiyan: 7:30 AM\n  * Lawrence Pur: 7:40 AM\n  * Hassan Abdal: 8:00 AM\n  * Barrier No. 3: 8:05 AM\n  * CUI Wah Campus: 8:25 AM",
+    "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_transport_route_8",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 8 (Waqas)?",
+    "answer": "Route No. 08 (Coaster Route):\n- Driver: Waqas (Cell: 0333-5701748)\n- Arrival Schedule:\n  * Melody Stop: 7:00 AM\n  * Abbpara Stop: 7:05 AM\n  * Fire brigade: 7:20 AM\n  * Zero Point: 7:25 AM\n  * NUST Signal: 7:30 AM\n  * CUI Wah Campus: 8:20 AM",
+    "source": "CUI Wah Campus Transport Chart"
+  },
+  {
+    "id": "wah_transport_route_9",
+    "category": "Hostel & Transport",
+    "question": "What is the timeline/stops for Transport Route 9 (Rawalpindi Route - Roshan/Anees Shahzad)?",
+    "answer": "Route No. 09 (RLC-8959 Rawalpindi Route):\n- Driver: Roshan / Anees Shahzad (Cell: 0311-0883884)\n- Arrival Schedule:\n  * MH Roomi Park: 7:25 AM\n  * Qasim Market: 7:30 AM\n  * Honda Center: 7:32 AM\n  * Lane No. 4, 5, 6, 7: 7:34 AM\n  * Chour Chowk: 7:36 AM\n  * Pirwadhi Mor: 7:40 AM\n  * Kohinoor Mill: 7:42 AM\n  * Golra Signal: 7:45 AM\n  * Daewoo Stop: 7:47 AM\n  * Sarahy Khrbooza: 7:55 AM\n  * Sang Jani Stop: 8:00 AM\n  * CUI Wah Campus: 8:25 AM",
+    "source": "CUI Wah Campus Transport Chart"
   }
 ]
