@@ -301,6 +301,7 @@ export default function App() {
         {/* Conversation Chat Window */}
         <ChatContainer
           activeCategory={activeCategory}
+          onSelectCategory={setActiveCategory}
           messages={messages}
           onSend={handleSendMessage}
           inputValue={inputValue}

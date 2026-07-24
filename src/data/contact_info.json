@@ -1,0 +1,49 @@
+{
+  "_meta": {
+    "source": "CUI Wah Campus Official Contact Directory",
+    "last_updated": "2025"
+  },
+  "admissions_office": {
+    "name": "Admissions Office — CUI Wah Campus",
+    "phone": "+92-51-4534200 up to 02",
+    "phone_alt": "+92-51-9314382 or +92-51-9314383",
+    "email": "info@ciitwah.edu.pk",
+    "email_admissions": "admissions@ciitwah.edu.pk",
+    "email_nts": "zainab@ciitwah.edu.pk",
+    "office_hours": "Monday to Friday: 9:00 AM – 5:00 PM",
+    "physical_address": "COMSATS University Islamabad, Wah Campus, Near Taxila, Wah Cantt, Punjab, Pakistan",
+    "portal_url": "https://admissions.comsats.edu.pk",
+    "campus_url": "https://wah.comsats.edu.pk"
+  },
+  "campus_main": {
+    "phone": "+92-51-4534200 up to 02",
+    "fax": "+92-51-9314381",
+    "postal_code": "47040",
+    "city": "Wah Cantt, Punjab, Pakistan"
+  },
+  "departments": [
+    { "name": "Department of Computer Science", "email": "cs@ciitwah.edu.pk", "programs": ["BS CS", "BS AI", "BS SE", "MS CS", "MS AI", "MS SE", "MS Cyber Security", "PhD CS"] },
+    { "name": "Department of Electrical & Computer Engineering", "email": "ece@ciitwah.edu.pk", "programs": ["BS Computer Engineering", "BS Electrical Engineering", "MS EE", "MS AIE", "PhD EE"] },
+    { "name": "Department of Civil Engineering", "email": "civil@ciitwah.edu.pk", "programs": ["BS Civil Engineering", "MS CVE", "PhD CVE"] },
+    { "name": "Department of Mechanical Engineering", "email": "mechanical@ciitwah.edu.pk", "programs": ["BS Mechanical Engineering", "MS ME", "PhD ME"] },
+    { "name": "Department of Management Sciences", "email": "management@ciitwah.edu.pk", "programs": ["BBA", "BS A&F", "MS Management Sciences", "MS Project Management", "PhD Management Sciences"] },
+    { "name": "Department of Mathematics", "email": "math@ciitwah.edu.pk", "programs": ["MS Mathematics", "PhD Mathematics"] },
+    { "name": "Department of Humanities", "email": "humanities@ciitwah.edu.pk", "programs": ["BS Psychology", "MS Psychology", "MS English Linguistics"] }
+  ],
+  "student_services": {
+    "financial_aid_office": { "name": "Financial Aid & Scholarships Office", "email": "financialaid@ciitwah.edu.pk" },
+    "hostel_office": { "name": "Hostel Warden Office", "phone": "+92-51-9047445", "note": "First come first served. Contact early for booking." },
+    "transport_office": { "name": "Transport Section", "phone": "+92-51-9047450", "routes": ["Islamabad", "Rawalpindi", "Attock", "Wah", "Taxila"] },
+    "it_helpdesk": { "name": "IT Help Desk / Portal Support", "email": "ithelpdesk@ciitwah.edu.pk" },
+    "registrar": { "name": "Registrar's Office", "email": "registrar@ciitwah.edu.pk" }
+  },
+  "social_media": {
+    "facebook": "https://www.facebook.com/CUI.Wah.Campus",
+    "website": "https://wah.comsats.edu.pk"
+  },
+  "directions": {
+    "from_islamabad": "Take M-1 motorway toward Peshawar. Exit at Taxila interchange. CUI Wah Campus is ~5 km from Taxila. Journey: 45–60 minutes.",
+    "from_rawalpindi": "Head north on GT Road toward Wah Cantt. Journey: 40–50 minutes.",
+    "from_attock": "Head south toward Wah Cantt on GT Road. Journey: 30–40 minutes."
+  }
+}

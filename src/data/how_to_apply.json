@@ -1,0 +1,91 @@
+{
+  "_meta": { "source": "CUI Wah Campus Official Admission Guide", "last_updated": "Fall 2025" },
+  "overview": "CUI Wah Campus admissions are conducted 100% online through the official portal at admissions.comsats.edu.pk. There is no need to visit the campus to apply.",
+  "portal_url": "https://admissions.comsats.edu.pk",
+  "steps": [
+    {
+      "step": 1,
+      "title": "Check Eligibility",
+      "description": "Before applying, verify that you meet the minimum eligibility requirements for your desired program. Engineering programs require 60% in HSSC. Computing and other programs require 50%.",
+      "tips": ["Check your HSSC percentage carefully", "Pre-medical students may need to appear for additional math courses for Computing programs", "O/A-Level students must obtain IBCC equivalence first"]
+    },
+    {
+      "step": 2,
+      "title": "Create Account on Admission Portal",
+      "description": "Visit admissions.comsats.edu.pk and create a new account using a valid, active email address. This email will be used for all future communication.",
+      "tips": ["Use a Gmail or professional email — avoid temporary emails", "Remember your login credentials", "Do NOT share your login details with anyone"]
+    },
+    {
+      "step": 3,
+      "title": "Fill the Online Admission Form",
+      "description": "Log in and complete the online admission form. Fill all fields accurately. Enter your name and father's name exactly as on your CNIC/B-Form/Matric certificate.",
+      "tips": ["Double-check spellings of name and father's name", "Select your correct NAT test category based on your HSSC group", "You can select more than one program choice in a single form", "You can edit the form before final submission"]
+    },
+    {
+      "step": 4,
+      "title": "Pay Application Processing Fee",
+      "description": "Download and print the challan form from the portal. Deposit Rs. 2,500 (non-refundable) at any online bank branch listed on the challan.",
+      "tips": ["Fee is Rs. 2,500 per campus — if applying to multiple campuses, pay separately for each", "Upload a clear, legible image of the paid challan on the portal", "Keep the original challan safe"]
+    },
+    {
+      "step": 5,
+      "title": "Register for NTS Entry Test",
+      "description": "Register for the NAT (undergraduate) or GAT (graduate) entry test through CUI. Pay the NTS registration fee of Rs. 800 via the provided challan.",
+      "tips": ["If you have a valid previous NAT/GAT score, you may not need to re-register", "NAT test category depends on what you studied in HSSC, NOT what program you are applying for", "Aim to get the highest NTS score possible as it counts 50% of merit"]
+    },
+    {
+      "step": 6,
+      "title": "Submit the Form",
+      "description": "Review all information carefully, upload all required documents, and click 'Submit'. Once submitted, you cannot edit — contact admissions for any changes.",
+      "tips": ["Do NOT submit until all documents are uploaded", "After submission, check portal regularly for verification status", "Look for: 'Your application is successfully verified'"]
+    },
+    {
+      "step": 7,
+      "title": "Appear in NTS Entry Test",
+      "description": "Print your NTS roll number slip from the portal and appear in the test on the scheduled date at the designated center.",
+      "tips": ["Bring roll slip + original CNIC/B-Form to the test center", "Arrive at least 30 minutes early", "You can appear in both test dates to improve your score"]
+    },
+    {
+      "step": 8,
+      "title": "Check Merit List",
+      "description": "Merit lists are displayed on the admission portal. Log in on August 18, 2025 (1st merit list date) to check your status.",
+      "tips": ["Merit = Matric 10% + HSSC 40% + NAT 50%", "If selected, download your offer letter immediately", "If not selected in 1st list, watch for 2nd and 3rd merit lists"]
+    },
+    {
+      "step": 9,
+      "title": "Pay Admission Dues",
+      "description": "If selected, download and pay the admission dues challan within the specified deadline. Failure to pay by the deadline means forfeiting your seat.",
+      "tips": ["Dues deadline is strictly enforced", "Pay at any HBL, ABL, or MCB branch listed on your challan", "Upload payment proof on the portal"]
+    },
+    {
+      "step": 10,
+      "title": "Submit Documents to Campus",
+      "description": "Submit attested copies of required documents to the CUI Wah Admissions Office. This can be done at the start of classes.",
+      "required_documents": [
+        "Printed Admission Form (from portal)",
+        "Two passport-size photographs (1 attested on back)",
+        "CNIC or B-Form (photocopy)",
+        "SSC/Matric Certificate and Mark Sheet (attested copy) or O-Level IBCC Equivalence",
+        "HSSC/Intermediate Certificate and Mark Sheet (attested copy) or A-Level IBCC Equivalence",
+        "Valid NTS Result Card",
+        "Affidavit (Rs. 20/50 stamp paper) — for result-awaiting students",
+        "Undertaking (Rs. 20/50 stamp paper)",
+        "Domicile Certificate (if applicable)",
+        "Character Certificate from last institution"
+      ]
+    }
+  ],
+  "common_mistakes": [
+    "Spelling errors in name or father's name (must match CNIC/Matric exactly)",
+    "Uploading blurry or incomplete document images",
+    "Not uploading paid challan image after paying fee",
+    "Selecting wrong NAT test category (must match HSSC group, not desired program)",
+    "Not clicking Submit after completing the form",
+    "Missing the form submission deadline",
+    "Applying with a supply (supplementary) in HSSC Part-1 — this makes you ineligible",
+    "Not monitoring the portal for objections after submission"
+  ],
+  "multiple_campus_policy": "You can apply to multiple CUI campuses. Each campus requires a separate form and Rs. 2,500 processing fee. However, one NTS roll number can be used for all campuses within the same session.",
+  "result_awaiting_policy": "F.Sc Part-2 result-awaiting students may apply using Part-1 results, provided there is no 'F' grade in any subject. Admission is provisional and will be cancelled if minimum required marks are not achieved in the final result.",
+  "application_portal_issue": "If the portal is unresponsive, try a different browser (Chrome, Firefox). If the issue persists, email admissions@ciitwah.edu.pk with screenshots."
+}

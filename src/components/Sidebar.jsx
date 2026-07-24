@@ -13,20 +13,26 @@ import {
   Globe,
   Home,
   Calculator,
-  Clipboard
+  Clipboard,
+  TrendingUp,
+  Phone,
+  Bell,
+  Shield
 } from 'lucide-react';
 
 const CATEGORIES = [
-  { name: 'All',           icon: Globe,        color: 'text-sky-500',    bg: 'bg-sky-50 dark:bg-sky-950/20' },
-  { name: 'Programs',      icon: BookOpen,     color: 'text-indigo-500', bg: 'bg-indigo-50 dark:bg-indigo-950/20' },
-  { name: 'Fees',          icon: DollarSign,   color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-950/20' },
-  { name: 'Hostel & Transport', icon: Home,    color: 'text-blue-500',   bg: 'bg-blue-50 dark:bg-blue-950/20' },
-  { name: 'Eligibility',   icon: CheckCircle,  color: 'text-amber-600',  bg: 'bg-amber-50 dark:bg-amber-950/20' },
-  { name: 'Merit Calculator', icon: Calculator, color: 'text-violet-600', bg: 'bg-violet-50 dark:bg-violet-950/20' },
-  { name: 'How to Apply',  icon: Clipboard,    color: 'text-amber-500',  bg: 'bg-amber-50 dark:bg-amber-950/20' },
-  { name: 'Prerequisites', icon: FileText,     color: 'text-violet-500', bg: 'bg-violet-50 dark:bg-violet-950/20' },
-  { name: 'Scholarships',  icon: Award,        color: 'text-rose-500',   bg: 'bg-rose-50 dark:bg-rose-950/20' },
-  { name: 'FAQs',          icon: HelpCircle,   color: 'text-blue-500',   bg: 'bg-blue-50 dark:bg-blue-950/20' }
+  { name: 'All',                icon: Globe,       color: 'text-sky-500',     bg: 'bg-sky-50 dark:bg-sky-950/20' },
+  { name: 'Programs',           icon: BookOpen,    color: 'text-indigo-500',  bg: 'bg-indigo-50 dark:bg-indigo-950/20' },
+  { name: 'Fees',               icon: DollarSign,  color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-950/20' },
+  { name: 'Hostel & Transport', icon: Home,        color: 'text-blue-500',    bg: 'bg-blue-50 dark:bg-blue-950/20' },
+  { name: 'Eligibility',        icon: CheckCircle, color: 'text-amber-600',   bg: 'bg-amber-50 dark:bg-amber-950/20' },
+  { name: 'Merit Calculator',   icon: Calculator,  color: 'text-violet-600',  bg: 'bg-violet-50 dark:bg-violet-950/20' },
+  { name: 'Merit Lists',        icon: TrendingUp,  color: 'text-cyan-600',    bg: 'bg-cyan-50 dark:bg-cyan-950/20' },
+  { name: 'How to Apply',       icon: Clipboard,   color: 'text-amber-500',   bg: 'bg-amber-50 dark:bg-amber-950/20' },
+  { name: 'Prerequisites',      icon: FileText,    color: 'text-violet-500',  bg: 'bg-violet-50 dark:bg-violet-950/20' },
+  { name: 'Scholarships',       icon: Award,       color: 'text-rose-500',    bg: 'bg-rose-50 dark:bg-rose-950/20' },
+  { name: 'FAQs',               icon: HelpCircle,  color: 'text-blue-500',    bg: 'bg-blue-50 dark:bg-blue-950/20' },
+  { name: 'Contact Info',       icon: Phone,       color: 'text-teal-600',    bg: 'bg-teal-50 dark:bg-teal-950/20' },
 ];
 
 export default function Sidebar({ 
@@ -109,9 +115,6 @@ export default function Sidebar({
                     <Icon className={`h-3.5 w-3.5 ${isActive ? cat.color : 'text-slate-400 dark:text-slate-500'}`} />
                   </span>
                   {cat.name}
-                  {isActive && (
-                    <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue-500" />
-                  )}
                 </button>
               );
             })}

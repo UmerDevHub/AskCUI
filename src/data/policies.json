@@ -1,0 +1,103 @@
+{
+  "_meta": { "source": "CUI Wah Campus Academic Regulations & Student Handbook", "last_updated": "2025" },
+  "attendance_policy": {
+    "title": "Attendance Policy",
+    "minimum_required": "75%",
+    "debar_threshold": "Below 60% attendance results in debarment from final exams",
+    "rules": [
+      "A student must maintain a minimum of 75% attendance in each enrolled course to be eligible to sit in the final examination.",
+      "If attendance falls below 60%, the student is automatically debarred from final exams in that course.",
+      "Between 60%–74%, the department may grant conditional permission at the HOD's discretion.",
+      "Medical exemptions require a certificate from a registered physician and must be submitted to the HOD within one week.",
+      "Online attendance records are accessible via the student portal."
+    ]
+  },
+  "academic_integrity": {
+    "title": "Academic Integrity & Plagiarism Policy",
+    "rules": [
+      "Plagiarism in any form (copying assignments, submitting AI-generated work without disclosure, cheating in exams) is strictly prohibited.",
+      "First offense: Failing grade in the assignment/exam.",
+      "Second offense: Failing grade in the course.",
+      "Third offense: Suspension or expulsion from the university.",
+      "Turnitin similarity threshold for theses and dissertations is 19% overall.",
+      "All course assignments may be checked using plagiarism detection software."
+    ]
+  },
+  "exam_policy": {
+    "title": "Examination Policy",
+    "rules": [
+      "Mid-term exams are typically held in the 8th week and final exams at the end of the semester.",
+      "A student must present their student ID card to enter the examination hall.",
+      "Use of mobile phones or any electronic device (other than a permitted calculator) in the exam hall is strictly prohibited.",
+      "A student arriving more than 30 minutes late may be denied entry.",
+      "Final exam schedule is published on the CUI student portal at least 2 weeks in advance.",
+      "Make-up exams are only granted for genuine medical emergencies with documented proof."
+    ]
+  },
+  "grading_system": {
+    "title": "Grading System",
+    "scale": "4.0 GPA Scale",
+    "grades": [
+      { "letter": "A", "gpa": 4.0, "percentage": "90–100%" },
+      { "letter": "A-", "gpa": 3.7, "percentage": "85–89%" },
+      { "letter": "B+", "gpa": 3.3, "percentage": "80–84%" },
+      { "letter": "B", "gpa": 3.0, "percentage": "75–79%" },
+      { "letter": "B-", "gpa": 2.7, "percentage": "70–74%" },
+      { "letter": "C+", "gpa": 2.3, "percentage": "65–69%" },
+      { "letter": "C", "gpa": 2.0, "percentage": "60–64%" },
+      { "letter": "C-", "gpa": 1.7, "percentage": "55–59%" },
+      { "letter": "D", "gpa": 1.0, "percentage": "50–54%" },
+      { "letter": "F", "gpa": 0.0, "percentage": "Below 50%" }
+    ],
+    "minimum_passing_gpa": 2.0,
+    "minimum_cgpa_for_degree": "2.0 / 4.0 for undergraduate; 2.5 / 4.0 for graduate"
+  },
+  "code_of_conduct": {
+    "title": "Student Code of Conduct",
+    "rules": [
+      "Students must maintain a respectful, professional demeanor on campus at all times.",
+      "Dress code must be adhered to: formal/semi-formal attire. Casual wear (ripped jeans, shorts, sleeveless) is not allowed.",
+      "Smoking is strictly prohibited inside all university buildings and classrooms.",
+      "Students must carry their ID cards at all times when on campus.",
+      "Any form of ragging, harassment, or bullying is a zero-tolerance offense and may result in immediate expulsion.",
+      "Political or religious gatherings are not permitted on campus without prior written approval from the administration.",
+      "Students must not use university equipment or resources for personal or commercial activities."
+    ]
+  },
+  "degree_completion": {
+    "title": "Degree Completion Requirements",
+    "bs_requirements": [
+      "Complete all required credit hours (typically 130–136 credit hours for BS programs).",
+      "Maintain a minimum CGPA of 2.0 out of 4.0.",
+      "Complete Final Year Project (FYP) with a passing grade.",
+      "Clear all dues and submit clearance form to the Registrar's Office.",
+      "No pending disciplinary cases."
+    ],
+    "ms_requirements": [
+      "Complete all required coursework (typically 30 credit hours).",
+      "Maintain a minimum CGPA of 2.5 out of 4.0.",
+      "Successfully defend MS Thesis (for thesis track) or complete research project (for non-thesis).",
+      "Clear all dues and submit clearance."
+    ]
+  },
+  "transfer_policy": {
+    "title": "Credit Transfer Policy",
+    "rules": [
+      "CUI does NOT accept credit hour transfers from any national or international institution.",
+      "However, a CUI student may transfer their credits to other universities, subject to the policies of the receiving institution.",
+      "Campus transfer within CUI (e.g., from Islamabad to Wah) is possible within the same session upon mutual agreement between campuses."
+    ]
+  },
+  "hostel_rules": {
+    "title": "Hostel Rules & Regulations",
+    "rules": [
+      "Hostel gate closes at 10:00 PM. Late entry requires prior written permission from the Warden.",
+      "Visitors are not allowed inside hostel rooms. Meeting area is provided in the common area.",
+      "Cooking in rooms is strictly prohibited.",
+      "Students are responsible for the cleanliness of their rooms.",
+      "Any damage to hostel property will be charged to the student.",
+      "Hostel mess provides 3 meals per day (included in the Rs. 55,000 hostel fee).",
+      "Hostel allocation is on first come first served basis and may be revoked for disciplinary reasons."
+    ]
+  }
+}

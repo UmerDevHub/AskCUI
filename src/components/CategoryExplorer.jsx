@@ -32,6 +32,11 @@ import eligibilityData from '../data/eligibility.json';
 import prerequisitesData from '../data/prerequisites.json';
 import scholarshipsData from '../data/scholarships.json';
 import faqsData from '../data/faqs.json';
+import meritListsData from '../data/merit_lists.json';
+import contactData from '../data/contact_info.json';
+import announcementsData from '../data/announcements.json';
+import policiesData from '../data/policies.json';
+import howToApplyData from '../data/how_to_apply.json';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -1868,26 +1873,287 @@ export default function CategoryExplorer({ category, onAskQuestion }) {
     );
   };
 
+  // --- MERIT LISTS RENDERER ---
+  const renderMeritLists = () => (
+    <motion.div variants={containerVariants} initial="hidden" animate="show" className="space-y-6 max-w-full">
+      <motion.div variants={itemVariants}>
+        <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600 dark:bg-cyan-950/40 dark:text-cyan-400">
+            <Info className="h-5 w-5" />
+          </span>
+          Historical Closing Merit Lists
+        </h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+          Official closing merit percentages per program. Formula: Matric 10% + FSc 40% + NAT 50%.
+        </p>
+      </motion.div>
+
+      {meritListsData.programs.map((prog, idx) => {
+        const latest = prog.merit_history[prog.merit_history.length - 1];
+        const oldest = prog.merit_history[0];
+        const change = (latest.closing_merit - oldest.closing_merit).toFixed(2);
+        return (
+          <motion.div key={idx} variants={itemVariants} className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-[#151a28] shadow-sm space-y-4">
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div>
+                <h3 className="font-extrabold text-slate-800 dark:text-slate-100">{prog.program}</h3>
+                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-0.5">{prog.category} · {prog.department}</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="text-right">
+                  <div className="text-2xl font-black text-cyan-600 dark:text-cyan-400 font-mono">{latest.closing_merit}%</div>
+                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">{latest.session}</div>
+                </div>
+                <span className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold ${ parseFloat(change) > 0 ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/20 dark:text-emerald-400' : 'bg-rose-50 text-rose-700 dark:bg-rose-950/20 dark:text-rose-400' }`}>
+                  {parseFloat(change) > 0 ? '↑' : '↓'} {Math.abs(change)}% since {oldest.session}
+                </span>
+              </div>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100 dark:border-slate-800">
+                    <th className="text-left px-2 py-2 font-bold text-slate-500 dark:text-slate-400">Session</th>
+                    <th className="text-right px-2 py-2 font-bold text-slate-500 dark:text-slate-400">Closing Merit</th>
+                    <th className="text-right px-2 py-2 font-bold text-slate-500 dark:text-slate-400">Seats</th>
+                    <th className="text-right px-2 py-2 font-bold text-slate-500 dark:text-slate-400">Round</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50 dark:divide-slate-800/50">
+                  {[...prog.merit_history].reverse().map((h, hi) => (
+                    <tr key={hi} className={hi === 0 ? 'bg-cyan-50/30 dark:bg-cyan-950/10' : ''}>
+                      <td className="px-2 py-2 font-semibold text-slate-700 dark:text-slate-300">{h.session}</td>
+                      <td className="px-2 py-2 text-right font-mono font-extrabold text-cyan-700 dark:text-cyan-400">{h.closing_merit}%</td>
+                      <td className="px-2 py-2 text-right text-slate-500 dark:text-slate-400">{h.seats}</td>
+                      <td className="px-2 py-2 text-right text-slate-400 dark:text-slate-500">{h.round}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-[10.5px] text-slate-400 dark:text-slate-500 leading-relaxed">{prog.trend_note}</p>
+            <button
+              onClick={() => onAskQuestion(`What is the merit trend and my admission chances for ${prog.program}?`, 'Merit Lists')}
+              className="flex w-full items-center justify-between rounded-xl bg-slate-50 border border-slate-200/50 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-cyan-50 hover:text-cyan-700 hover:border-cyan-100 dark:bg-slate-900/60 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-cyan-950/20 dark:hover:text-cyan-400 transition-all"
+            >
+              <span>Ask AI about {prog.abbreviation} merit trends</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </motion.div>
+        );
+      })}
+
+      <motion.div variants={itemVariants} className="rounded-2xl bg-amber-50/30 dark:bg-amber-950/10 border border-amber-200/50 dark:border-amber-900/30 p-4 text-xs text-amber-700 dark:text-amber-400 leading-relaxed">
+        {meritListsData.general_notes.map((n, i) => <p key={i} className="mb-1">• {n}</p>)}
+      </motion.div>
+    </motion.div>
+  );
+
+  // --- CONTACT INFO RENDERER ---
+  const renderContactInfo = () => (
+    <motion.div variants={containerVariants} initial="hidden" animate="show" className="space-y-6 max-w-full">
+      <motion.div variants={itemVariants}>
+        <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600 dark:bg-teal-950/40 dark:text-teal-400">
+            <Mail className="h-5 w-5" />
+          </span>
+          Contact Information
+        </h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Official CUI Wah Campus contact details for admissions, departments, and student services.</p>
+      </motion.div>
+
+      {/* Admissions Office */}
+      <motion.div variants={itemVariants} className="rounded-2xl border border-teal-200/60 bg-teal-50/20 dark:border-teal-900/40 dark:bg-teal-950/10 p-5 space-y-3">
+        <h3 className="font-extrabold text-teal-700 dark:text-teal-400 text-sm">📞 Admissions Office</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          {[['Phone', contactData.admissions_office.phone], ['Alt Phone', contactData.admissions_office.phone_alt], ['Email', contactData.admissions_office.email], ['NTS Email', contactData.admissions_office.email_nts], ['Office Hours', contactData.admissions_office.office_hours], ['Address', contactData.admissions_office.physical_address]].map(([label, val]) => (
+            <div key={label} className="rounded-xl bg-white dark:bg-[#151a28] border border-slate-200/50 dark:border-slate-800 p-3">
+              <div className="text-[9px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-0.5">{label}</div>
+              <div className="font-bold text-slate-800 dark:text-slate-200 break-all">{val}</div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Departments */}
+      <motion.div variants={itemVariants} className="space-y-3">
+        <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Department Contacts</h3>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {contactData.departments.map((dept, i) => (
+            <div key={i} className="rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-[#151a28] p-4 shadow-sm space-y-2">
+              <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm">{dept.name}</h4>
+              <p className="text-[10px] font-bold text-teal-600 dark:text-teal-400">{dept.email}</p>
+              <div className="flex flex-wrap gap-1 mt-1">
+                {dept.programs.map((p, pi) => <span key={pi} className="rounded bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[9px] font-bold text-slate-600 dark:text-slate-400">{p}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Student Services */}
+      <motion.div variants={itemVariants} className="space-y-3">
+        <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">Student Services</h3>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {Object.entries(contactData.student_services).map(([key, svc]) => (
+            <div key={key} className="rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-[#151a28] p-4 shadow-sm">
+              <h4 className="font-bold text-slate-800 dark:text-slate-200 text-xs">{svc.name}</h4>
+              {svc.email && <p className="text-[10px] font-bold text-teal-600 dark:text-teal-400 mt-1">{svc.email}</p>}
+              {svc.phone && <p className="text-[10px] font-bold text-slate-600 dark:text-slate-400 mt-1">{svc.phone}</p>}
+              {svc.note && <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-1.5 leading-relaxed">{svc.note}</p>}
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      <motion.button variants={itemVariants} whileTap={{ scale: 0.98 }}
+        onClick={() => onAskQuestion('What is the phone number and email for CUI Wah Campus admissions office?', 'Contact Info')}
+        className="flex w-full items-center justify-between rounded-2xl bg-gradient-to-r from-teal-600 to-cyan-600 px-5 py-4 text-sm font-bold text-white shadow-md hover:from-teal-700 hover:to-cyan-700 transition-all">
+        <span>Ask AI for contact details</span>
+        <ArrowRight className="h-4 w-4" />
+      </motion.button>
+    </motion.div>
+  );
+
+  // --- ANNOUNCEMENTS RENDERER ---
+  const renderAnnouncements = () => (
+    <motion.div variants={containerVariants} initial="hidden" animate="show" className="space-y-6 max-w-full">
+      <motion.div variants={itemVariants}>
+        <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-600 dark:bg-orange-950/40 dark:text-orange-400">
+            <Info className="h-5 w-5" />
+          </span>
+          News & Announcements
+        </h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Latest official notices, admission updates, and academic calendar for Fall 2025.</p>
+      </motion.div>
+
+      {announcementsData.announcements.map((ann, i) => {
+        const badgeColor = ann.type === 'Admission' ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400'
+          : ann.type === 'Merit' ? 'bg-cyan-100 text-cyan-700 dark:bg-cyan-950/30 dark:text-cyan-400'
+          : ann.type === 'Fee' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400'
+          : ann.type === 'Scholarship' ? 'bg-rose-100 text-rose-700 dark:bg-rose-950/30 dark:text-rose-400'
+          : ann.type === 'Test' ? 'bg-violet-100 text-violet-700 dark:bg-violet-950/30 dark:text-violet-400'
+          : 'bg-orange-100 text-orange-700 dark:bg-orange-950/30 dark:text-orange-400';
+        return (
+          <motion.div key={i} variants={itemVariants} className="rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-[#151a28] p-5 shadow-sm space-y-3">
+            <div className="flex items-start gap-3 justify-between flex-wrap">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider ${badgeColor}`}>{ann.badge}</span>
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500">{ann.date}</span>
+                </div>
+                <h3 className="font-extrabold text-slate-800 dark:text-slate-100 text-sm">{ann.title}</h3>
+              </div>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{ann.details || ann.summary}</p>
+            <button
+              onClick={() => onAskQuestion(ann.title, ann.category)}
+              className="flex items-center gap-1.5 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline">
+              <span>Ask AI for more details</span><ArrowRight className="h-3 w-3" />
+            </button>
+          </motion.div>
+        );
+      })}
+
+      {/* Academic Calendar */}
+      <motion.div variants={itemVariants} className="rounded-2xl border border-orange-200/60 bg-orange-50/20 dark:border-orange-900/40 dark:bg-orange-950/10 p-5 space-y-3">
+        <h3 className="font-extrabold text-orange-700 dark:text-orange-400 text-sm">📅 Fall 2025 Academic Calendar</h3>
+        <div className="grid grid-cols-2 gap-3">
+          {Object.entries(announcementsData.academic_calendar_fall_2025).map(([key, val]) => (
+            <div key={key} className="rounded-xl bg-white dark:bg-[#151a28] border border-slate-200/50 dark:border-slate-800 p-3">
+              <div className="text-[9px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-0.5">{key.replace(/_/g, ' ')}</div>
+              <div className="font-bold text-slate-800 dark:text-slate-200 text-xs">{val}</div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+
+  // --- POLICIES RENDERER ---
+  const renderPolicies = () => {
+    const sections = ['attendance_policy','academic_integrity','exam_policy','grading_system','code_of_conduct','degree_completion','transfer_policy','hostel_rules'];
+    return (
+      <motion.div variants={containerVariants} initial="hidden" animate="show" className="space-y-6 max-w-full">
+        <motion.div variants={itemVariants}>
+          <h2 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-2.5">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+              <Shield className="h-5 w-5" />
+            </span>
+            University Policies & Regulations
+          </h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Official CUI Wah Campus academic policies, conduct rules, and regulations.</p>
+        </motion.div>
+
+        {sections.filter(s => policiesData[s]).map((sectionKey, i) => {
+          const section = policiesData[sectionKey];
+          return (
+            <motion.div key={i} variants={itemVariants} className="rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-[#151a28] p-5 shadow-sm space-y-3">
+              <h3 className="font-extrabold text-slate-800 dark:text-slate-100 text-sm">{section.title}</h3>
+              {section.minimum_required && (
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-black text-slate-800 dark:text-slate-100 font-mono">{section.minimum_required}</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400">minimum required</span>
+                </div>
+              )}
+              {section.rules && (
+                <ul className="space-y-2">
+                  {section.rules.map((rule, ri) => (
+                    <li key={ri} className="flex gap-2 items-start text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-slate-400 shrink-0" />
+                      {rule}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {section.grades && (
+                <div className="overflow-x-auto rounded-xl border border-slate-100 dark:border-slate-800">
+                  <table className="w-full text-xs">
+                    <thead><tr className="bg-slate-50 dark:bg-slate-900">
+                      <th className="px-3 py-2 text-left font-bold text-slate-500">Grade</th>
+                      <th className="px-3 py-2 text-right font-bold text-slate-500">GPA</th>
+                      <th className="px-3 py-2 text-right font-bold text-slate-500">Percentage</th>
+                    </tr></thead>
+                    <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
+                      {section.grades.map((g, gi) => (
+                        <tr key={gi}>
+                          <td className="px-3 py-1.5 font-extrabold text-slate-800 dark:text-slate-200">{g.letter}</td>
+                          <td className="px-3 py-1.5 text-right font-mono text-slate-700 dark:text-slate-300">{g.gpa}</td>
+                          <td className="px-3 py-1.5 text-right text-slate-500 dark:text-slate-400">{g.percentage}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              <button
+                onClick={() => onAskQuestion(`What is CUI's ${section.title}?`, 'Policies')}
+                className="flex items-center gap-1.5 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline mt-1">
+                <span>Ask AI about this policy</span><ArrowRight className="h-3 w-3" />
+              </button>
+            </motion.div>
+          );
+        })}
+      </motion.div>
+    );
+  };
+
   // --- EXPLORER ROUTER ---
   switch (category) {
-    case 'Programs':
-      return renderPrograms();
-    case 'Fees':
-      return renderFees();
-    case 'Eligibility':
-      return renderEligibility();
-    case 'Prerequisites':
-      return renderPrerequisites();
-    case 'Scholarships':
-      return renderScholarships();
-    case 'Hostel & Transport':
-      return renderHostelAndTransport();
-    case 'Merit Calculator':
-      return renderMeritCalculator();
-    case 'How to Apply':
-      return renderHowToApply();
-    case 'FAQs':
-      return renderFaqs();
+    case 'Programs':           return renderPrograms();
+    case 'Fees':               return renderFees();
+    case 'Eligibility':        return renderEligibility();
+    case 'Prerequisites':      return renderPrerequisites();
+    case 'Scholarships':       return renderScholarships();
+    case 'Hostel & Transport': return renderHostelAndTransport();
+    case 'Merit Calculator':   return renderMeritCalculator();
+    case 'How to Apply':       return renderHowToApply();
+    case 'FAQs':               return renderFaqs();
+    case 'Merit Lists':        return renderMeritLists();
+    case 'Contact Info':       return renderContactInfo();
+    case 'Announcements':      return renderAnnouncements();
+    case 'Policies':           return renderPolicies();
     default:
       return (
         <div className="py-16 text-center text-slate-400">
