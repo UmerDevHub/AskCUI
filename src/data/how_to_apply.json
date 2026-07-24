@@ -85,6 +85,18 @@
     "Applying with a supply (supplementary) in HSSC Part-1 — this makes you ineligible",
     "Not monitoring the portal for objections after submission"
   ],
+  "nts_score_improvement_procedure": {
+    "title": "How to Improve NTS Score (2nd Test / Repeat Challan)",
+    "fee": "Rs. 800 (Improvement Challan)",
+    "critical_notice": "IMPORTANT: There is NO upload option on the portal for 2nd time improvement challans. You MUST email the paid challan copy to Ma'am Zainab.",
+    "steps": [
+      "Step 1: Generate NTS Improvement Challan (Rs. 800) from admissions.comsats.edu.pk.",
+      "Step 2: Deposit Rs. 800 at designated bank branch (HBL, ABL, MCB).",
+      "Step 3: Email clear photo/scan of the paid challan to Ma'am Zainab at zainab@ciitwah.edu.pk. Include your Name, Form ID, CNIC/B-Form #, and Test Date.",
+      "Step 4: Once verified, your new NTS Roll Number Slip will automatically appear on your portal (admissions.comsats.edu.pk) for printing.",
+      "Step 5: Appear in the NTS test on August 16, 2026 with your new roll slip and original CNIC/B-Form."
+    ]
+  },
   "multiple_campus_policy": "You can apply to multiple CUI campuses. Each campus requires a separate form and Rs. 2,500 processing fee. However, one NTS roll number can be used for all campuses within the same session.",
   "result_awaiting_policy": "F.Sc Part-2 result-awaiting students may apply using Part-1 results, provided there is no 'F' grade in any subject. Admission is provisional and will be cancelled if minimum required marks are not achieved in the final result.",
   "application_portal_issue": "If the portal is unresponsive, try a different browser (Chrome, Firefox). If the issue persists, email admissions@ciitwah.edu.pk with screenshots."

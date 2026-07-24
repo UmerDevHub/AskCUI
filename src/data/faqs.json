@@ -1,5 +1,12 @@
 [
   {
+    "id": "cui_nts_improvement_challan_submission",
+    "category": "How to Apply",
+    "question": "Where do I upload or send my 2nd time NTS improvement paid challan?",
+    "answer": "CRITICAL NOTICE: There is NO upload option on the admission portal for 2nd time / improvement paid challans. After paying the Rs. 800 improvement challan at the bank, you MUST email a clear photo/scan of the paid challan directly to Ma'am Zainab at zainab@ciitwah.edu.pk. Include your Name, Application Form ID, CNIC/B-Form number, and Test Date in the email. Once verified by Ma'am Zainab, your new NTS Roll Number Slip will automatically appear on your portal (admissions.comsats.edu.pk) for printing.",
+    "source": "CUI Wah Admissions Office — Official NTS Improvement Protocol"
+  },
+  {
     "id": "cui_nts_remaining_test",
     "category": "How to Apply",
     "question": "What are the NTS test dates for Fall 2026 (FA26) and how many tests remain?",
