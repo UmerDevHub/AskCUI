@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -12,37 +12,15 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   -webkit-font-smoothing: antialiased;
-  background-color: #F8F9FB;
-  color: #1A1A1A;
-  line-height: 1.65;
 }
 
-body.dark, html.dark body {
-  background-color: #0A111E;
-  color: #E2E8F0;
-}
-
-/* Typography styles */
-.font-serif {
-  font-family: 'Lora', Georgia, serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lora', Georgia, serif;
-  color: #0F1E36;
-  line-height: 1.35;
-}
-
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
-  color: #F1F5F9;
-}
-
-/* Mobile viewport adjustments */
+/* Mobile: use dynamic viewport height so browser chrome doesn't clip content */
 .h-dvh { height: 100dvh; }
 @supports not (height: 100dvh) {
   .h-dvh { height: 100vh; }
 }
 
+/* Smooth momentum scroll on iOS */
 .scroll-touch {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
@@ -53,13 +31,8 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Focus outline styled cleanly */
-*:focus-visible {
-  outline: 2px solid #C9A84C;
-  outline-offset: 2px;
-}
 
-/* Custom Scrollbars */
+/* Custom Scrollbars - subtle & human */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -68,68 +41,128 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(30, 58, 95, 0.15);
+  background: rgba(156, 163, 175, 0.25);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(30, 58, 95, 0.3);
+  background: rgba(156, 163, 175, 0.45);
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: rgba(226, 232, 240, 0.1);
+  background: rgba(75, 85, 99, 0.4);
 }
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(226, 232, 240, 0.2);
+  background: rgba(75, 85, 99, 0.6);
 }
 
-/* Hide scrollbar utility */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+/* Micro-animations */
+.animate-spin-hover:hover {
+  animation-play-state: running;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Keyboard virtual viewport variable hook */
-:root {
-  --keyboard-offset: 0px;
+.active\:scale-98:active {
+  transform: scale(0.98);
 }
 
-/* Custom premium border style */
-.border-premium {
-  border: 1px solid rgba(30, 58, 95, 0.08);
+/* ── Custom colour tokens ──────────────────────────── */
+.bg-warm-50  { background-color: #fafaf8; }
+.bg-warm-100 { background-color: #f5f4f0; }
+.bg-warm-200 { background-color: #ece9e0; }
+.text-warm-700 { color: #6b5f4e; }
+.border-warm-200 { border-color: #e8e4db; }
+
+.bg-slate-150 { background-color: #eef1f6; }
+.dark .bg-slate-150 { background-color: #1e2435; }
+
+.text-slate-350 { color: #cbd5e1; }
+.dark .text-slate-350 { color: #94a3b8; }
+
+.text-slate-450 { color: #8694aa; }
+.dark .text-slate-450 { color: #64748b; }
+
+.text-slate-550 { color: #5c6b7e; }
+.dark .text-slate-550 { color: #7a8fa8; }
+
+.text-red-650 { color: #dc2626; }
+
+/* ── Card variants ─────────────────────────────────── */
+.card-human {
+  background: #ffffff;
+  border: 1px solid #e8e4db;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
-.dark .border-premium {
-  border: 1px solid rgba(255, 255, 255, 0.06);
+.card-human:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  border-color: #d5cfc6;
+}
+.dark .card-human {
+  background: #1a2033;
+  border-color: #2a3447;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.dark .card-human:hover {
+  border-color: #3a4460;
 }
 
-/* Muted gold accents */
-.accent-gold {
-  color: #C9A84C;
+/* ── Tag pill ──────────────────────────────────────── */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: #f0ede6;
+  color: #6b5f4e;
+  border: 1px solid #e0d9ce;
 }
-.bg-accent-gold {
-  background-color: #C9A84C;
-}
-.border-accent-gold {
-  border-color: #C9A84C;
-}
-
-/* Navy details */
-.bg-navy-brand {
-  background-color: #0F1E36;
-}
-.text-navy-brand {
-  color: #0F1E36;
-}
-.bg-navy-muted {
-  background-color: rgba(15, 30, 54, 0.03);
-}
-.dark .bg-navy-muted {
-  background-color: rgba(255, 255, 255, 0.03);
+.dark .tag-pill {
+  background: #252d3d;
+  color: #8fa3c0;
+  border-color: #2e3a50;
 }
 
-/* Minimum interactive target constraint helper */
-.target-min-size {
-  min-height: 44px;
-  min-width: 44px;
+/* ── Serif headings ─────────────────────────────────── */
+.font-editorial {
+  font-family: 'Lora', Georgia, serif;
+}
+
+/* ── Input focus ring ──────────────────────────────── */
+.input-natural {
+  border: 1.5px solid #ddd8d0;
+  border-radius: 12px;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-natural:focus-within {
+  border-color: #6c8ebf;
+  box-shadow: 0 0 0 3px rgba(108,142,191,0.12);
+}
+.dark .input-natural {
+  border-color: #2a3447;
+  background: #151c2c;
+}
+.dark .input-natural:focus-within {
+  border-color: #4a7abf;
+  box-shadow: 0 0 0 3px rgba(74,122,191,0.12);
+}
+
+/* ── Prose tweaks ──────────────────────────────────── */
+.dark .prose { color: #cbd5e1; }
+.prose li { margin-top: 0.2rem; margin-bottom: 0.2rem; line-height: 1.65; }
+.prose p  { line-height: 1.7; }
+.prose strong { font-weight: 700; }
+
+/* ── NAT/GAT table row hover ─────────────────────── */
+.nat-row { 
+  transition: background 0.15s ease;
+  border-radius: 8px;
+}
+.nat-row:hover { 
+  background: rgba(108,142,191,0.06);
+}
+.dark .nat-row:hover {
+  background: rgba(74,122,191,0.08);
 }

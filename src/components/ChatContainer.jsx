@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Send, Copy, Check, FileCheck, ArrowRight, User, Sparkles, 
-  Globe, BookOpen, DollarSign, Home, CheckCircle, Calculator, 
-  Clipboard, FileText, Award, HelpCircle, Phone, ChevronDown, 
-  ChevronUp, Grid, TrendingUp
+  TrendingUp, ShieldCheck, AlertTriangle, Globe, BookOpen, 
+  DollarSign, Home, CheckCircle, Calculator, Clipboard, 
+  FileText, Award, HelpCircle, Phone, Brain, ChevronDown, ChevronUp,
+  Clock, Zap, CheckCircle2, AlertCircle
 } from 'lucide-react';
 import CategoryExplorer from './CategoryExplorer';
 
@@ -19,7 +20,7 @@ const SUGGESTIONS = [
   { text: "What is the contact number for the admissions office?", category: "Contact Info" },
 ];
 
-const CATEGORIES = [
+const CATEGORY_PILLS = [
   { name: 'All', icon: Globe },
   { name: 'Programs', icon: BookOpen },
   { name: 'Fees', icon: DollarSign },
@@ -34,17 +35,7 @@ const CATEGORIES = [
   { name: 'Contact Info', icon: Phone },
 ];
 
-// Helper icons mapping
-const iconMap = {
-  Globe, BookOpen, DollarSign, Home, CheckCircle, Calculator, Clipboard, FileText, Award, HelpCircle, Phone, TrendingUp
-};
-
-function CategoryIcon({ name, className }) {
-  const IconComponent = iconMap[name] || Globe;
-  return <IconComponent className={className} />;
-}
-
-// ── Markdown Renderer ─────────────────────────────────────────────────────────
+// ── Markdown Renderer with AI Feel ──────────────────────────────────────────
 function renderMarkdown(text) {
   if (typeof text !== 'string' || !text.trim()) return null;
 
@@ -56,11 +47,11 @@ function renderMarkdown(text) {
   const flushList = () => {
     if (listBuffer.length === 0) return;
     elements.push(
-      <ul key={`ul-${elements.length}`} className="my-2 space-y-1.5 pl-1">
+      <ul key={`ul-${elements.length}`} className="my-2.5 space-y-2 pl-1">
         {listBuffer.map((item, idx) => (
-          <li key={idx} className="flex gap-2 items-start text-xs sm:text-sm leading-relaxed">
-            <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#C9A84C] shrink-0" />
-            <span className="text-[#1A1A1A] dark:text-[#E2E8F0]">{renderInline(item)}</span>
+          <li key={idx} className="flex gap-2.5 items-start text-[13px] md:text-[14px] leading-relaxed text-slate-700 dark:text-slate-200 font-normal">
+            <span className="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500 dark:bg-blue-400 shrink-0 shadow-sm shadow-blue-500/50" />
+            <span className="flex-1">{renderInline(item)}</span>
           </li>
         ))}
       </ul>
@@ -71,6 +62,7 @@ function renderMarkdown(text) {
   while (i < lines.length) {
     const line = lines[i];
 
+    // Table detection: pipe-separated rows
     if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
       flushList();
       const tableLines = [];
@@ -82,26 +74,53 @@ function renderMarkdown(text) {
       continue;
     }
 
+    // Heading H1
     if (line.startsWith('# ')) {
       flushList();
-      elements.push(<h1 key={i} className="text-sm font-serif font-black text-[#0F1E36] dark:text-white mt-4 mb-2 tracking-tight">{renderInline(line.slice(2))}</h1>);
-    } else if (line.startsWith('## ')) {
-      flushList();
-      elements.push(<h2 key={i} className="text-xs font-serif font-extrabold text-[#0F1E36] dark:text-white mt-3 mb-1.5 tracking-tight">{renderInline(line.slice(3))}</h2>);
-    } else if (line.startsWith('### ')) {
-      flushList();
-      elements.push(<h3 key={i} className="text-[11.5px] font-serif font-bold text-slate-700 dark:text-slate-300 mt-2.5 mb-1">{renderInline(line.slice(4))}</h3>);
-    } else if (line.startsWith('> ')) {
+      elements.push(
+        <h1 key={i} className="text-base md:text-lg font-black text-slate-900 dark:text-slate-50 mt-4 mb-2 tracking-tight pb-1 border-b border-slate-200/60 dark:border-slate-800 flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-blue-600" />
+          {renderInline(line.slice(2))}
+        </h1>
+      );
+    }
+    // Heading H2
+    else if (line.startsWith('## ')) {
       flushList();
       elements.push(
-        <blockquote key={i} className="border-l-3 border-[#C9A84C] pl-3 py-1.5 my-3 text-xs text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-900 rounded-r-xl">
-          {renderInline(line.slice(2))}
+        <h2 key={i} className="text-sm md:text-base font-extrabold text-slate-850 dark:text-slate-100 mt-3.5 mb-2 tracking-tight flex items-center gap-1.5">
+          <Zap className="h-3.5 w-3.5 text-blue-500" />
+          {renderInline(line.slice(3))}
+        </h2>
+      );
+    }
+    // Heading H3
+    else if (line.startsWith('### ')) {
+      flushList();
+      elements.push(
+        <h3 key={i} className="text-[13px] md:text-sm font-bold text-slate-800 dark:text-slate-200 mt-3 mb-1">
+          {renderInline(line.slice(4))}
+        </h3>
+      );
+    }
+    // Callout / Blockquote
+    else if (line.startsWith('> ')) {
+      flushList();
+      const content = line.slice(2);
+      elements.push(
+        <blockquote key={i} className="my-3 rounded-2xl border-l-4 border-amber-500 bg-amber-50/60 dark:bg-amber-950/20 p-3.5 text-[12.5px] md:text-[13px] font-medium text-amber-900 dark:text-amber-300 shadow-sm flex items-start gap-2.5">
+          <AlertCircle className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400 mt-0.5" />
+          <div className="flex-1 leading-relaxed">{renderInline(content)}</div>
         </blockquote>
       );
-    } else if (line.trim() === '---' || line.trim() === '***') {
+    }
+    // Horizontal rule
+    else if (line.trim() === '---' || line.trim() === '***') {
       flushList();
-      elements.push(<hr key={i} className="my-4 border-slate-100 dark:border-slate-800" />);
-    } else if (/^\d+\.\s/.test(line)) {
+      elements.push(<hr key={i} className="my-4 border-slate-200/80 dark:border-slate-800" />);
+    }
+    // Ordered list
+    else if (/^\d+\.\s/.test(line)) {
       flushList();
       const olLines = [];
       while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
@@ -109,80 +128,71 @@ function renderMarkdown(text) {
         i++;
       }
       elements.push(
-        <ol key={`ol-${elements.length}`} className="my-2 space-y-2 pl-1">
+        <ol key={`ol-${elements.length}`} className="my-2.5 space-y-2 pl-1">
           {olLines.map((item, idx) => (
-            <li key={idx} className="flex gap-2.5 items-start text-xs sm:text-sm leading-relaxed">
-              <span className="shrink-0 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-[#0F1E36] text-white text-[9px] font-black mt-0.5 shadow-sm">{idx + 1}</span>
-              <span className="text-[#1A1A1A] dark:text-[#E2E8F0]">{renderInline(item)}</span>
+            <li key={idx} className="flex gap-2.5 items-start text-[13px] md:text-[14px] leading-relaxed">
+              <span className="shrink-0 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600/10 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400 text-[10px] font-extrabold mt-0.5 border border-blue-200 dark:border-blue-800">{idx + 1}</span>
+              <span className="text-slate-750 dark:text-slate-200 flex-1">{renderInline(item)}</span>
             </li>
           ))}
         </ol>
       );
       continue;
-    } else if (line.trim().startsWith('- ') || line.trim().startsWith('* ') || line.trim().startsWith('✓ ')) {
+    }
+    // Bullet list
+    else if (line.trim().startsWith('- ') || line.trim().startsWith('* ') || line.trim().startsWith('✓ ')) {
       listBuffer.push(line.trim().replace(/^[-*✓]\s+/, ''));
-    } else if (!line.trim()) {
+    }
+    // Empty line — flush list, add spacing
+    else if (!line.trim()) {
       flushList();
       if (elements.length > 0) {
         elements.push(<div key={`space-${i}`} className="h-1.5" />);
       }
-    } else {
+    }
+    // Normal paragraph
+    else {
       flushList();
       const rendered = renderInline(line);
       if (rendered) {
-        elements.push(<p key={i} className="text-xs sm:text-sm text-[#1A1A1A] dark:text-[#E2E8F0] leading-relaxed my-1.5">{rendered}</p>);
+        elements.push(
+          <p key={i} className="text-[13px] md:text-[14px] text-slate-750 dark:text-slate-200 leading-relaxed mb-2 break-words font-normal">
+            {rendered}
+          </p>
+        );
       }
     }
     i++;
   }
+
   flushList();
   return elements;
 }
 
-function renderInline(text) {
-  if (!text) return '';
-  const parts = [];
-  let currentText = text;
-  let boldRegex = /\*\*(.*?)\*\*/g;
-  let match;
-  let lastIndex = 0;
+function renderTable(lines, keyOffset) {
+  const rows = lines
+    .filter(l => !l.trim().match(/^\|[-\s|]+\|$/)) // filter separator row
+    .map(l => l.trim().slice(1, -1).split('|').map(c => c.trim()));
 
-  while ((match = boldRegex.exec(currentText)) !== null) {
-    if (match.index > lastIndex) {
-      parts.push(currentText.substring(lastIndex, match.index));
-    }
-    parts.push(<strong key={match.index} className="font-extrabold text-[#0F1E36] dark:text-white">{match[1]}</strong>);
-    lastIndex = boldRegex.lastIndex;
-  }
-  if (lastIndex < currentText.length) {
-    parts.push(currentText.substring(lastIndex));
-  }
-  return parts.length > 0 ? parts : text;
-}
-
-function renderTable(tableLines, key) {
-  if (tableLines.length < 2) return null;
-  const parseRow = (line) => line.split('|').map(cell => cell.trim()).filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
-  const headers = parseRow(tableLines[0]);
-  const rows = tableLines.slice(2).map(parseRow);
+  if (rows.length === 0) return null;
+  const headers = rows[0];
+  const body = rows.slice(1);
 
   return (
-    <div key={key} className="my-4 overflow-x-auto rounded-xl border border-premium bg-white dark:bg-[#121824] shadow-sm max-w-full">
-      <table className="min-w-full divide-y divide-slate-100 dark:divide-slate-800 text-xs text-left" aria-label="Informational data table">
-        <thead className="bg-slate-50 dark:bg-slate-900/60">
-          <tr>
-            {headers.map((h, idx) => (
-              <th key={idx} className="px-4 py-3 font-serif font-black text-[#0F1E36] dark:text-[#E2E8F0] tracking-tight">{h}</th>
+    <div key={`table-${keyOffset}`} className="my-3.5 overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-[#121622]">
+      <table className="w-full text-[11.5px] md:text-xs text-left border-collapse">
+        <thead>
+          <tr className="bg-slate-100/70 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 font-bold">
+            {headers.map((h, i) => (
+              <th key={i} className="px-3.5 py-2.5 whitespace-nowrap">{renderInline(h)}</th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-          {rows.map((row, rIdx) => (
-            <tr key={rIdx} className="hover:bg-slate-50/50 dark:hover:bg-slate-850/50">
-              {row.map((cell, cIdx) => (
-                <td key={cIdx} className="px-4 py-2.5 font-medium text-slate-700 dark:text-slate-300 whitespace-nowrap">
-                  {renderInline(cell)}
-                </td>
+        <tbody className="divide-y divide-slate-150 dark:divide-slate-800/80">
+          {body.map((row, ri) => (
+            <tr key={ri} className="hover:bg-slate-50/60 dark:hover:bg-slate-850/40 transition-colors">
+              {row.map((cell, ci) => (
+                <td key={ci} className="px-3.5 py-2.5 text-slate-700 dark:text-slate-300 font-medium">{renderInline(cell)}</td>
               ))}
             </tr>
           ))}
@@ -192,80 +202,223 @@ function renderTable(tableLines, key) {
   );
 }
 
-// --- STREAMING OUTPUT WRAPPER ---
-function StreamingText({ text, isLast, onComplete }) {
-  const [displayedText, setDisplayedText] = useState('');
+function renderInline(text) {
+  if (!text || typeof text !== 'string') return text;
   
-  useEffect(() => {
-    if (!isLast) {
-      setDisplayedText(text);
-      return;
+  // Handle code chips `code`
+  const codeParts = text.split(/(`.*?`)/g);
+  return codeParts.map((codePart, ci) => {
+    if (codePart.startsWith('`') && codePart.endsWith('`')) {
+      return (
+        <code key={ci} className="rounded-md bg-slate-100 dark:bg-slate-800/90 px-1.5 py-0.5 text-[11.5px] font-mono text-indigo-600 dark:text-indigo-300 border border-slate-200/60 dark:border-slate-700/60">
+          {codePart.slice(1, -1)}
+        </code>
+      );
     }
-    let idx = 0;
-    const interval = setInterval(() => {
-      setDisplayedText(text.slice(0, idx + 2));
-      idx += 2;
-      if (idx >= text.length) {
-        clearInterval(interval);
-        if (onComplete) onComplete();
+    
+    // Handle bold **text**
+    const parts = codePart.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={`${ci}-${i}`} className="font-extrabold text-slate-900 dark:text-white">{part.slice(2, -2)}</strong>;
       }
-    }, 4);
-    return () => clearInterval(interval);
-  }, [text, isLast]);
-
-  return <div className="prose dark:prose-invert break-words max-w-full overflow-x-hidden">{renderMarkdown(displayedText)}</div>;
+      return part;
+    });
+  });
 }
 
-// --- ACCORDION CITATION BADGE EXPANDER ---
-function CitationExpander({ citations }) {
-  const [expandedIdx, setExpandedIdx] = useState(null);
-
-  if (!citations || citations.length === 0) return null;
+// ── Confidence Badge ───────────────────────────────────────────────────────────
+function ConfidenceBadge({ confidence, label, reason }) {
+  if (!confidence && !label) return null;
+  const score = typeof confidence === 'number' ? confidence : 0;
+  
+  let colorClass = 'text-slate-600 bg-slate-100 dark:bg-slate-800 dark:text-slate-300';
+  let Icon = AlertTriangle;
+  if (score >= 85) { colorClass = 'text-emerald-700 bg-emerald-50 dark:bg-emerald-950/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/40'; Icon = ShieldCheck; }
+  else if (score >= 65) { colorClass = 'text-blue-700 bg-blue-50 dark:bg-blue-950/30 dark:text-blue-400 border border-blue-200 dark:border-blue-900/40'; Icon = TrendingUp; }
+  else if (score >= 45) { colorClass = 'text-amber-700 bg-amber-50 dark:bg-amber-950/30 dark:text-amber-400 border border-amber-200 dark:border-amber-900/40'; Icon = AlertTriangle; }
 
   return (
-    <div className="mt-3.5 space-y-1.5 w-full">
-      <span className="text-[9px] font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest block mb-1">
-        Citations & Source Snippets
-      </span>
-      <div className="flex flex-wrap gap-2">
-        {citations.map((cite, idx) => {
-          const isExpanded = expandedIdx === idx;
-          return (
-            <div key={idx} className="flex flex-col border border-premium bg-slate-50/40 dark:bg-slate-900/30 rounded-lg">
-              <button
-                onClick={() => setExpandedIdx(isExpanded ? null : idx)}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-[#1E3A5F] dark:text-[#C9A84C] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all rounded-lg cursor-pointer outline-none border-0"
-                aria-expanded={isExpanded}
-              >
-                <FileCheck className="h-3.5 w-3.5 text-[#C9A84C]" />
-                <span>{cite.label}</span>
-                <ChevronDown className={`h-3 w-3 transition-transform duration-150 ${isExpanded ? 'rotate-180' : ''}`} />
-              </button>
-              <AnimatePresence initial={false}>
-                {isExpanded && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    className="px-3 pb-2.5 pt-1 text-[11px] text-slate-550 dark:text-slate-400 max-w-md whitespace-pre-wrap leading-relaxed border-t border-slate-100 dark:border-slate-800/80"
-                  >
-                    {cite.snippet || "Verified official admissions reference database records."}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-      </div>
+    <div className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[9.5px] font-extrabold ${colorClass}`} title={reason || ''}>
+      <Icon className="h-3 w-3 shrink-0" />
+      <span>Confidence: {label || score + '%'}</span>
     </div>
   );
 }
 
+// ── ChatGPT-o1 Style Reasoning / Thinking Box ────────────────────────────────────
+function GptThinkingBox({ isFinished = false, secondsElapsed = 5.8, queryText = '' }) {
+  const [isOpen, setIsOpen] = useState(!isFinished);
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    if (isFinished) return;
+    const interval = setInterval(() => {
+      setTimer(prev => +(prev + 0.1).toFixed(1));
+    }, 100);
+    return () => clearInterval(interval);
+  }, [isFinished]);
+
+  const displayTime = isFinished ? secondsElapsed : timer;
+
+  // Determine current active reasoning step for loading state
+  const getCurrentStep = (t) => {
+    if (t < 1.5) return 0;
+    if (t < 3.2) return 1;
+    if (t < 4.8) return 2;
+    return 3;
+  };
+
+  const activeStep = isFinished ? 4 : getCurrentStep(timer);
+
+  // Dynamic context-aware steps generation
+  const getDynamicSteps = (text) => {
+    const q = (text || '').toLowerCase();
+    
+    if (q.includes('fee') || q.includes('dues') || q.includes('cost') || q.includes('tuition') || q.includes('challan') || q.includes('rs.')) {
+      return [
+        { label: "Deconstructing query & verifying CUI Wah Fee Structure" },
+        { label: "Retrieving official Fall 2026 (FA26) admission & recurring semester charges" },
+        { label: "Itemizing admission fee, tuition, and refundable security deposits" },
+        { label: "Formatting structured fee table with verified citations" }
+      ];
+    }
+    
+    if (q.includes('merit') || q.includes('cutoff') || q.includes('aggregate') || q.includes('closing') || q.includes('chance')) {
+      return [
+        { label: "Deconstructing prompt & verifying CUI Wah program criteria" },
+        { label: "Searching official Fall 2026 (FA26) closing merit aggregates & cutoffs" },
+        { label: "Calculating aggregate formula (10% Matric + 40% HSSC + 50% NAT)" },
+        { label: "Formatting program cutoff analysis with verified sources" }
+      ];
+    }
+
+    if (q.includes('hostel') || q.includes('transport') || q.includes('bus') || q.includes('room') || q.includes('accommodation')) {
+      return [
+        { label: "Deconstructing prompt & checking CUI Wah campus facilities" },
+        { label: "Retrieving hostel allotment criteria, room rates & transport routes" },
+        { label: "Checking room availability & warden contact details" },
+        { label: "Formatting hostel & transport guide with verified sources" }
+      ];
+    }
+
+    if (q.includes('test') || q.includes('nts') || q.includes('august') || q.includes('date') || q.includes('apply') || q.includes('deadline')) {
+      return [
+        { label: "Deconstructing prompt & checking Fall 2026 (FA26) admission schedule" },
+        { label: "Verifying remaining entry test date (16th August 2026)" },
+        { label: "Extracting step-by-step application instructions & portal link" },
+        { label: "Formatting admission roadmap with verified source citations" }
+      ];
+    }
+
+    return [
+      { label: "Deconstructing prompt intent & CUI Wah Campus scope" },
+      { label: "Searching knowledge base for verified guidelines & policies" },
+      { label: "Cross-referencing CUI official admission regulations" },
+      { label: "Formatting structured response with verified sources" }
+    ];
+  };
+
+  const steps = getDynamicSteps(queryText);
+
+  return (
+    <div className={`w-full mb-2.5 rounded-2xl border transition-all duration-300 ${
+      !isFinished 
+        ? 'border-blue-500/40 bg-blue-50/50 dark:border-blue-500/30 dark:bg-blue-950/20 shadow-md shadow-blue-500/5 ring-1 ring-blue-500/20 p-3.5' 
+        : 'border-slate-200/80 bg-slate-50/80 dark:border-slate-800/70 dark:bg-[#131825]/90 p-3 hover:bg-slate-100/80 dark:hover:bg-[#171d2d]'
+    } backdrop-blur-md`}>
+      <div 
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center justify-between cursor-pointer select-none group"
+      >
+        <div className="flex items-center gap-2.5">
+          <div className={`relative flex h-6 w-6 items-center justify-center rounded-xl font-bold transition-all shadow-xs ${
+            !isFinished 
+              ? 'bg-gradient-to-tr from-blue-600 to-indigo-600 text-white animate-pulse' 
+              : 'bg-slate-200/70 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
+          }`}>
+            <Brain className={`h-3.5 w-3.5 ${!isFinished ? 'animate-pulse text-white' : 'text-slate-600 dark:text-slate-400'}`} />
+            {!isFinished && (
+              <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-[12.5px] font-extrabold text-slate-800 dark:text-slate-200 tracking-tight flex items-center gap-1.5">
+              {!isFinished ? (
+                <span className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold">
+                  <span>Thinking...</span>
+                  <span className="flex items-center gap-1">
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-bounce" style={{ animationDelay: '0ms' }} />
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-bounce" style={{ animationDelay: '150ms' }} />
+                    <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  </span>
+                </span>
+              ) : (
+                <span className="text-slate-700 dark:text-slate-300 font-bold group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                  Thought for {displayTime} seconds
+                </span>
+              )}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-mono text-slate-500 dark:text-slate-400 font-bold bg-slate-200/60 dark:bg-slate-800/80 px-2 py-0.5 rounded-md border border-slate-200/40 dark:border-slate-700/40">
+            {displayTime}s
+          </span>
+          <button className="text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200 transition-colors p-0.5">
+            {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-3 pt-2.5 border-t border-slate-200/70 dark:border-slate-800/80 space-y-2 text-[12px] text-slate-650 dark:text-slate-300 font-medium">
+              {steps.map((st, sIdx) => {
+                const isDone = sIdx < activeStep;
+                const isCurrent = sIdx === activeStep && !isFinished;
+                const isPending = sIdx > activeStep && !isFinished;
+
+                return (
+                  <div key={sIdx} className="flex items-center gap-2.5">
+                    {isDone ? (
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                    ) : isCurrent ? (
+                      <Zap className="h-3.5 w-3.5 text-blue-500 shrink-0 animate-pulse" />
+                    ) : (
+                      <span className="h-3.5 w-3.5 rounded-full border border-slate-300 dark:border-slate-700 shrink-0" />
+                    )}
+                    <span className={
+                      isDone ? "text-slate-700 dark:text-slate-300 font-medium" :
+                      isCurrent ? "text-blue-600 dark:text-blue-400 font-bold" :
+                      "text-slate-400 dark:text-slate-600"
+                    }>
+                      {st.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// ── Main Component ─────────────────────────────────────────────────────────────
 export default function ChatContainer({ 
-  activeCategory, 
-  onSelectCategory, 
-  currentTab,
-  onChangeTab,
+  activeCategory,
+  onSelectCategory,
   messages, 
   onSend, 
   inputValue, 
@@ -274,31 +427,11 @@ export default function ChatContainer({
   copiedId, 
   onCopyAnswer 
 }) {
-  const [isCategoryPickerOpen, setIsCategoryPickerOpen] = useState(false);
   const chatEndRef = useRef(null);
-  const containerRef = useRef(null);
 
-  // Auto scroll to chat end
   useEffect(() => {
-    if (currentTab === 'chat') {
-      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [messages, isLoading, currentTab]);
-
-  // visualViewport Virtual Keyboard Height adjustment helper
-  useEffect(() => {
-    if (!window.visualViewport) return;
-    const handleResize = () => {
-      const offset = window.innerHeight - window.visualViewport.height;
-      document.documentElement.style.setProperty('--keyboard-offset', `${Math.max(0, offset)}px`);
-    };
-    window.visualViewport.addEventListener('resize', handleResize);
-    window.visualViewport.addEventListener('scroll', handleResize);
-    return () => {
-      window.visualViewport?.removeEventListener('resize', handleResize);
-      window.visualViewport?.removeEventListener('scroll', handleResize);
-    };
-  }, []);
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, isLoading]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -306,208 +439,214 @@ export default function ChatContainer({
     onSend(inputValue);
   };
 
-  const handleSelectDropdownCategory = (catName) => {
-    onSelectCategory(catName);
-    setIsCategoryPickerOpen(false);
-  };
-
   return (
-    <div ref={containerRef} className="relative flex flex-1 flex-col overflow-hidden bg-[#F8F9FB] dark:bg-[#0A111E]">
+    <div className="flex flex-1 flex-col overflow-hidden bg-slate-50 dark:bg-[#0b0e14] w-full max-w-full relative">
       
-      {/* Pinned Category Dropdown Selector (Mobile layout only) */}
-      <div className="sticky top-0 z-20 border-b border-premium bg-white dark:bg-[#0A111E] py-2 px-4 md:hidden flex justify-between items-center w-full shadow-sm shrink-0">
-        <button
-          onClick={() => setIsCategoryPickerOpen(prev => !prev)}
-          className="flex items-center justify-between w-full border border-premium bg-slate-50 dark:bg-slate-900 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-700 dark:text-slate-300 outline-none cursor-pointer"
-          aria-haspopup="dialog"
-          aria-expanded={isCategoryPickerOpen}
-        >
-          <span className="flex items-center gap-2">
-            <Grid className="h-4 w-4 text-[#C9A84C]" />
-            <span>Category: {activeCategory}</span>
-          </span>
-          <ChevronDown className="h-4 w-4 text-slate-450" />
-        </button>
+      {/* Horizontally scrollable category selector pills for mobile/laptop navigation */}
+      <div className="sticky top-0 z-10 w-full shrink-0 border-b border-slate-200/80 bg-white/95 px-3.5 py-2.5 backdrop-blur-md dark:border-slate-800/80 dark:bg-[#10151f]/95 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth">
+        {CATEGORY_PILLS.map((pill) => {
+          const Icon = pill.icon;
+          const isActive = activeCategory === pill.name;
+          return (
+            <button
+              key={pill.name}
+              onClick={() => onSelectCategory(pill.name)}
+              className={`flex items-center gap-1.5 shrink-0 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 cursor-pointer ${
+                isActive
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 dark:bg-blue-600'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-[#182030] dark:text-slate-400 dark:hover:bg-slate-800/80'
+              }`}
+            >
+              <Icon className="h-3.5 w-3.5" />
+              <span>{pill.name}</span>
+            </button>
+          );
+        })}
       </div>
 
-      {/* Category Dropdown Bottom Sheet Drawer */}
-      <AnimatePresence>
-        {isCategoryPickerOpen && (
-          <div className="fixed inset-0 z-40 md:hidden flex items-end">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsCategoryPickerOpen(false)}
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
-            />
-            {/* Sheet */}
-            <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "tween", duration: 0.18 }}
-              className="relative w-full bg-white dark:bg-[#0D1522] rounded-t-2xl border-t border-premium z-50 p-4 max-h-[75vh] overflow-y-auto pb-safe"
-            >
-              <div className="flex justify-between items-center pb-3 border-b border-slate-100 dark:border-slate-800 mb-3">
-                <span className="font-serif font-black text-[#0F1E36] dark:text-white text-sm">Select Admissions Category</span>
-                <button
-                  onClick={() => setIsCategoryPickerOpen(false)}
-                  className="text-xs font-bold text-slate-450 dark:text-slate-500 hover:text-slate-700 dark:hover:text-white cursor-pointer border-0"
-                >
-                  Close
-                </button>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2">
-                {CATEGORIES.map(cat => {
-                  const isActive = activeCategory === cat.name;
-                  return (
-                    <button
-                      key={cat.name}
-                      onClick={() => handleSelectDropdownCategory(cat.name)}
-                      className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-bold transition-all text-left outline-none cursor-pointer ${
-                        isActive
-                          ? 'border-[#C9A84C] bg-[#C9A84C]/5 text-[#C9A84C]'
-                          : 'border-slate-100 dark:border-slate-850 text-slate-650 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-900'
-                      }`}
-                    >
-                      <CategoryIcon name={cat.icon.name} className="h-4 w-4 shrink-0" />
-                      <span className="truncate">{cat.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* Main Container Contents */}
-      <div className="flex-1 overflow-y-auto scroll-touch p-4">
-        {currentTab === 'browse' ? (
-          /* Browse Mode Category Explorer Panel */
-          <div className="max-w-4xl mx-auto pb-16">
-            <CategoryExplorer 
-              category={activeCategory} 
-              onAskQuestion={(txt, cat) => {
-                onSelectCategory(cat || activeCategory);
-                onSend(txt, cat || activeCategory);
-              }} 
-            />
+      {/* Messages area */}
+      <div className="flex-1 overflow-y-auto scroll-touch px-3 py-4 md:px-8 max-w-full">
+        {activeCategory !== 'All' ? (
+          <div className="mx-auto max-w-4xl py-2 pb-12">
+            <CategoryExplorer category={activeCategory} onAskQuestion={(qText, cat) => onSend(qText, cat)} />
           </div>
         ) : messages.length === 0 ? (
-          /* Empty State Welcome concierges */
-          <div className="mx-auto max-w-3xl flex flex-col justify-center items-center py-10 md:py-16 text-center space-y-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0F1E36] font-bold text-white text-2xl shadow-sm border border-slate-700">
-              C
-            </div>
-            
-            <div>
-              <h1 className="font-serif font-black text-2xl text-[#0F1E36] dark:text-white tracking-tight">
-                CUI Wah Admission AI
-              </h1>
-              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mt-2 leading-relaxed">
-                Official Admissions Concierge. Ask any question regarding programs, requirements, merit lists, and hostel schedules.
-              </p>
-            </div>
-
-            <div className="w-full max-w-xl space-y-2 pt-4">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-600 block text-left">
-                Suggested Inquiries
+          /* Welcome / Empty State */
+          <div className="mx-auto flex max-w-2xl flex-col items-center justify-center pt-[4vh] md:pt-[6vh] text-center px-4 pb-10">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', duration: 0.6 }}
+              className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-750 text-white shadow-xl shadow-blue-500/25 relative"
+            >
+              <Sparkles className="h-8 w-8 animate-pulse" />
+              <span className="absolute -top-1 -right-1 flex h-4 w-4">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-blue-500"></span>
               </span>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            </motion.div>
+
+            <motion.h1
+              initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }}
+              className="mt-5 text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-slate-100"
+            >
+              CUI Wah Admission AI
+            </motion.h1>
+
+            <motion.p
+              initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}
+              className="mt-2 text-slate-500 dark:text-slate-400 text-xs md:text-sm max-w-md leading-relaxed font-medium"
+            >
+              Instant guidance on degrees, closing merit aggregates, fee breakdowns, and hostel info for COMSATS Wah.
+            </motion.p>
+
+            <motion.div
+              initial={{ y: 15, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 }}
+              className="mt-6 md:mt-8 w-full"
+            >
+              <div className="flex items-center justify-between mb-3 px-1">
+                <p className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                  Frequently Asked Questions
+                </p>
+                <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1">
+                  <Zap className="h-3 w-3" /> Tap to ask AI
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {SUGGESTIONS.map((sug, idx) => (
                   <button
                     key={idx}
                     onClick={() => onSend(sug.text, sug.category)}
-                    className="flex items-center justify-between rounded-xl border border-slate-200/80 bg-white px-3.5 py-3.5 text-left text-xs font-bold text-slate-700 transition-all hover:border-[#C9A84C] hover:bg-slate-50 dark:border-slate-800 dark:bg-[#121622] dark:text-slate-350 dark:hover:border-[#C9A84C] dark:hover:bg-[#172030] shadow-sm outline-none cursor-pointer"
+                    className="group flex items-center justify-between rounded-2xl border border-slate-200/80 bg-white p-3.5 text-left text-xs font-bold text-slate-700 transition-all duration-200 hover:border-blue-400 hover:bg-blue-50/10 hover:shadow-md hover:-translate-y-0.5 active:scale-98 dark:border-slate-800 dark:bg-[#121622] dark:text-slate-200 dark:hover:border-blue-500/60 dark:hover:bg-blue-950/20 cursor-pointer shadow-xs"
                   >
-                    <span className="pr-2 line-clamp-1">{sug.text}</span>
-                    <ArrowRight className="h-3.5 w-3.5 shrink-0 text-slate-400" />
+                    <span className="pr-2 line-clamp-2 leading-snug">{sug.text}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-transform group-hover:translate-x-1" />
                   </button>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         ) : (
-          /* Conversation Feed Layout */
-          <div className="mx-auto max-w-3xl space-y-8 pb-16 pt-2">
-            {messages.map((msg, mIdx) => {
+          /* Conversation Feed */
+          <div className="mx-auto max-w-3xl space-y-5 pb-12 pt-1">
+            {messages.map((msg) => {
               const isUser = msg.sender === 'user';
               const responseObj = typeof msg.text === 'object' ? msg.text : null;
-              
-              // Handle error/no-answer state or confidence labels
-              const confidence = responseObj?.confidence ?? 1.0;
-              const hasLowConfidence = confidence < 0.25;
-              
-              let answerText = responseObj ? responseObj.answer : msg.text;
-              if (!isUser && hasLowConfidence) {
-                answerText = "I couldn't find this information in the official CUI Wah Campus datasets. For verified details, please feel free to reach out to the Admissions Office directly at info@ciitwah.edu.pk or +92-51-4534200.";
-              }
-
-              const isLast = mIdx === messages.length - 1;
+              const answerText = responseObj ? responseObj.answer : msg.text;
 
               return (
-                <div 
-                  key={msg.id} 
-                  className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'} w-full max-w-full`}
-                >
+                <div key={msg.id} className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'} w-full max-w-full`}>
+                  {/* Bot Avatar */}
+                  {!isUser && (
+                    <div className="flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 font-black text-white text-xs shadow-md shadow-blue-500/20 mt-0.5">
+                      C
+                    </div>
+                  )}
+
                   <div className={`relative flex flex-col max-w-[94%] md:max-w-[85%] ${isUser ? 'items-end' : 'items-start'} overflow-hidden`}>
                     
-                    {isUser ? (
-                      /* User Chat bubble: clean navy bubble */
-                      <div className="rounded-xl px-4 py-2.5 bg-[#0F1E36] text-white font-bold text-xs sm:text-sm shadow-sm max-w-full">
-                        <p className="leading-relaxed whitespace-pre-wrap break-words">{msg.text}</p>
-                      </div>
-                    ) : (
-                      /* Assistant: Plain Claude-like plain layout without bubble background */
-                      <div className="w-full text-xs sm:text-sm leading-relaxed text-[#1A1A1A] dark:text-[#E2E8F0] pl-1 pr-4">
-                        <StreamingText 
-                          text={typeof answerText === 'string' ? answerText : JSON.stringify(answerText)} 
-                          isLast={isLast} 
-                        />
-                        
-                        {/* Inline Citations Accordeons */}
-                        {responseObj?.citations?.length > 0 && !hasLowConfidence && (
-                          <CitationExpander citations={responseObj.citations} />
+                    {/* Bot Thought Header (GPT style) */}
+                    {!isUser && (
+                      <GptThinkingBox 
+                        isFinished={true} 
+                        secondsElapsed={msg.thinkingTime || 5.8} 
+                        queryText={typeof answerText === 'string' ? answerText : (responseObj?.answer || '')} 
+                      />
+                    )}
+
+                    <div className={`rounded-2xl px-4 py-3 shadow-xs break-words w-full max-w-full ${
+                      isUser
+                        ? 'bg-blue-600 text-white rounded-tr-none dark:bg-blue-600 font-semibold shadow-md shadow-blue-500/10'
+                        : 'bg-white text-slate-850 rounded-tl-none dark:bg-[#151a28] dark:text-slate-100 border border-slate-200/70 dark:border-slate-800'
+                    }`}>
+                      {isUser ? (
+                        <p className="text-[13.5px] md:text-[14.5px] leading-relaxed whitespace-pre-wrap break-words">{msg.text}</p>
+                      ) : (
+                        <div className="prose dark:prose-invert break-words max-w-full overflow-x-hidden">
+                          {renderMarkdown(typeof answerText === 'string' ? answerText : JSON.stringify(answerText))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Action bar: Sources, confidence, copy — bot messages only */}
+                    {!isUser && (
+                      <div className="mt-2 flex flex-wrap items-center gap-2 w-full px-1">
+                        {/* Confidence Badge */}
+                        {responseObj?.confidence_label && (
+                          <ConfidenceBadge
+                            confidence={responseObj.confidence}
+                            label={responseObj.confidence_label}
+                            reason={responseObj.confidence_reason}
+                          />
                         )}
 
-                        {/* Copy details */}
-                        <div className="mt-3 flex justify-start items-center border-t border-slate-100 dark:border-slate-800/80 pt-2.5">
-                          <button
-                            onClick={() => onCopyAnswer(msg.id, typeof answerText === 'string' ? answerText : '')}
-                            className="flex items-center gap-1 text-[10px] font-bold text-slate-400 hover:text-slate-600 dark:hover:text-slate-350 transition-colors cursor-pointer border-0 bg-transparent outline-none"
-                            title="Copy answer text"
-                          >
-                            {copiedId === msg.id ? (
-                              <>
-                                <Check className="h-3 w-3 text-green-500" />
-                                <span className="text-green-500 font-bold uppercase tracking-wider text-[8.5px]">Copied</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="h-3 w-3" />
-                                <span className="font-bold uppercase tracking-wider text-[8.5px]">Copy Answer</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
+                        {/* Source citations */}
+                        {responseObj?.citations?.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1">
+                            <span className="flex items-center gap-1 text-[9px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                              <FileCheck className="h-3 w-3 text-blue-500" />Sources:
+                            </span>
+                            {responseObj.citations.map((c, si) => (
+                              <span key={si} className="rounded-lg bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[9px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50" title={c.tier}>
+                                {c.icon} {c.label}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Fallback sources */}
+                        {!responseObj?.citations && responseObj?.sources?.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1">
+                            <span className="flex items-center gap-1 text-[9px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                              <FileCheck className="h-3 w-3 text-blue-500" />Sources:
+                            </span>
+                            {responseObj.sources.map((src, si) => (
+                              <span key={si} className="rounded-lg bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[9px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50">
+                                {src}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Copy button */}
+                        <button
+                          onClick={() => onCopyAnswer(msg.id, typeof answerText === 'string' ? answerText : '')}
+                          className="rounded-xl p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 ml-auto flex items-center gap-1 text-xs font-semibold cursor-pointer"
+                          title="Copy Answer"
+                        >
+                          {copiedId === msg.id ? (
+                            <>
+                              <Check className="h-3.5 w-3.5 text-emerald-500" />
+                              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">Copied</span>
+                            </>
+                          ) : (
+                            <Copy className="h-3.5 w-3.5" />
+                          )}
+                        </button>
                       </div>
                     )}
                   </div>
+
+                  {/* User Avatar */}
+                  {isUser && (
+                    <div className="flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-2xl bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300 shadow-xs mt-0.5">
+                      <User className="h-4 w-4" />
+                    </div>
+                  )}
                 </div>
               );
             })}
 
-            {/* AI Typing Indicator dot */}
+            {/* AI GPT Thinking State (When loading) */}
             {isLoading && (
-              <div className="flex gap-2 justify-start items-center pl-1">
-                <span className="flex h-1.5 w-1.5 rounded-full bg-[#C9A84C] animate-ping" />
-                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest ml-1.5">
-                  Thinking...
-                </span>
+              <div className="flex gap-3 justify-start w-full">
+                <div className="flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 font-black text-white text-xs shadow-md shadow-blue-500/20 mt-0.5 animate-pulse">
+                  C
+                </div>
+                <div className="max-w-[94%] md:max-w-[85%] w-full">
+                  <GptThinkingBox isFinished={false} queryText={inputValue} />
+                </div>
               </div>
             )}
 
@@ -516,31 +655,28 @@ export default function ChatContainer({
         )}
       </div>
 
-      {/* Input Bar pinned dynamically relative to keyboardViewport */}
-      <div 
-        className="sticky bottom-0 left-0 right-0 border-t border-slate-200/85 bg-white/95 backdrop-blur-md p-3 pb-safe dark:border-slate-800/80 dark:bg-[#0A111E]/95 shrink-0 w-full"
-        style={{ bottom: 'var(--keyboard-offset, 0px)' }}
-      >
+      {/* Input Bar */}
+      <div className="border-t border-slate-200/80 bg-white/95 backdrop-blur-md p-3 pb-safe dark:border-slate-800/80 dark:bg-[#10151f]/95 shrink-0 w-full">
         <form onSubmit={handleSubmit} className="mx-auto max-w-3xl">
-          <div className="relative flex items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm focus-within:border-[#C9A84C] focus-within:ring-2 focus-within:ring-[#C9A84C]/5 dark:border-slate-800 dark:bg-[#121824] transition-all duration-200">
+          <div className="relative flex items-center overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/10 dark:border-slate-800 dark:bg-[#151a28] dark:focus-within:border-blue-500 dark:focus-within:ring-blue-500/10 transition-all duration-200">
             <input
               type="text"
               value={inputValue}
               onChange={(e) => onInputChange(e.target.value)}
               placeholder="Ask anything about CUI Wah admissions..."
               disabled={isLoading}
-              className="flex-1 bg-transparent px-4 py-3.5 text-xs sm:text-sm text-[#1A1A1A] outline-none placeholder:text-slate-400 dark:text-[#E2E8F0] dark:placeholder:text-slate-500 border-0"
+              className="flex-1 bg-transparent px-4 py-3.5 text-[13px] md:text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100 dark:placeholder:text-slate-500"
             />
             <button
               type="submit"
               disabled={!inputValue.trim() || isLoading}
-              className="mr-2 rounded-lg bg-[#0F1E36] p-2 text-white transition hover:bg-[#1C2C42] disabled:bg-slate-100 disabled:text-slate-400 dark:bg-[#1A2D48] dark:hover:bg-[#253E61] dark:disabled:bg-slate-800 dark:disabled:text-slate-650 shrink-0 border-0 cursor-pointer"
+              className="mr-2 rounded-xl bg-blue-600 p-2.5 text-white transition hover:bg-blue-700 disabled:bg-slate-100 disabled:text-slate-400 dark:bg-blue-600 dark:hover:bg-blue-700 dark:disabled:bg-slate-800 dark:disabled:text-slate-600 shrink-0 cursor-pointer shadow-sm"
             >
               <Send className="h-4 w-4" />
             </button>
           </div>
-          <p className="mt-2 text-center text-[9px] font-bold text-slate-400 dark:text-slate-550 uppercase tracking-widest">
-            Answers sourced exclusively from official CUI admission data
+          <p className="mt-2 text-center text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+            Answers compiled from official CUI knowledge base · All sources cited
           </p>
         </form>
       </div>

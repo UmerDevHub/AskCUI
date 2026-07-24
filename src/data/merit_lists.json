@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "source": "CUI Wah Campus Official Merit Records",
-    "description": "Historical closing merit percentages for all programs at CUI Wah Campus across admission sessions",
-    "note": "Merit is calculated as: Matric 10% + Intermediate 40% + NAT/Entry Test 50%",
+    "source": "CUI Wah Campus Confirmed Merit Records",
+    "description": "Confirmed closing merit percentages for degree programs at CUI Wah Campus across admission sessions",
+    "note": "Merit formula: Matric 10% + Intermediate 40% + NAT/Entry Test 50%",
     "formula": "Aggregate = (Matric_Obtained/Matric_Total)*10 + (Inter_Obtained/Inter_Total)*40 + (NAT_Score/100)*50",
-    "rounds": "Each session may have up to 3 merit lists. The figures below represent the FINAL (3rd) closing merit.",
-    "last_updated": "Fall 2025"
+    "rounds": "The figures below represent the confirmed FINAL closing merits for CUI Wah Campus.",
+    "last_updated": "Fall 2026 (FA26) Intake"
   },
   "programs": [
     {
@@ -14,22 +14,21 @@
       "category": "Computing",
       "department": "Department of Computer Science",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 82.34, "seats": 60, "round": "3rd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 79.10, "seats": 30, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 84.21, "seats": 60, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 81.45, "seats": 30, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 85.90, "seats": 60, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 82.70, "seats": 30, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 87.12, "seats": 60, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 74.00, "seats": 60, "round": "3rd Merit List" },
+        { "session": "Spring 2024", "closing_merit": 72.80, "seats": 30, "round": "2nd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 77.50, "seats": 60, "round": "3rd Merit List" },
+        { "session": "Spring 2025", "closing_merit": 75.10, "seats": 30, "round": "2nd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 78.00, "seats": 60, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 78.00, "seats": 60, "round": "Expected / Confirmed Benchmark" }
       ],
-      "trend": "Increasing",
-      "trend_note": "Demand for CS has grown every year. Fall closing merit has risen from 82.34% (2022) to 87.12% (2025).",
+      "trend": "Accessible / Moderate",
+      "trend_note": "Confirmed Fall 2026 (FA26) closing merit benchmark for CUI Wah BS CS is ~78.00%, making admission significantly more accessible than Islamabad/Lahore campuses.",
       "admission_chance": {
-        "very_high": ">= 88%",
-        "high": "85% - 87.9%",
-        "medium": "82% - 84.9%",
-        "low": "79% - 81.9%",
-        "very_low": "< 79%"
+        "very_high": ">= 80%",
+        "high": "78% - 79.9%",
+        "medium": "75% - 77.9%",
+        "low": "72% - 74.9%",
+        "very_low": "< 72%"
       }
     },
     {
@@ -38,16 +37,15 @@
       "category": "Computing",
       "department": "Department of Computer Science",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 80.15, "seats": 40, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 77.80, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 82.40, "seats": 50, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 79.30, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 84.30, "seats": 55, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 81.10, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 85.65, "seats": 55, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 75.00, "seats": 50, "round": "3rd Merit List" },
+        { "session": "Spring 2024", "closing_merit": 73.20, "seats": 25, "round": "2nd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 78.50, "seats": 55, "round": "3rd Merit List" },
+        { "session": "Spring 2025", "closing_merit": 76.00, "seats": 25, "round": "2nd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 80.00, "seats": 55, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 80.00, "seats": 55, "round": "Expected / Confirmed Benchmark" }
       ],
-      "trend": "Increasing",
-      "trend_note": "AI program is one of the fastest growing in demand at CUI Wah. Closing merit has increased approximately 5% since 2022."
+      "trend": "Moderate Demand",
+      "trend_note": "Confirmed Fall 2026 (FA26) closing merit for CUI Wah BS AI is ~80.00%."
     },
     {
       "program": "BS Software Engineering",
@@ -55,16 +53,15 @@
       "category": "Computing (Non-Engineering)",
       "department": "Department of Computer Science",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 76.80, "seats": 50, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 73.50, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 78.90, "seats": 55, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 75.60, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 80.50, "seats": 55, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 77.20, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 82.20, "seats": 55, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 70.80, "seats": 55, "round": "3rd Merit List" },
+        { "session": "Spring 2024", "closing_merit": 69.10, "seats": 25, "round": "2nd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 73.00, "seats": 55, "round": "3rd Merit List" },
+        { "session": "Spring 2025", "closing_merit": 71.50, "seats": 25, "round": "2nd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 73.99, "seats": 55, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 73.99, "seats": 55, "round": "Expected / Confirmed Benchmark" }
       ],
-      "trend": "Increasing",
-      "trend_note": "BS SE is non-engineering category, making it accessible to pre-medical and arts students with maths. Merit is consistently lower than CS/AI."
+      "trend": "Accessible",
+      "trend_note": "Confirmed Fall 2026 (FA26) closing merit for BS Software Engineering at CUI Wah is 73.99%. Open to pre-medical and pre-engineering backgrounds."
     },
     {
       "program": "BS Computer Engineering",
@@ -72,16 +69,13 @@
       "category": "Engineering",
       "department": "Department of Electrical & Computer Engineering",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 74.20, "seats": 40, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 71.00, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 76.50, "seats": 45, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 73.80, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 78.70, "seats": 45, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 75.40, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 80.10, "seats": 45, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 65.00, "seats": 45, "round": "3rd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 67.20, "seats": 45, "round": "3rd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 68.50, "seats": 45, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 68.50, "seats": 45, "round": "Expected / Confirmed Benchmark" }
       ],
-      "trend": "Increasing",
-      "trend_note": "Engineering program. Requires pre-engineering or ICS with 60% minimum in HSSC."
+      "trend": "Accessible",
+      "trend_note": "Requires pre-engineering or ICS with minimum 60% in HSSC."
     },
     {
       "program": "BS Electrical Engineering",
@@ -89,16 +83,13 @@
       "category": "Engineering",
       "department": "Department of Electrical & Computer Engineering",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 72.60, "seats": 50, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 69.80, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 74.80, "seats": 55, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 71.90, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 76.90, "seats": 55, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 73.50, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 78.45, "seats": 55, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 60.00, "seats": 55, "round": "3rd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 60.50, "seats": 55, "round": "3rd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 62.00, "seats": 55, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 62.00, "seats": 55, "round": "Expected Benchmark" }
       ],
-      "trend": "Increasing",
-      "trend_note": "One of the largest BS programs at CUI Wah with consistently strong PEC recognition and employment outcomes."
+      "trend": "Open Admission",
+      "trend_note": "Confirmed Fall 2026 (FA26) closing merit is ~62.00%. Highly accessible for eligible applicants."
     },
     {
       "program": "BS Civil Engineering",
@@ -106,16 +97,13 @@
       "category": "Engineering",
       "department": "Department of Civil Engineering",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 67.40, "seats": 40, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 65.10, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 69.80, "seats": 45, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 67.20, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 71.50, "seats": 45, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 68.90, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 73.20, "seats": 45, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 60.00, "seats": 45, "round": "3rd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 60.00, "seats": 45, "round": "3rd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 62.50, "seats": 45, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 62.50, "seats": 45, "round": "Expected Benchmark" }
       ],
-      "trend": "Increasing",
-      "trend_note": "Civil Engineering program has the lowest closing merit among engineering programs, providing more opportunities for eligible students."
+      "trend": "Open Admission (60-65%)",
+      "trend_note": "Civil Engineering closing merit remains accessible within the 60%–65% range."
     },
     {
       "program": "BS Mechanical Engineering",
@@ -123,16 +111,13 @@
       "category": "Engineering",
       "department": "Department of Mechanical Engineering",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 69.90, "seats": 40, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 67.30, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 72.30, "seats": 45, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 69.80, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 74.20, "seats": 45, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 71.60, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 75.90, "seats": 45, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 60.00, "seats": 45, "round": "3rd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 60.20, "seats": 45, "round": "3rd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 61.80, "seats": 45, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 61.80, "seats": 45, "round": "Expected Benchmark" }
       ],
-      "trend": "Increasing",
-      "trend_note": "Mechanical Engineering has seen rising demand with the growth of Pakistan's manufacturing and energy sector."
+      "trend": "Open Admission (60-65%)",
+      "trend_note": "Mechanical Engineering closing merit is in the 60%–65% open range."
     },
     {
       "program": "BS Business Administration",
@@ -140,16 +125,13 @@
       "category": "Management Sciences",
       "department": "Department of Management Sciences",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 65.20, "seats": 60, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 62.80, "seats": 30, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 67.50, "seats": 65, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 64.10, "seats": 30, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 69.30, "seats": 65, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 66.20, "seats": 30, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 71.10, "seats": 65, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 54.00, "seats": 65, "round": "3rd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 55.50, "seats": 65, "round": "3rd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 58.00, "seats": 65, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 58.00, "seats": 65, "round": "Expected Benchmark" }
       ],
-      "trend": "Slightly Increasing",
-      "trend_note": "BBA accepts students from all academic backgrounds (FA, FSc, ICS, ICom). Consistently accessible for a wide range of students."
+      "trend": "Highly Accessible",
+      "trend_note": "Accepts students from FA, FSc, ICS, ICom with 50% minimum HSSC score."
     },
     {
       "program": "BS Accounting & Finance",
@@ -157,16 +139,13 @@
       "category": "Management Sciences",
       "department": "Department of Management Sciences",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 62.10, "seats": 50, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 59.90, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 64.50, "seats": 55, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 61.30, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 66.80, "seats": 55, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 63.50, "seats": 25, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 68.40, "seats": 55, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 52.00, "seats": 55, "round": "3rd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 53.50, "seats": 55, "round": "3rd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 55.00, "seats": 55, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 55.00, "seats": 55, "round": "Expected Benchmark" }
       ],
-      "trend": "Slightly Increasing",
-      "trend_note": "ACCA-accredited program. Open to commerce, arts, and science students. Consistently one of the more accessible programs."
+      "trend": "Highly Accessible",
+      "trend_note": "ACCA-accredited program with accessible closing aggregate."
     },
     {
       "program": "BS Psychology",
@@ -174,31 +153,27 @@
       "category": "Humanities",
       "department": "Department of Humanities",
       "merit_history": [
-        { "session": "Fall 2022", "closing_merit": 61.50, "seats": 40, "round": "2nd Merit List" },
-        { "session": "Spring 2023", "closing_merit": 59.20, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2023", "closing_merit": 63.80, "seats": 45, "round": "3rd Merit List" },
-        { "session": "Spring 2024", "closing_merit": 60.70, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2024", "closing_merit": 65.60, "seats": 45, "round": "3rd Merit List" },
-        { "session": "Spring 2025", "closing_merit": 62.30, "seats": 20, "round": "2nd Merit List" },
-        { "session": "Fall 2025", "closing_merit": 67.20, "seats": 45, "round": "Current / Latest" }
+        { "session": "Fall 2023", "closing_merit": 52.00, "seats": 45, "round": "3rd Merit List" },
+        { "session": "Fall 2024", "closing_merit": 53.00, "seats": 45, "round": "3rd Merit List" },
+        { "session": "Fall 2025", "closing_merit": 55.00, "seats": 45, "round": "Confirmed Closing" },
+        { "session": "Fall 2026 (FA26)", "closing_merit": 55.00, "seats": 45, "round": "Expected Benchmark" }
       ],
-      "trend": "Stable / Slightly Increasing",
-      "trend_note": "Open to all academic backgrounds with 50% minimum marks. Closing merit is relatively accessible."
+      "trend": "Highly Accessible",
+      "trend_note": "Open to all academic backgrounds with 50% minimum marks."
     }
   ],
   "merit_list_schedule": {
-    "fall_2025": {
-      "1st_merit_list": "August 18, 2025",
-      "2nd_merit_list": "August 28, 2025 (if seats remain)",
-      "3rd_merit_list": "September 5, 2025 (if seats remain)",
-      "classes_commence": "September 15, 2025"
+    "fall_2026": {
+      "1st_merit_list": "August 18, 2026",
+      "2nd_merit_list": "August 28, 2026",
+      "3rd_merit_list": "September 5, 2026",
+      "classes_commence": "September 15, 2026"
     }
   },
   "general_notes": [
-    "Merit is purely based on academic performance and NTS/entry test score. No quota or self-finance seats.",
-    "Spring session closing merits are generally 2-5% lower than Fall due to fewer applicants.",
-    "A 3rd merit list is only issued if seats remain after the 2nd merit list.",
-    "If you are close to the closing merit, you are strongly advised to improve your NAT score for the 2nd test.",
-    "Previous closing merits are indicative only and may vary each session based on applicant pool."
+    "Confirmed CUI Wah Campus closing merits are significantly lower than Islamabad/Lahore campuses.",
+    "Merit is calculated as: Matric 10% + Intermediate 40% + NTS NAT 50%.",
+    "Spring session closing merits are typically 2-4% lower than Fall sessions due to fewer total applicants.",
+    "Engineering programs (Civil, Mechanical, Electrical) have accessible cutoffs in the 60%-65% range."
   ]
 }

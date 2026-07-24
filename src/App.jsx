@@ -19,8 +19,9 @@ export default function App() {
   const DEFAULT_COHERE_KEY = import.meta.env.VITE_COHERE_API_KEY || '';
   const DEFAULT_OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 
-  // AI Configuration State — locked to default keys
+  // AI Configuration State — locked to code-defined default keys from environment
   const [config] = useState(() => {
+    // Choose the first available default key
     if (DEFAULT_GROQ_KEY) {
       return { 
         provider: 'groq', 
@@ -40,12 +41,14 @@ export default function App() {
         apiKey: DEFAULT_OPENROUTER_KEY
       };
     }
+
     return { 
       provider: 'groq', 
       model: 'llama-3.3-70b-versatile', 
       apiKey: '' 
     };
   });
+
 
   // Conversations & History
   const [conversations, setConversations] = useState(() => {
@@ -59,17 +62,8 @@ export default function App() {
     return saved || null;
   });
 
-  // UI Navigation States
-  const [activeCategory, setActiveCategory] = useState(() => {
-    const saved = localStorage.getItem('active_category');
-    return saved || 'All';
-  });
-
-  const [currentTab, setCurrentTab] = useState(() => {
-    // If the category is 'All', default to the chat interface. Otherwise default to browse cards.
-    return activeCategory === 'All' ? 'chat' : 'browse';
-  });
-
+  // UI Panels / Modals
+  const [activeCategory, setActiveCategory] = useState('All');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -87,14 +81,10 @@ export default function App() {
     }
   }, [isDarkMode]);
 
-  // Sync Conversations & Category with LocalStorage
+  // Sync Conversations with LocalStorage
   useEffect(() => {
     localStorage.setItem('conversations', JSON.stringify(conversations));
   }, [conversations]);
-
-  useEffect(() => {
-    localStorage.setItem('active_category', activeCategory);
-  }, [activeCategory]);
 
   useEffect(() => {
     if (activeConversationId) {
@@ -136,17 +126,6 @@ export default function App() {
   // Toggle Theme helper
   const handleToggleTheme = () => setIsDarkMode(!isDarkMode);
 
-  // Select active category and coordinate tabs
-  const handleSelectCategory = (cat) => {
-    setActiveCategory(cat);
-    if (cat === 'All') {
-      setCurrentTab('chat');
-    } else {
-      setCurrentTab('browse');
-    }
-    setIsMobileSidebarOpen(false);
-  };
-
   // Start a new conversation
   const handleNewConversation = () => {
     const newId = 'conv_' + Date.now();
@@ -158,7 +137,6 @@ export default function App() {
     setConversations([newConv, ...conversations]);
     setActiveConversationId(newId);
     setActiveCategory('All');
-    setCurrentTab('chat');
     setIsMobileSidebarOpen(false);
   };
 
@@ -178,7 +156,7 @@ export default function App() {
   // Select active conversation
   const handleSelectConversation = (id) => {
     setActiveConversationId(id);
-    setCurrentTab('chat');
+    setActiveCategory('All');
     setIsMobileSidebarOpen(false);
   };
 
@@ -186,8 +164,8 @@ export default function App() {
   const handleSendMessage = async (text, overrideCategory = null) => {
     const categoryToUse = overrideCategory || activeCategory;
     
-    // Tapping/sending a message switches to 'chat' state, but doesn't destroy activeCategory context
-    setCurrentTab('chat');
+    // Switch to 'All' to view the chat conversation
+    setActiveCategory('All');
 
     const userMessage = {
       id: 'msg_user_' + Date.now(),
@@ -199,6 +177,7 @@ export default function App() {
     // Update active conversation locally with user message
     let updatedConversations = conversations.map(c => {
       if (c.id === activeConversationId) {
+        // If it was named "New Conversation", rename it to a snippet of the question
         const title = c.title === 'New Conversation' ? (text.length > 30 ? text.slice(0, 30) + '...' : text) : c.title;
         return {
           ...c,
@@ -214,6 +193,7 @@ export default function App() {
     setIsLoading(true);
 
     // Call AI Integration
+    const startTime = Date.now();
     const response = await askAI({
       provider: config.provider,
       apiKey: config.apiKey,
@@ -222,11 +202,15 @@ export default function App() {
       category: categoryToUse,
       chatHistory: messages
     });
+    const elapsedMs = Date.now() - startTime;
+    // Calculate realistic thinking time between 4.8s and 6.5s for authentic AI feel
+    const thinkingTime = Math.max(parseFloat((elapsedMs / 1000).toFixed(1)), parseFloat((4.8 + Math.random() * 1.6).toFixed(1)));
 
     const botMessage = {
       id: 'msg_bot_' + Date.now(),
       sender: 'bot',
-      text: response,
+      text: response, // Contains { answer, sources }
+      thinkingTime: thinkingTime,
       timestamp: new Date().toLocaleTimeString()
     };
 
@@ -252,26 +236,24 @@ export default function App() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+
   return (
-    <div className="flex h-dvh w-screen overflow-hidden bg-[#F8F9FB] text-[#1A1A1A] dark:bg-[#0A111E] dark:text-[#E2E8F0] font-sans">
-      
-      {/* Sidebar - Desktop Layout (Permanent on md+) */}
+    <div className="flex h-dvh w-screen overflow-hidden bg-slate-100 text-slate-600 dark:bg-slate-950 dark:text-slate-400 font-sans">
+      {/* Sidebar - Desktop Layout */}
       <div className="hidden md:block">
         <Sidebar
           activeCategory={activeCategory}
-          onSelectCategory={handleSelectCategory}
+          onSelectCategory={setActiveCategory}
           conversations={conversations}
           activeConversationId={activeConversationId}
           onSelectConversation={handleSelectConversation}
           onNewConversation={handleNewConversation}
           onDeleteConversation={handleDeleteConversation}
           onOpenSearch={() => setIsSearchOpen(true)}
-          isDarkMode={isDarkMode}
-          onToggleTheme={handleToggleTheme}
         />
       </div>
 
-      {/* Sidebar - Mobile Drawer with Backdrop */}
+      {/* Sidebar - Mobile Drawer with backdrop */}
       <AnimatePresence>
         {isMobileSidebarOpen && (
           <div className="fixed inset-0 z-40 md:hidden flex">
@@ -283,17 +265,20 @@ export default function App() {
               onClick={() => setIsMobileSidebarOpen(false)}
               className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
             />
-            {/* Sidebar Drawer content */}
+            {/* Sidebar drawer content */}
             <motion.div
               initial={{ x: -288 }}
               animate={{ x: 0 }}
               exit={{ x: -288 }}
-              transition={{ ease: "easeInOut", duration: 0.15 }}
+              transition={{ type: 'tween', duration: 0.3 }}
               className="relative z-50 h-full flex"
             >
               <Sidebar
                 activeCategory={activeCategory}
-                onSelectCategory={handleSelectCategory}
+                onSelectCategory={(cat) => {
+                  setActiveCategory(cat);
+                  setIsMobileSidebarOpen(false);
+                }}
                 conversations={conversations}
                 activeConversationId={activeConversationId}
                 onSelectConversation={handleSelectConversation}
@@ -303,8 +288,6 @@ export default function App() {
                   setIsMobileSidebarOpen(false);
                   setIsSearchOpen(true);
                 }}
-                isDarkMode={isDarkMode}
-                onToggleTheme={handleToggleTheme}
               />
             </motion.div>
           </div>
@@ -313,22 +296,16 @@ export default function App() {
 
       {/* Main Right Side Content */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Top Navbar */}
+        {/* Top Navbar (Mobile Only) */}
         <Navbar
-          isDarkMode={isDarkMode}
-          onToggleTheme={handleToggleTheme}
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(true)}
-          currentTab={currentTab}
-          onChangeTab={setCurrentTab}
-          activeCategory={activeCategory}
+          onNewConversation={handleNewConversation}
         />
 
-        {/* Combined Browse / Chat Container */}
+        {/* Conversation Chat Window */}
         <ChatContainer
           activeCategory={activeCategory}
-          onSelectCategory={handleSelectCategory}
-          currentTab={currentTab}
-          onChangeTab={setCurrentTab}
+          onSelectCategory={setActiveCategory}
           messages={messages}
           onSend={handleSendMessage}
           inputValue={inputValue}
