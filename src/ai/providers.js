@@ -36,6 +36,7 @@ export async function callProvider(provider, apiKey, model, messages) {
       messages,
       response_format: { type: 'json_object' },
       temperature: 0.2, // Lower temp for factual accuracy
+      max_tokens: 3000, // Ensure long, comprehensive, research-backed responses
     }),
   });
 
