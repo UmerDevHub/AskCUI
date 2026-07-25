@@ -417,35 +417,36 @@ function GptThinkingBox({ isFinished = false, secondsElapsed = 5.8, queryText = 
 
 // ── Main Component ─────────────────────────────────────────────────────────────
 export default function ChatContainer({ 
-  activeCategory,
-  onSelectCategory,
-  messages, 
-  onSend, 
-  inputValue, 
-  onInputChange, 
-  isLoading, 
-  copiedId, 
-  onCopyAnswer 
+  activeCategory = 'All',
+  onSelectCategory = () => {},
+  messages = [], 
+  onSend = () => {}, 
+  inputValue = '', 
+  onInputChange = () => {}, 
+  isLoading = false, 
+  copiedId = null, 
+  onCopyAnswer = () => {} 
 }) {
+  const safeMessages = Array.isArray(messages) ? messages : [];
   const lastUserMsgRef = useRef(null);
-  const prevMsgCountRef = useRef(messages.length);
+  const prevMsgCountRef = useRef(safeMessages.length);
 
-  // Find the index of the last user message to align scroll top
-  const lastUserMsgIdx = messages.reduce((acc, m, i) => m.sender === 'user' ? i : acc, -1);
+  // Safely find the index of the last user message to align scroll top
+  const lastUserMsgIdx = safeMessages.reduce((acc, m, i) => (m && m.sender === 'user') ? i : acc, -1);
 
   useEffect(() => {
     // Only scroll when user sends a new message/query
-    if (messages.length > prevMsgCountRef.current) {
+    if (safeMessages.length > prevMsgCountRef.current) {
       if (lastUserMsgRef.current) {
         lastUserMsgRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-    prevMsgCountRef.current = messages.length;
-  }, [messages.length]);
+    prevMsgCountRef.current = safeMessages.length;
+  }, [safeMessages.length]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!inputValue.trim() || isLoading) return;
+    if (!inputValue || !inputValue.trim() || isLoading) return;
     onSend(inputValue);
   };
 
@@ -480,7 +481,7 @@ export default function ChatContainer({
           <div className="mx-auto max-w-4xl py-1 pb-12">
             <CategoryExplorer category={activeCategory} onAskQuestion={(qText, cat) => onSend(qText, cat)} />
           </div>
-        ) : messages.length === 0 ? (
+        ) : safeMessages.length === 0 ? (
           /* Welcome / Empty State */
           <div className="mx-auto flex max-w-2xl flex-col items-center justify-center pt-[3vh] md:pt-[6vh] text-center px-3 sm:px-4 pb-10">
             <motion.div
@@ -540,15 +541,16 @@ export default function ChatContainer({
         ) : (
           /* Conversation Feed */
           <div className="mx-auto max-w-3xl space-y-4 md:space-y-5 pb-12 pt-1">
-            {messages.map((msg, idx) => {
+            {safeMessages.map((msg, idx) => {
+              if (!msg) return null;
               const isUser = msg.sender === 'user';
               const isLastUserMsg = idx === lastUserMsgIdx;
-              const responseObj = typeof msg.text === 'object' ? msg.text : null;
-              const answerText = responseObj ? responseObj.answer : msg.text;
+              const responseObj = (msg.text && typeof msg.text === 'object') ? msg.text : null;
+              const answerText = responseObj ? responseObj.answer : (msg.text || '');
 
               return (
                 <div 
-                  key={msg.id} 
+                  key={msg.id || idx} 
                   ref={isLastUserMsg ? lastUserMsgRef : null}
                   className={`flex gap-2 md:gap-3 ${isUser ? 'justify-end' : 'justify-start'} w-full max-w-full scroll-mt-14`}
                 >
