@@ -427,11 +427,21 @@ export default function ChatContainer({
   copiedId, 
   onCopyAnswer 
 }) {
-  const chatEndRef = useRef(null);
+  const lastUserMsgRef = useRef(null);
+  const prevMsgCountRef = useRef(messages.length);
+
+  // Find the index of the last user message to align scroll top
+  const lastUserMsgIdx = messages.reduce((acc, m, i) => m.sender === 'user' ? i : acc, -1);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading]);
+    // Only scroll when user sends a new message/query
+    if (messages.length > prevMsgCountRef.current) {
+      if (lastUserMsgRef.current) {
+        lastUserMsgRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    prevMsgCountRef.current = messages.length;
+  }, [messages.length]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -530,13 +540,18 @@ export default function ChatContainer({
         ) : (
           /* Conversation Feed */
           <div className="mx-auto max-w-3xl space-y-4 md:space-y-5 pb-12 pt-1">
-            {messages.map((msg) => {
+            {messages.map((msg, idx) => {
               const isUser = msg.sender === 'user';
+              const isLastUserMsg = idx === lastUserMsgIdx;
               const responseObj = typeof msg.text === 'object' ? msg.text : null;
               const answerText = responseObj ? responseObj.answer : msg.text;
 
               return (
-                <div key={msg.id} className={`flex gap-2 md:gap-3 ${isUser ? 'justify-end' : 'justify-start'} w-full max-w-full`}>
+                <div 
+                  key={msg.id} 
+                  ref={isLastUserMsg ? lastUserMsgRef : null}
+                  className={`flex gap-2 md:gap-3 ${isUser ? 'justify-end' : 'justify-start'} w-full max-w-full scroll-mt-14`}
+                >
                   {/* Bot Avatar */}
                   {!isUser && (
                     <div className="flex h-8 w-8 md:h-9 md:w-9 shrink-0 select-none items-center justify-center rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 font-black text-white text-[11px] md:text-xs shadow-md shadow-blue-500/20 mt-0.5">
