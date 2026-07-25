@@ -48,8 +48,8 @@
       "badge": "Calendar",
       "title": "Fall 2026 (FA26) Academic Calendar Published",
       "date": "June 1, 2026",
-      "summary": "Fall 2026 (FA26) classes commence September 7, 2026. Mid-term exams: November 2026. Final exams: January 2027.",
-      "details": "Key dates for Fall 2026 (FA26): Classes Begin: September 7, 2026 | Add/Drop Period: First 2 weeks | Mid-term Exams: 2nd to 3rd week of November 2026 | Final Exams: 2nd week of January 2027 | Result Announcement: January/February 2027.",
+      "summary": "Fall 2026 (FA26) classes commence September 7, 2026.",
+      "details": "Key dates for Fall 2026 (FA26): Classes Begin: September 7, 2026 | Add/Drop Period: First 2 weeks.",
       "category": "Academic Calendar"
     },
     {
@@ -91,9 +91,6 @@
     "merit_list_2": "August 28, 2026",
     "merit_list_3": "September 5, 2026",
     "classes_begin": "September 7, 2026",
-    "add_drop_period": "September 7–21, 2026",
-    "mid_term_exams": "November 10–21, 2026",
-    "final_exams": "January 5–16, 2027",
-    "semester_end": "January 31, 2027"
+    "add_drop_period": "September 7–21, 2026"
   }
 }
