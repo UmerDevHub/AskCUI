@@ -443,7 +443,7 @@ export default function ChatContainer({
     <div className="flex flex-1 flex-col overflow-hidden bg-slate-50 dark:bg-[#0b0e14] w-full max-w-full relative">
       
       {/* Horizontally scrollable category selector pills for mobile/laptop navigation */}
-      <div className="sticky top-0 z-10 w-full shrink-0 border-b border-slate-200/80 bg-white/95 px-3.5 py-2.5 backdrop-blur-md dark:border-slate-800/80 dark:bg-[#10151f]/95 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth">
+      <div className="sticky top-0 z-10 w-full shrink-0 border-b border-slate-200/80 bg-white/95 px-2.5 py-2 md:px-3.5 md:py-2.5 backdrop-blur-md dark:border-slate-800/80 dark:bg-[#10151f]/95 flex items-center gap-1.5 md:gap-2 overflow-x-auto no-scrollbar scroll-smooth touch-pan-x">
         {CATEGORY_PILLS.map((pill) => {
           const Icon = pill.icon;
           const isActive = activeCategory === pill.name;
@@ -451,13 +451,13 @@ export default function ChatContainer({
             <button
               key={pill.name}
               onClick={() => onSelectCategory(pill.name)}
-              className={`flex items-center gap-1.5 shrink-0 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all duration-200 active:scale-95 cursor-pointer ${
+              className={`flex items-center gap-1.5 shrink-0 rounded-full px-3 py-1.5 md:px-3.5 text-[11.5px] md:text-xs font-bold transition-all duration-200 active:scale-95 cursor-pointer whitespace-nowrap ${
                 isActive
                   ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 dark:bg-blue-600'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-[#182030] dark:text-slate-400 dark:hover:bg-slate-800/80'
+                  : 'bg-slate-100/80 text-slate-600 hover:bg-slate-200/80 dark:bg-[#182030] dark:text-slate-400 dark:hover:bg-slate-800/80'
               }`}
             >
-              <Icon className="h-3.5 w-3.5" />
+              <Icon className="h-3.5 w-3.5 shrink-0" />
               <span>{pill.name}</span>
             </button>
           );
@@ -465,21 +465,21 @@ export default function ChatContainer({
       </div>
 
       {/* Messages area */}
-      <div className="flex-1 overflow-y-auto scroll-touch px-3 py-4 md:px-8 max-w-full">
+      <div className="flex-1 overflow-y-auto scroll-touch px-2.5 py-3 md:px-8 max-w-full">
         {activeCategory !== 'All' ? (
-          <div className="mx-auto max-w-4xl py-2 pb-12">
+          <div className="mx-auto max-w-4xl py-1 pb-12">
             <CategoryExplorer category={activeCategory} onAskQuestion={(qText, cat) => onSend(qText, cat)} />
           </div>
         ) : messages.length === 0 ? (
           /* Welcome / Empty State */
-          <div className="mx-auto flex max-w-2xl flex-col items-center justify-center pt-[4vh] md:pt-[6vh] text-center px-4 pb-10">
+          <div className="mx-auto flex max-w-2xl flex-col items-center justify-center pt-[3vh] md:pt-[6vh] text-center px-3 sm:px-4 pb-10">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', duration: 0.6 }}
-              className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-750 text-white shadow-xl shadow-blue-500/25 relative"
+              className="flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-750 text-white shadow-xl shadow-blue-500/25 relative"
             >
-              <Sparkles className="h-8 w-8 animate-pulse" />
+              <Sparkles className="h-7 w-7 md:h-8 md:w-8 animate-pulse" />
               <span className="absolute -top-1 -right-1 flex h-4 w-4">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-4 w-4 bg-blue-500"></span>
@@ -488,40 +488,40 @@ export default function ChatContainer({
 
             <motion.h1
               initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.1 }}
-              className="mt-5 text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-slate-100"
+              className="mt-4 md:mt-5 text-lg sm:text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-slate-100"
             >
               CUI Wah Admission AI
             </motion.h1>
 
             <motion.p
               initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}
-              className="mt-2 text-slate-500 dark:text-slate-400 text-xs md:text-sm max-w-md leading-relaxed font-medium"
+              className="mt-1.5 text-slate-500 dark:text-slate-400 text-xs md:text-sm max-w-md leading-relaxed font-medium"
             >
               Instant guidance on degrees, closing merit aggregates, fee breakdowns, and hostel info for COMSATS Wah.
             </motion.p>
 
             <motion.div
               initial={{ y: 15, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 }}
-              className="mt-6 md:mt-8 w-full"
+              className="mt-5 md:mt-8 w-full"
             >
-              <div className="flex items-center justify-between mb-3 px-1">
-                <p className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+              <div className="flex items-center justify-between mb-2.5 px-1">
+                <p className="text-[9.5px] md:text-[10px] font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500">
                   Frequently Asked Questions
                 </p>
-                <span className="text-[10px] font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1">
+                <span className="text-[9.5px] md:text-[10px] font-semibold text-blue-600 dark:text-blue-400 flex items-center gap-1">
                   <Zap className="h-3 w-3" /> Tap to ask AI
                 </span>
               </div>
 
-              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-2 sm:gap-2.5 sm:grid-cols-2">
                 {SUGGESTIONS.map((sug, idx) => (
                   <button
                     key={idx}
                     onClick={() => onSend(sug.text, sug.category)}
-                    className="group flex items-center justify-between rounded-2xl border border-slate-200/80 bg-white p-3.5 text-left text-xs font-bold text-slate-700 transition-all duration-200 hover:border-blue-400 hover:bg-blue-50/10 hover:shadow-md hover:-translate-y-0.5 active:scale-98 dark:border-slate-800 dark:bg-[#121622] dark:text-slate-200 dark:hover:border-blue-500/60 dark:hover:bg-blue-950/20 cursor-pointer shadow-xs"
+                    className="group flex items-center justify-between rounded-2xl border border-slate-200/80 bg-white p-3 md:p-3.5 text-left text-xs font-bold text-slate-700 transition-all duration-200 hover:border-blue-400 hover:bg-blue-50/10 hover:shadow-md hover:-translate-y-0.5 active:scale-98 dark:border-slate-800 dark:bg-[#121622] dark:text-slate-200 dark:hover:border-blue-500/60 dark:hover:bg-blue-950/20 cursor-pointer shadow-xs"
                   >
-                    <span className="pr-2 line-clamp-2 leading-snug">{sug.text}</span>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-transform group-hover:translate-x-1" />
+                    <span className="pr-2 line-clamp-2 leading-snug text-[11.5px] md:text-xs">{sug.text}</span>
+                    <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4 shrink-0 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-transform group-hover:translate-x-1" />
                   </button>
                 ))}
               </div>
@@ -529,22 +529,22 @@ export default function ChatContainer({
           </div>
         ) : (
           /* Conversation Feed */
-          <div className="mx-auto max-w-3xl space-y-5 pb-12 pt-1">
+          <div className="mx-auto max-w-3xl space-y-4 md:space-y-5 pb-12 pt-1">
             {messages.map((msg) => {
               const isUser = msg.sender === 'user';
               const responseObj = typeof msg.text === 'object' ? msg.text : null;
               const answerText = responseObj ? responseObj.answer : msg.text;
 
               return (
-                <div key={msg.id} className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'} w-full max-w-full`}>
+                <div key={msg.id} className={`flex gap-2 md:gap-3 ${isUser ? 'justify-end' : 'justify-start'} w-full max-w-full`}>
                   {/* Bot Avatar */}
                   {!isUser && (
-                    <div className="flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 font-black text-white text-xs shadow-md shadow-blue-500/20 mt-0.5">
+                    <div className="flex h-8 w-8 md:h-9 md:w-9 shrink-0 select-none items-center justify-center rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 font-black text-white text-[11px] md:text-xs shadow-md shadow-blue-500/20 mt-0.5">
                       C
                     </div>
                   )}
 
-                  <div className={`relative flex flex-col max-w-[94%] md:max-w-[85%] ${isUser ? 'items-end' : 'items-start'} overflow-hidden`}>
+                  <div className={`relative flex flex-col max-w-[96%] md:max-w-[85%] ${isUser ? 'items-end' : 'items-start'} overflow-hidden`}>
                     
                     {/* Bot Thought Header (GPT style) */}
                     {!isUser && (
@@ -555,13 +555,13 @@ export default function ChatContainer({
                       />
                     )}
 
-                    <div className={`rounded-2xl px-4 py-3 shadow-xs break-words w-full max-w-full ${
+                    <div className={`rounded-2xl px-3.5 py-2.5 md:px-4 md:py-3 shadow-xs break-words w-full max-w-full ${
                       isUser
                         ? 'bg-blue-600 text-white rounded-tr-none dark:bg-blue-600 font-semibold shadow-md shadow-blue-500/10'
                         : 'bg-white text-slate-850 rounded-tl-none dark:bg-[#151a28] dark:text-slate-100 border border-slate-200/70 dark:border-slate-800'
                     }`}>
                       {isUser ? (
-                        <p className="text-[13.5px] md:text-[14.5px] leading-relaxed whitespace-pre-wrap break-words">{msg.text}</p>
+                        <p className="text-[13px] md:text-[14.5px] leading-relaxed whitespace-pre-wrap break-words">{msg.text}</p>
                       ) : (
                         <div className="prose dark:prose-invert break-words max-w-full overflow-x-hidden">
                           {renderMarkdown(typeof answerText === 'string' ? answerText : JSON.stringify(answerText))}
@@ -571,7 +571,7 @@ export default function ChatContainer({
 
                     {/* Action bar: Sources, confidence, copy — bot messages only */}
                     {!isUser && (
-                      <div className="mt-2 flex flex-wrap items-center gap-2 w-full px-1">
+                      <div className="mt-1.5 flex flex-wrap items-center gap-1.5 md:gap-2 w-full px-1">
                         {/* Confidence Badge */}
                         {responseObj?.confidence_label && (
                           <ConfidenceBadge
@@ -584,11 +584,11 @@ export default function ChatContainer({
                         {/* Source citations */}
                         {responseObj?.citations?.length > 0 && (
                           <div className="flex flex-wrap items-center gap-1">
-                            <span className="flex items-center gap-1 text-[9px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                            <span className="flex items-center gap-1 text-[8.5px] md:text-[9px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                               <FileCheck className="h-3 w-3 text-blue-500" />Sources:
                             </span>
                             {responseObj.citations.map((c, si) => (
-                              <span key={si} className="rounded-lg bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[9px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50" title={c.tier}>
+                              <span key={si} className="rounded-lg bg-slate-100 dark:bg-slate-800 px-1.5 md:px-2 py-0.5 text-[8.5px] md:text-[9px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50" title={c.tier}>
                                 {c.icon} {c.label}
                               </span>
                             ))}
@@ -598,11 +598,11 @@ export default function ChatContainer({
                         {/* Fallback sources */}
                         {!responseObj?.citations && responseObj?.sources?.length > 0 && (
                           <div className="flex flex-wrap items-center gap-1">
-                            <span className="flex items-center gap-1 text-[9px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                            <span className="flex items-center gap-1 text-[8.5px] md:text-[9px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                               <FileCheck className="h-3 w-3 text-blue-500" />Sources:
                             </span>
                             {responseObj.sources.map((src, si) => (
-                              <span key={si} className="rounded-lg bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[9px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50">
+                              <span key={si} className="rounded-lg bg-slate-100 dark:bg-slate-800 px-1.5 md:px-2 py-0.5 text-[8.5px] md:text-[9px] font-bold text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50">
                                 {src}
                               </span>
                             ))}
@@ -612,13 +612,13 @@ export default function ChatContainer({
                         {/* Copy button */}
                         <button
                           onClick={() => onCopyAnswer(msg.id, typeof answerText === 'string' ? answerText : '')}
-                          className="rounded-xl p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 ml-auto flex items-center gap-1 text-xs font-semibold cursor-pointer"
+                          className="rounded-xl p-1 md:p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200 transition-colors shrink-0 ml-auto flex items-center gap-1 text-xs font-semibold cursor-pointer"
                           title="Copy Answer"
                         >
                           {copiedId === msg.id ? (
                             <>
                               <Check className="h-3.5 w-3.5 text-emerald-500" />
-                              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">Copied</span>
+                              <span className="text-[9.5px] text-emerald-600 dark:text-emerald-400 font-bold">Copied</span>
                             </>
                           ) : (
                             <Copy className="h-3.5 w-3.5" />
@@ -630,8 +630,8 @@ export default function ChatContainer({
 
                   {/* User Avatar */}
                   {isUser && (
-                    <div className="flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-2xl bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300 shadow-xs mt-0.5">
-                      <User className="h-4 w-4" />
+                    <div className="flex h-8 w-8 md:h-9 md:w-9 shrink-0 select-none items-center justify-center rounded-xl md:rounded-2xl bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300 shadow-xs mt-0.5">
+                      <User className="h-3.5 w-3.5 md:h-4 md:w-4" />
                     </div>
                   )}
                 </div>
@@ -640,11 +640,11 @@ export default function ChatContainer({
 
             {/* AI GPT Thinking State (When loading) */}
             {isLoading && (
-              <div className="flex gap-3 justify-start w-full">
-                <div className="flex h-9 w-9 shrink-0 select-none items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 font-black text-white text-xs shadow-md shadow-blue-500/20 mt-0.5 animate-pulse">
+              <div className="flex gap-2 md:gap-3 justify-start w-full">
+                <div className="flex h-8 w-8 md:h-9 md:w-9 shrink-0 select-none items-center justify-center rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 font-black text-white text-[11px] md:text-xs shadow-md shadow-blue-500/20 mt-0.5 animate-pulse">
                   C
                 </div>
-                <div className="max-w-[94%] md:max-w-[85%] w-full">
+                <div className="max-w-[96%] md:max-w-[85%] w-full">
                   <GptThinkingBox isFinished={false} queryText={inputValue} />
                 </div>
               </div>
@@ -656,7 +656,7 @@ export default function ChatContainer({
       </div>
 
       {/* Input Bar */}
-      <div className="border-t border-slate-200/80 bg-white/95 backdrop-blur-md p-3 pb-safe dark:border-slate-800/80 dark:bg-[#10151f]/95 shrink-0 w-full">
+      <div className="border-t border-slate-200/80 bg-white/95 backdrop-blur-md p-2.5 pb-3 md:p-3 md:pb-3 dark:border-slate-800/80 dark:bg-[#10151f]/95 shrink-0 w-full">
         <form onSubmit={handleSubmit} className="mx-auto max-w-3xl">
           <div className="relative flex items-center overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/10 dark:border-slate-800 dark:bg-[#151a28] dark:focus-within:border-blue-500 dark:focus-within:ring-blue-500/10 transition-all duration-200">
             <input
@@ -665,17 +665,17 @@ export default function ChatContainer({
               onChange={(e) => onInputChange(e.target.value)}
               placeholder="Ask anything about CUI Wah admissions..."
               disabled={isLoading}
-              className="flex-1 bg-transparent px-4 py-3.5 text-[13px] md:text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100 dark:placeholder:text-slate-500"
+              className="flex-1 bg-transparent px-3.5 py-3 md:px-4 md:py-3.5 text-[13px] md:text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100 dark:placeholder:text-slate-500"
             />
             <button
               type="submit"
               disabled={!inputValue.trim() || isLoading}
-              className="mr-2 rounded-xl bg-blue-600 p-2.5 text-white transition hover:bg-blue-700 disabled:bg-slate-100 disabled:text-slate-400 dark:bg-blue-600 dark:hover:bg-blue-700 dark:disabled:bg-slate-800 dark:disabled:text-slate-600 shrink-0 cursor-pointer shadow-sm"
+              className="mr-1.5 md:mr-2 rounded-xl bg-blue-600 p-2 md:p-2.5 text-white transition hover:bg-blue-700 active:scale-95 disabled:bg-slate-100 disabled:text-slate-400 dark:bg-blue-600 dark:hover:bg-blue-700 dark:disabled:bg-slate-800 dark:disabled:text-slate-600 shrink-0 cursor-pointer shadow-xs"
             >
               <Send className="h-4 w-4" />
             </button>
           </div>
-          <p className="mt-2 text-center text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+          <p className="mt-1.5 text-center text-[8.5px] md:text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest truncate px-2">
             Answers compiled from official CUI knowledge base · All sources cited
           </p>
         </form>

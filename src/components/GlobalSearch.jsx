@@ -96,7 +96,7 @@ export default function GlobalSearch({ isOpen, onClose, onAskQuestion }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-[12vh]">
+      <div className="fixed inset-0 z-50 flex items-start justify-center p-3 pt-3 sm:p-4 sm:pt-[12vh]">
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           onClick={onClose}
@@ -107,7 +107,7 @@ export default function GlobalSearch({ isOpen, onClose, onAskQuestion }) {
           animate={{ scale: 1, y: 0, opacity: 1 }}
           exit={{ scale: 0.97, y: -10, opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900"
+          className="relative w-full max-w-2xl max-h-[88vh] flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900"
         >
           {/* Input */}
           <div className="flex items-center gap-3 border-b border-slate-100 px-4 py-3.5 dark:border-slate-800">
