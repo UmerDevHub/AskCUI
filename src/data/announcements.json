@@ -49,7 +49,7 @@
       "title": "Fall 2026 (FA26) Academic Calendar Published",
       "date": "June 1, 2026",
       "summary": "Fall 2026 (FA26) classes commence September 7, 2026.",
-      "details": "Key dates for Fall 2026 (FA26): Classes Begin: September 7, 2026 | Add/Drop Period: First 2 weeks.",
+      "details": "Key dates for Fall 2026 (FA26): Classes Begin: September 7, 2026.",
       "category": "Academic Calendar"
     },
     {
@@ -90,7 +90,6 @@
     "merit_list_1": "August 18, 2026",
     "merit_list_2": "August 28, 2026",
     "merit_list_3": "September 5, 2026",
-    "classes_begin": "September 7, 2026",
-    "add_drop_period": "September 7–21, 2026"
+    "classes_begin": "September 7, 2026"
   }
 }
