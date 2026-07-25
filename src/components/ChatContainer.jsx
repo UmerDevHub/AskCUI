@@ -667,7 +667,7 @@ export default function ChatContainer({
               </div>
             )}
 
-            <div ref={chatEndRef} />
+            <div className="h-2" />
           </div>
         )}
       </div>
