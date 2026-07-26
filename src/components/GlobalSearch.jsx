@@ -7,17 +7,17 @@ import { getSourceMeta } from '../knowledge/citations.js';
 
 // Icon map for source files
 const SOURCE_ICONS = {
-  'programs.json':      { icon: BookOpen,    color: 'text-indigo-500', bg: 'bg-indigo-50 dark:bg-indigo-950/20' },
-  'fees.json':          { icon: DollarSign,  color: 'text-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-950/20' },
-  'eligibility.json':   { icon: CheckCircle, color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-950/20' },
-  'prerequisites.json': { icon: FileText,    color: 'text-violet-500', bg: 'bg-violet-50 dark:bg-violet-950/20' },
-  'scholarships.json':  { icon: Award,       color: 'text-rose-500', bg: 'bg-rose-50 dark:bg-rose-950/20' },
-  'faqs.json':          { icon: HelpCircle,  color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-950/20' },
-  'merit_lists.json':   { icon: TrendingUp,  color: 'text-cyan-600', bg: 'bg-cyan-50 dark:bg-cyan-950/20' },
-  'contact_info.json':  { icon: Phone,       color: 'text-teal-600', bg: 'bg-teal-50 dark:bg-teal-950/20' },
-  'announcements.json': { icon: Bell,        color: 'text-orange-500', bg: 'bg-orange-50 dark:bg-orange-950/20' },
-  'policies.json':      { icon: Shield,      color: 'text-slate-600', bg: 'bg-slate-100 dark:bg-slate-900/40' },
-  'how_to_apply.json':  { icon: CheckCircle, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-950/20' },
+  'programs.json':      { icon: BookOpen },
+  'fees.json':          { icon: DollarSign },
+  'eligibility.json':   { icon: CheckCircle },
+  'prerequisites.json': { icon: FileText },
+  'scholarships.json':  { icon: Award },
+  'faqs.json':          { icon: HelpCircle },
+  'merit_lists.json':   { icon: TrendingUp },
+  'contact_info.json':  { icon: Phone },
+  'announcements.json': { icon: Bell },
+  'policies.json':      { icon: Shield },
+  'how_to_apply.json':  { icon: CheckCircle },
 };
 
 function getRecordTitle(record) {
@@ -100,74 +100,74 @@ export default function GlobalSearch({ isOpen, onClose, onAskQuestion }) {
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-[#0B2545]/40 backdrop-blur-xs"
         />
         <motion.div
-          initial={{ scale: 0.97, y: -10, opacity: 0 }}
+          initial={{ scale: 0.98, y: -8, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
-          exit={{ scale: 0.97, y: -10, opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="relative w-full max-w-2xl max-h-[88vh] flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900"
+          exit={{ scale: 0.98, y: -8, opacity: 0 }}
+          transition={{ duration: 0.18 }}
+          className="relative w-full max-w-2xl max-h-[88vh] flex flex-col overflow-hidden rounded-xl border border-[#E7E2D8] bg-white shadow-xl dark:border-[#1A2A40] dark:bg-[#0B1524]"
         >
-          {/* Input */}
-          <div className="flex items-center gap-3 border-b border-slate-100 px-4 py-3.5 dark:border-slate-800">
-            <Search className="h-5 w-5 text-slate-400 dark:text-slate-500 shrink-0" />
+          {/* Input Header */}
+          <div className="flex items-center gap-3 border-b border-[#E7E2D8] px-4 py-3.5 dark:border-[#1A2A40] bg-[#F7F5F0] dark:bg-[#070D18]">
+            <Search className="h-4.5 w-4.5 text-[#0B2545] dark:text-[#809BCE] shrink-0" />
             <input
               ref={inputRef}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search all knowledge sources — programs, fees, merit, FAQs, policies..."
-              className="flex-1 bg-transparent text-slate-800 outline-none placeholder:text-slate-400 dark:text-slate-100 dark:placeholder:text-slate-500 text-sm"
+              placeholder="Search admissions knowledge base — programs, fees, eligibility, merit..."
+              className="flex-1 bg-transparent text-[#2B2B2B] outline-none placeholder:text-[#888888] dark:text-[#E2EBFA] dark:placeholder:text-[#607085] text-sm font-medium"
             />
-            <button onClick={onClose} className="rounded-lg p-1 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+            <button onClick={onClose} className="rounded-md p-1 text-[#666666] hover:bg-[#E7E2D8] dark:hover:bg-[#1A2A40]">
               <X className="h-4 w-4" />
             </button>
           </div>
 
-          {/* Results */}
+          {/* Search Results Feed */}
           <div className="max-h-[60vh] overflow-y-auto p-2">
             {!query.trim() ? (
               <div className="py-10 text-center space-y-2">
-                <Database className="h-8 w-8 mx-auto text-slate-300 dark:text-slate-600" />
-                <p className="text-sm text-slate-400 dark:text-slate-500">
-                  Searching across {kb.length.toLocaleString()} indexed records from all knowledge sources
+                <Database className="h-7 w-7 mx-auto text-[#0B2545]/40 dark:text-[#809BCE]/40" />
+                <p className="text-xs text-[#666666] dark:text-[#809BCE]/70">
+                  Searching across {kb.length.toLocaleString()} indexed records from official CUI Wah knowledge base
                 </p>
               </div>
             ) : results.length === 0 ? (
-              <div className="py-12 text-center text-sm text-slate-400 dark:text-slate-500">
-                No results found — try a different keyword or ask the AI directly
+              <div className="py-12 text-center text-xs text-[#666666] dark:text-[#809BCE]">
+                No matching records found — try a different keyword or enter query directly
               </div>
             ) : (
               <div className="space-y-1">
                 {results.map((record, idx) => {
-                  const meta = SOURCE_ICONS[record.source] || { icon: Database, color: 'text-slate-500', bg: 'bg-slate-100 dark:bg-slate-800' };
+                  const meta = SOURCE_ICONS[record.source] || { icon: Database };
                   const Icon = meta.icon;
                   return (
                     <div
                       key={idx}
                       onClick={() => handleSelectResult(record)}
-                      className="group flex cursor-pointer items-start gap-3 rounded-xl p-3 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all border border-transparent hover:border-slate-100 dark:hover:border-slate-800/80"
+                      className="group flex cursor-pointer items-start gap-3 rounded-lg p-3 hover:bg-[#F4F5F7] dark:hover:bg-[#112035] transition-all border border-transparent hover:border-[#E7E2D8] dark:hover:border-[#1A2A40]"
                     >
-                      <div className={`rounded-xl p-2 shrink-0 ${meta.bg}`}>
-                        <Icon className={`h-5 w-5 ${meta.color}`} />
+                      <div className="rounded-md p-2 shrink-0 bg-[#F4F5F7] dark:bg-[#112035] text-[#0B2545] dark:text-[#C9A227] border border-[#E7E2D8] dark:border-[#1A2A40]">
+                        <Icon className="h-4 w-4" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 truncate">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#7A1E2B] dark:text-[#C9A227] truncate">
                             {getSourceMeta(record.source).label}
                           </span>
-                          <span className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[10px] font-bold text-blue-600 dark:text-blue-400 shrink-0">
-                            Ask AI <ArrowRight className="h-3 w-3" />
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[10px] font-semibold text-[#0B2545] dark:text-[#E2EBFA] shrink-0">
+                            Select <ArrowRight className="h-3 w-3" />
                           </span>
                         </div>
-                        <h4 className="text-sm font-bold text-slate-800 dark:text-slate-100 line-clamp-1 mt-0.5">
+                        <h4 className="font-serif text-sm font-bold text-[#0B2545] dark:text-[#E2EBFA] line-clamp-1 mt-0.5">
                           {getRecordTitle(record)}
                         </h4>
-                        <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5 truncate">
+                        <p className="text-xs font-medium text-[#666666] dark:text-[#A0B0C5] mt-0.5 truncate">
                           {getRecordSubtitle(record)}
                         </p>
-                        <p className="text-xs text-slate-400 dark:text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                        <p className="text-xs text-[#555555] dark:text-[#809BCE] mt-1 line-clamp-2 leading-relaxed">
                           {getRecordContent(record)}
                         </p>
                       </div>
@@ -179,10 +179,10 @@ export default function GlobalSearch({ isOpen, onClose, onAskQuestion }) {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50/50 px-4 py-3 text-[11px] text-slate-400 dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-500">
-            <span>Click any result to ask the AI assistant</span>
+          <div className="flex items-center justify-between border-t border-[#E7E2D8] bg-[#F7F5F0] px-4 py-2.5 text-[11px] text-[#666666] dark:border-[#1A2A40] dark:bg-[#070D18] dark:text-[#809BCE]">
+            <span>Click any result to select resource</span>
             <div className="flex items-center gap-1">
-              <kbd className="rounded border bg-white px-1.5 py-0.5 font-mono text-[9px] dark:border-slate-800 dark:bg-slate-950">ESC</kbd>
+              <kbd className="rounded border border-[#E7E2D8] bg-white px-1.5 py-0.5 font-mono text-[9px] dark:border-[#1A2A40] dark:bg-[#0B1524]">ESC</kbd>
               <span>to close</span>
             </div>
           </div>

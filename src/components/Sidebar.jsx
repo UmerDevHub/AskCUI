@@ -16,22 +16,22 @@ import {
   Clipboard,
   TrendingUp,
   Phone,
-  Sparkles
+  GraduationCap
 } from 'lucide-react';
 
 const CATEGORIES = [
-  { name: 'All',                icon: Globe,       color: 'text-sky-500',     bg: 'bg-sky-50 dark:bg-sky-950/20' },
-  { name: 'Programs',           icon: BookOpen,    color: 'text-indigo-500',  bg: 'bg-indigo-50 dark:bg-indigo-950/20' },
-  { name: 'Fees',               icon: DollarSign,  color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-950/20' },
-  { name: 'Hostel & Transport', icon: Home,        color: 'text-blue-500',    bg: 'bg-blue-50 dark:bg-blue-950/20' },
-  { name: 'Eligibility',        icon: CheckCircle, color: 'text-amber-600',   bg: 'bg-amber-50 dark:bg-amber-950/20' },
-  { name: 'Merit Calculator',   icon: Calculator,  color: 'text-violet-600',  bg: 'bg-violet-50 dark:bg-violet-950/20' },
-  { name: 'Merit Lists',        icon: TrendingUp,  color: 'text-cyan-600',    bg: 'bg-cyan-50 dark:bg-cyan-950/20' },
-  { name: 'How to Apply',       icon: Clipboard,   color: 'text-amber-500',   bg: 'bg-amber-50 dark:bg-amber-950/20' },
-  { name: 'Prerequisites',      icon: FileText,    color: 'text-violet-500',  bg: 'bg-violet-50 dark:bg-violet-950/20' },
-  { name: 'Scholarships',       icon: Award,       color: 'text-rose-500',    bg: 'bg-rose-50 dark:bg-rose-950/20' },
-  { name: 'FAQs',               icon: HelpCircle,  color: 'text-blue-500',    bg: 'bg-blue-50 dark:bg-blue-950/20' },
-  { name: 'Contact Info',       icon: Phone,       color: 'text-teal-600',    bg: 'bg-teal-50 dark:bg-teal-950/20' },
+  { name: 'All',                icon: Globe },
+  { name: 'Programs',           icon: BookOpen },
+  { name: 'Fees',               icon: DollarSign },
+  { name: 'Hostel & Transport', icon: Home },
+  { name: 'Eligibility',        icon: CheckCircle },
+  { name: 'Merit Calculator',   icon: Calculator },
+  { name: 'Merit Lists',        icon: TrendingUp },
+  { name: 'How to Apply',       icon: Clipboard },
+  { name: 'Prerequisites',      icon: FileText },
+  { name: 'Scholarships',       icon: Award },
+  { name: 'FAQs',               icon: HelpCircle },
+  { name: 'Contact Info',       icon: Phone },
 ];
 
 export default function Sidebar({ 
@@ -45,24 +45,21 @@ export default function Sidebar({
   onOpenSearch
 }) {
   return (
-    <aside className="flex h-full w-72 flex-col border-r border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-[#10151f]">
+    <aside className="flex h-full w-72 flex-col border-r border-[#E7E2D8] dark:border-[#1A2A40] bg-white dark:bg-[#0B1524]">
       
-      {/* Brand Header */}
-      <div className="px-5 pt-5 pb-4 border-b border-slate-200/80 dark:border-slate-800/80">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 font-extrabold text-white shadow-md text-sm">
-              C
-            </div>
-            <div>
-              <h2 className="text-[13px] font-extrabold text-slate-900 dark:text-slate-100 leading-tight flex items-center gap-1">
-                CUI Wah AI
-                <Sparkles className="h-3 w-3 text-amber-500 fill-amber-500" />
-              </h2>
-              <p className="text-[10.5px] text-slate-400 dark:text-slate-500 mt-0.5 font-medium">
-                Official Admission Assistant
-              </p>
-            </div>
+      {/* Institutional Brand Header */}
+      <div className="px-5 pt-5 pb-4 border-b border-[#E7E2D8] dark:border-[#1A2A40] bg-[#FFFFFF] dark:bg-[#0B1524]">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#0B2545] font-serif font-bold text-[#C9A227] text-base border border-[#C9A227]/40 shadow-xs">
+            <GraduationCap className="h-5 w-5 text-[#C9A227]" />
+          </div>
+          <div className="min-w-0">
+            <h2 className="font-serif text-[13.5px] font-bold text-[#0B2545] dark:text-[#E2EBFA] leading-tight truncate">
+              COMSATS University
+            </h2>
+            <p className="text-[11px] text-[#7A1E2B] dark:text-[#C9A227] font-semibold mt-0.5 tracking-wide truncate">
+              Wah Campus Admissions
+            </p>
           </div>
         </div>
       </div>
@@ -71,33 +68,33 @@ export default function Sidebar({
       <div className="px-4 py-3.5 space-y-2">
         <button
           onClick={onNewConversation}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-2.5 text-[13px] font-bold text-white shadow-md shadow-blue-500/20 transition-all hover:bg-blue-700 active:scale-98 cursor-pointer"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#0B2545] py-2.5 text-[13px] font-semibold text-white transition-all hover:bg-[#7A1E2B] active:scale-[0.99] cursor-pointer shadow-xs"
         >
           <Plus className="h-4 w-4" />
-          New Chat
+          <span>New Inquiry</span>
         </button>
 
         <button
           onClick={onOpenSearch}
-          className="flex w-full items-center justify-between rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 px-3.5 py-2.5 text-left text-[13px] text-slate-500 dark:text-slate-400 transition-all hover:bg-slate-100 dark:hover:bg-slate-800/60 cursor-pointer"
+          className="flex w-full items-center justify-between rounded-lg border border-[#E7E2D8] dark:border-[#1A2A40] bg-[#F4F5F7] dark:bg-[#0E1B2D] px-3.5 py-2.5 text-left text-[12.5px] text-[#2B2B2B] dark:text-[#A0B0C5] transition-all hover:border-[#0B2545]/40 dark:hover:border-[#6C8EBF]/40 cursor-pointer"
         >
-          <span className="flex items-center gap-2">
-            <Search className="h-3.5 w-3.5 text-slate-400" />
-            Search knowledge base...
+          <span className="flex items-center gap-2 truncate">
+            <Search className="h-3.5 w-3.5 text-[#0B2545] dark:text-[#809BCE] shrink-0" />
+            <span>Search admissions info...</span>
           </span>
-          <kbd className="hidden rounded-md bg-slate-200/70 dark:bg-slate-800 px-1.5 py-0.5 text-[9px] font-mono text-slate-500 sm:inline-block">
+          <kbd className="hidden rounded bg-[#E7E2D8] dark:bg-[#1A2A40] px-1.5 py-0.5 text-[9px] font-mono text-[#0B2545] dark:text-[#C0D0E5] sm:inline-block">
             Ctrl+K
           </kbd>
         </button>
       </div>
 
-      {/* Categories + Conversations - unified scrollable area */}
+      {/* Categories + Conversations - scrollable navigation panel */}
       <div className="flex-1 overflow-y-auto flex flex-col min-h-0">
 
-        {/* Categories */}
-        <div className="px-3 pt-1 pb-3 border-b border-slate-200/60 dark:border-slate-800/60 shrink-0">
-          <p className="px-2 pb-2 text-[9.5px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
-            Knowledge Base
+        {/* Knowledge Base Categories */}
+        <div className="px-3 pt-1 pb-3 border-b border-[#E7E2D8]/70 dark:border-[#1A2A40]/70 shrink-0">
+          <p className="px-2 pb-2 text-[10px] font-bold uppercase tracking-wider text-[#7A1E2B] dark:text-[#C9A227]">
+            Information Resources
           </p>
           <nav className="space-y-0.5">
             {CATEGORIES.map((cat) => {
@@ -107,31 +104,29 @@ export default function Sidebar({
                 <button
                   key={cat.name}
                   onClick={() => onSelectCategory(cat.name)}
-                  className={`flex w-full items-center gap-3 rounded-xl px-2.5 py-2 text-[13px] font-medium transition-all cursor-pointer ${
+                  className={`flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-[12.5px] font-medium transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 font-bold'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-850/60 dark:hover:text-slate-300'
+                      ? 'bg-[#0B2545] text-white font-semibold shadow-xs'
+                      : 'text-[#2B2B2B] hover:bg-[#F4F5F7] hover:text-[#0B2545] dark:text-[#C0D0E5] dark:hover:bg-[#112035] dark:hover:text-white'
                   }`}
                 >
-                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg ${isActive ? cat.bg : ''}`}>
-                    <Icon className={`h-3.5 w-3.5 ${isActive ? cat.color : 'text-slate-400 dark:text-slate-500'}`} />
-                  </span>
-                  {cat.name}
+                  <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-[#C9A227]' : 'text-[#0B2545] dark:text-[#809BCE]'}`} />
+                  <span className="truncate">{cat.name}</span>
                 </button>
               );
             })}
           </nav>
         </div>
 
-        {/* Conversation History */}
-        <div className="px-3 py-4 flex-1">
-          <p className="px-2 pb-2.5 text-[9.5px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
-            Recent Chats
+        {/* Saved Inquiries / History */}
+        <div className="px-3 py-3.5 flex-1">
+          <p className="px-2 pb-2 text-[10px] font-bold uppercase tracking-wider text-[#0B2545] dark:text-[#A0B0C5]">
+            Recent Inquiries
           </p>
           <div className="space-y-0.5">
             {conversations.length === 0 ? (
-              <div className="py-4 text-center text-xs text-slate-400 dark:text-slate-500">
-                No conversations yet
+              <div className="py-4 text-center text-xs text-[#666666] dark:text-[#708095]">
+                No recent inquiries
               </div>
             ) : (
               conversations.map((conv) => {
@@ -139,24 +134,24 @@ export default function Sidebar({
                 return (
                   <div
                     key={conv.id}
-                    className={`group relative flex items-center rounded-xl px-2.5 py-2 text-[13px] transition-all cursor-pointer ${
+                    className={`group relative flex items-center rounded-md px-2.5 py-2 text-[12.5px] transition-all cursor-pointer ${
                       isActive
-                        ? 'bg-slate-100 text-slate-900 dark:bg-slate-800/70 dark:text-slate-100 font-bold'
-                        : 'text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/40'
+                        ? 'bg-[#F4F5F7] text-[#0B2545] dark:bg-[#112035] dark:text-white font-semibold border-l-2 border-[#7A1E2B]'
+                        : 'text-[#2B2B2B] hover:bg-[#F4F5F7] dark:text-[#A0B0C5] dark:hover:bg-[#112035]'
                     }`}
                   >
                     <button
                       onClick={() => onSelectConversation(conv.id)}
                       className="flex flex-1 items-center gap-2.5 text-left outline-none min-w-0"
                     >
-                      <MessageSquare className="h-3.5 w-3.5 shrink-0 text-slate-400 dark:text-slate-500" />
-                      <span className="truncate font-medium text-[12.5px]">
-                        {conv.title || 'New Chat'}
+                      <MessageSquare className="h-3.5 w-3.5 shrink-0 text-[#0B2545] dark:text-[#809BCE]" />
+                      <span className="truncate font-medium text-[12px]">
+                        {conv.title || 'New Inquiry'}
                       </span>
                     </button>
                     <button
                       onClick={() => onDeleteConversation(conv.id)}
-                      className="ml-1 shrink-0 opacity-0 p-0.5 rounded hover:text-red-500 group-hover:opacity-100 transition-all dark:hover:text-red-400 cursor-pointer"
+                      className="ml-1 shrink-0 opacity-0 p-0.5 rounded hover:text-[#7A1E2B] group-hover:opacity-100 transition-all cursor-pointer"
                       title="Delete"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
@@ -170,10 +165,13 @@ export default function Sidebar({
 
       </div>
 
-      {/* Footer */}
-      <div className="border-t border-slate-200/80 dark:border-slate-800/80 px-4 py-3 flex items-center justify-between gap-2">
-        <p className="text-[10.5px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">
-          CUI Wah Campus AI v2.5
+      {/* Institutional Footer */}
+      <div className="border-t border-[#E7E2D8] dark:border-[#1A2A40] px-4 py-3 bg-[#F4F5F7] dark:bg-[#070D18]">
+        <p className="text-[10px] text-[#0B2545] dark:text-[#A0B0C5] font-semibold tracking-wide truncate">
+          COMSATS University Islamabad
+        </p>
+        <p className="text-[9.5px] text-[#7A1E2B] dark:text-[#C9A227] font-medium mt-0.5 truncate">
+          Wah Campus Admissions Office
         </p>
       </div>
     </aside>

@@ -238,7 +238,7 @@ export default function App() {
 
 
   return (
-    <div className="flex h-dvh w-screen overflow-hidden bg-slate-100 text-slate-600 dark:bg-slate-950 dark:text-slate-400 font-sans">
+    <div className="flex h-dvh w-screen overflow-hidden bg-[#F7F5F0] text-[#2B2B2B] dark:bg-[#070D18] dark:text-[#D8E2EE] font-sans">
       {/* Sidebar - Desktop Layout */}
       <div className="hidden md:block">
         <Sidebar
