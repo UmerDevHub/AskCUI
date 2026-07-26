@@ -300,6 +300,9 @@ export default function App() {
         <Navbar
           onToggleMobileSidebar={() => setIsMobileSidebarOpen(true)}
           onNewConversation={handleNewConversation}
+          onOpenSearch={() => setIsSearchOpen(true)}
+          isDarkMode={isDarkMode}
+          onToggleTheme={handleToggleTheme}
         />
 
         {/* Conversation Chat Window */}

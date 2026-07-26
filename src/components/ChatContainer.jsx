@@ -5,7 +5,7 @@ import {
   TrendingUp, ShieldCheck, AlertTriangle, Globe, BookOpen, 
   DollarSign, Home, CheckCircle, Calculator, Clipboard, 
   FileText, Award, HelpCircle, Phone, ChevronDown, ChevronUp,
-  Clock, CheckCircle2, AlertCircle, GraduationCap
+  Clock, CheckCircle2, AlertCircle, GraduationCap, ArrowDown
 } from 'lucide-react';
 import CategoryExplorer from './CategoryExplorer';
 
@@ -444,18 +444,56 @@ export default function ChatContainer({
 }) {
   const safeMessages = Array.isArray(messages) ? messages : [];
   const lastUserMsgRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+  const isAutoScrollEnabledRef = useRef(true);
+  const [showScrollBottomBtn, setShowScrollBottomBtn] = useState(false);
   const prevMsgCountRef = useRef(safeMessages.length);
 
   const lastUserMsgIdx = safeMessages.reduce((acc, m, i) => (m && m.sender === 'user') ? i : acc, -1);
 
+  // Detect user manual scroll up/down
+  const handleScroll = () => {
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
+    
+    // If distance from bottom is > 60px, user has scrolled up away from bottom
+    if (distanceFromBottom > 60) {
+      isAutoScrollEnabledRef.current = false;
+      setShowScrollBottomBtn(true);
+    } else {
+      // User is near bottom (< 30px)
+      isAutoScrollEnabledRef.current = true;
+      setShowScrollBottomBtn(false);
+    }
+  };
+
+  // Scroll to bottom helper
+  const scrollToBottom = (behavior = 'smooth') => {
+    const container = messagesContainerRef.current;
+    if (!container) return;
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: behavior
+    });
+  };
+
   useEffect(() => {
     if (safeMessages.length > prevMsgCountRef.current) {
-      if (lastUserMsgRef.current) {
-        lastUserMsgRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      isAutoScrollEnabledRef.current = true;
+      setShowScrollBottomBtn(false);
+      scrollToBottom('smooth');
     }
     prevMsgCountRef.current = safeMessages.length;
   }, [safeMessages.length]);
+
+  const handleTypewriterScroll = () => {
+    if (isAutoScrollEnabledRef.current && messagesContainerRef.current) {
+      const container = messagesContainerRef.current;
+      container.scrollTop = container.scrollHeight;
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -489,7 +527,11 @@ export default function ChatContainer({
       </div>
 
       {/* Main Content Feed */}
-      <div className="flex-1 overflow-y-auto scroll-touch px-2.5 py-4 md:px-8 max-w-full">
+      <div 
+        ref={messagesContainerRef}
+        onScroll={handleScroll}
+        className="flex-1 overflow-y-auto scroll-touch px-2.5 py-4 md:px-8 max-w-full"
+      >
         {activeCategory !== 'All' ? (
           <div className="mx-auto max-w-4xl py-1 pb-12">
             <CategoryExplorer category={activeCategory} onAskQuestion={(qText, cat) => onSend(qText, cat)} />
@@ -584,11 +626,7 @@ export default function ChatContainer({
                         <TypewriterText 
                           text={typeof answerText === 'string' ? answerText : JSON.stringify(answerText)} 
                           isLatest={idx === safeMessages.length - 1} 
-                          onScrollToBottom={() => {
-                            if (lastUserMsgRef.current) {
-                              lastUserMsgRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-                            }
-                          }}
+                          onScrollToBottom={handleTypewriterScroll}
                         />
                       )}
                     </div>
@@ -690,6 +728,27 @@ export default function ChatContainer({
           </p>
         </form>
       </div>
+
+      {/* Floating Scroll-to-Bottom Button */}
+      <AnimatePresence>
+        {showScrollBottomBtn && (
+          <motion.button
+            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            onClick={() => {
+              isAutoScrollEnabledRef.current = true;
+              setShowScrollBottomBtn(false);
+              scrollToBottom('smooth');
+            }}
+            className="absolute bottom-20 right-4 md:right-8 z-20 flex items-center gap-1.5 rounded-full bg-[#0B2545] text-white dark:bg-[#C9A227] dark:text-[#0B2545] px-3.5 py-2 text-xs font-semibold shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer border border-white/20 dark:border-black/20"
+            title="Scroll to bottom"
+          >
+            <ArrowDown className="h-3.5 w-3.5" />
+            <span>Scroll to bottom</span>
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
