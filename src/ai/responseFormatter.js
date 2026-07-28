@@ -1,6 +1,6 @@
 /**
  * Response Formatter
- * Normalizes and enriches LLM responses before sending to the UI.
+ * Normalizes and cleans LLM responses before sending to the UI.
  */
 
 import { formatCitations } from '../knowledge/citations.js';
@@ -15,6 +15,23 @@ const FALLBACK_RESPONSE = {
 };
 
 /**
+ * Strips technical raw JSON file source listings from answer text
+ * (e.g. "Sources: prerequisites.json, eligibility.json...")
+ */
+function cleanAnswerText(text) {
+  if (typeof text !== 'string') return text;
+  
+  // Remove lines like "Sources: prerequisites.json, eligibility.json..." or "**Sources:** ..."
+  return text
+    .replace(/\n\s*(\*\*|\*)?Sources?:?(\*\*|\*)?\s*.*\.json.*/gi, '')
+    .replace(/\n\s*(\*\*|\*)?Sources?:?(\*\*|\*)?[\s\S]*$/gi, (match) => {
+      // If the match contains .json file extensions, strip it
+      return match.includes('.json') ? '' : match;
+    })
+    .trim();
+}
+
+/**
  * Parses and validates the raw JSON response from the LLM.
  * Returns a safe, normalized response object.
  */
@@ -22,6 +39,9 @@ export function formatResponse(raw, contextSources, contextConfidence) {
   // Handle null / error cases
   if (!raw || typeof raw !== 'object') return FALLBACK_RESPONSE;
   if (!raw.answer || typeof raw.answer !== 'string') return FALLBACK_RESPONSE;
+
+  // Clean raw answer text
+  const cleanAnswer = cleanAnswerText(raw.answer);
 
   // Prefer LLM-provided confidence if it looks valid, otherwise use computed
   const confidence = (typeof raw.confidence === 'number' && raw.confidence >= 0 && raw.confidence <= 100)
@@ -40,7 +60,7 @@ export function formatResponse(raw, contextSources, contextConfidence) {
   const citations = formatCitations(allSources);
 
   return {
-    answer: raw.answer,
+    answer: cleanAnswer,
     sources: allSources,
     citations,
     confidence,
