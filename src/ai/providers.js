@@ -1,10 +1,11 @@
 /**
- * LLM Providers — Groq, Cohere, OpenRouter, OpenAI
+ * LLM Providers — Groq, Mistral, Cohere, OpenRouter, OpenAI
  * Extracted from ai.js for clean separation of concerns.
  */
 
 const PROVIDER_URLS = {
   groq: 'https://api.groq.com/openai/v1/chat/completions',
+  mistral: 'https://api.mistral.ai/v1/chat/completions',
   cohere: 'https://api.cohere.ai/compatibility/v1/chat/completions',
   openrouter: 'https://openrouter.ai/api/v1/chat/completions',
   openai: 'https://api.openai.com/v1/chat/completions',
@@ -28,21 +29,26 @@ export async function callProvider(provider, apiKey, model, messages) {
     headers['X-Title'] = 'CUI Wah Admission AI';
   }
 
+  const payload = {
+    model,
+    messages,
+    response_format: { type: 'json_object' },
+    temperature: 0.2, // Lower temp for factual accuracy
+    max_tokens: 3000, // Ensure long, comprehensive, research-backed responses
+  };
+
   const res = await fetch(url, {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      model,
-      messages,
-      response_format: { type: 'json_object' },
-      temperature: 0.2, // Lower temp for factual accuracy
-      max_tokens: 3000, // Ensure long, comprehensive, research-backed responses
-    }),
+    body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
     let errMsg;
-    try { errMsg = (await res.json()).error?.message; } catch { /* noop */ }
+    try { 
+      const errJson = await res.json();
+      errMsg = errJson.error?.message || errJson.message; 
+    } catch { /* noop */ }
     throw new Error(errMsg || `${provider.toUpperCase()} returned status ${res.status}`);
   }
 
@@ -66,11 +72,13 @@ export async function callWithFallback(primaryProvider, primaryKey, primaryModel
 
   // Build fallback list from env vars
   const envGroq = import.meta.env.VITE_GROQ_API_KEY || '';
+  const envMistral = import.meta.env.VITE_MISTRAL_API_KEY || '';
   const envCohere = import.meta.env.VITE_COHERE_API_KEY || '';
   const envOpenRouter = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 
   const fallbacks = [
     { provider: 'groq', key: envGroq, model: 'llama-3.3-70b-versatile' },
+    { provider: 'mistral', key: envMistral, model: 'mistral-small-latest' },
     { provider: 'cohere', key: envCohere, model: 'command-a-plus-05-2026' },
     { provider: 'openrouter', key: envOpenRouter, model: 'meta-llama/llama-3.3-70b-instruct:free' },
   ].filter(f => f.key && f.provider !== primaryProvider);

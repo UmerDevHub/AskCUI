@@ -16,6 +16,7 @@ export default function App() {
 
   // Default keys baked in at build time (from .env)
   const DEFAULT_GROQ_KEY = import.meta.env.VITE_GROQ_API_KEY || '';
+  const DEFAULT_MISTRAL_KEY = import.meta.env.VITE_MISTRAL_API_KEY || '';
   const DEFAULT_COHERE_KEY = import.meta.env.VITE_COHERE_API_KEY || '';
   const DEFAULT_OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 
@@ -27,6 +28,12 @@ export default function App() {
         provider: 'groq', 
         model: 'llama-3.3-70b-versatile', 
         apiKey: DEFAULT_GROQ_KEY 
+      };
+    } else if (DEFAULT_MISTRAL_KEY) {
+      return {
+        provider: 'mistral',
+        model: 'mistral-small-latest',
+        apiKey: DEFAULT_MISTRAL_KEY
       };
     } else if (DEFAULT_COHERE_KEY) {
       return {
