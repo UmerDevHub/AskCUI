@@ -11,6 +11,18 @@ import {
 } from 'lucide-react';
 import CategoryExplorer from './CategoryExplorer';
 
+// ── SANITIZE TEXT HELPER ───────────────────────────────────────────────────────
+// Removes any trailing "Sources: prerequisites.json, eligibility.json..." lines
+function sanitizeText(text) {
+  if (!text || typeof text !== 'string') return text;
+  return text
+    .replace(/(\*\*|\*)?Sources?:?(\*\*|\*)?\s*[\w_,\s.-]+\.json[^\n]*/gi, '')
+    .replace(/\n\s*(\*\*|\*)?Sources?:?(\*\*|\*)?[\s\S]*$/gi, (match) => {
+      return match.includes('.json') ? '' : match;
+    })
+    .trim();
+}
+
 // ── SUGGESTIONS & CATEGORIES DATA ───────────────────────────────────────────────
 const SUGGESTIONS = [
   { text: "What is the fee structure for BS Computer Science in Fall 2026?", category: "Fees", icon: DollarSign },
@@ -46,7 +58,8 @@ const QUICK_ACTIONS = [
 ];
 
 // ── MARKDOWN RENDERER ──────────────────────────────────────────────────────────
-function renderMarkdown(text) {
+function renderMarkdown(rawText) {
+  const text = sanitizeText(rawText);
   if (typeof text !== 'string' || !text.trim()) return null;
 
   const lines = text.split('\n');
@@ -420,16 +433,17 @@ function GptThinkingBox({ isFinished = false, secondsElapsed = 4.2, queryText = 
 
 // ── TYPEWRITER TEXT STREAMING ───────────────────────────────────────────────────
 function TypewriterText({ text = '', isLatest = false, onScrollToBottom = () => {} }) {
-  const [displayedLength, setDisplayedLength] = useState(isLatest ? 0 : text.length);
+  const cleanText = sanitizeText(text);
+  const [displayedLength, setDisplayedLength] = useState(isLatest ? 0 : cleanText.length);
 
   useEffect(() => {
     if (!isLatest) {
-      setDisplayedLength(text.length);
+      setDisplayedLength(cleanText.length);
       return;
     }
 
     setDisplayedLength(0);
-    const totalLength = text.length;
+    const totalLength = cleanText.length;
     const step = 3;
     const interval = setInterval(() => {
       setDisplayedLength((prev) => {
@@ -444,10 +458,10 @@ function TypewriterText({ text = '', isLatest = false, onScrollToBottom = () => 
     }, 12);
 
     return () => clearInterval(interval);
-  }, [text, isLatest]);
+  }, [cleanText, isLatest]);
 
-  const currentText = isLatest ? text.slice(0, displayedLength) : text;
-  const isTyping = isLatest && displayedLength < text.length;
+  const currentText = isLatest ? cleanText.slice(0, displayedLength) : cleanText;
+  const isTyping = isLatest && displayedLength < cleanText.length;
 
   return (
     <div className="prose dark:prose-invert break-words max-w-full overflow-x-hidden relative">
@@ -469,6 +483,7 @@ function MessageActionBar({
 }) {
   const [feedback, setFeedback] = useState(null);
   const [speaking, setSpeaking] = useState(false);
+  const cleanAnswer = sanitizeText(answerText);
 
   const handleSpeechToggle = () => {
     if (!('speechSynthesis' in window)) return;
@@ -478,7 +493,7 @@ function MessageActionBar({
       setSpeaking(false);
     } else {
       window.speechSynthesis.cancel();
-      const plainText = answerText.replace(/[#*`|_~]/g, '');
+      const plainText = cleanAnswer.replace(/[#*`|_~]/g, '');
       const utterance = new SpeechSynthesisUtterance(plainText);
       utterance.rate = 1.0;
       utterance.onend = () => setSpeaking(false);
@@ -516,7 +531,7 @@ function MessageActionBar({
 
       {/* Copy Button */}
       <button
-        onClick={() => onCopyAnswer(msgId, answerText)}
+        onClick={() => onCopyAnswer(msgId, cleanAnswer)}
         className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
         title="Copy"
       >
@@ -551,9 +566,9 @@ function MessageActionBar({
       <button
         onClick={() => {
           if (navigator.share) {
-            navigator.share({ title: 'CUI Admissions FAQ Answer', text: answerText }).catch(() => {});
+            navigator.share({ title: 'CUI Admissions FAQ Answer', text: cleanAnswer }).catch(() => {});
           } else {
-            onCopyAnswer(msgId, answerText);
+            onCopyAnswer(msgId, cleanAnswer);
           }
         }}
         className="flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer ml-auto"
@@ -750,7 +765,8 @@ export default function ChatContainer({
               const isUser = msg.sender === 'user';
               const isLastUserMsg = idx === lastUserMsgIdx;
               const responseObj = (msg.text && typeof msg.text === 'object') ? msg.text : null;
-              const answerText = responseObj ? responseObj.answer : (msg.text || '');
+              const rawAnswer = responseObj ? responseObj.answer : (msg.text || '');
+              const answerText = sanitizeText(typeof rawAnswer === 'string' ? rawAnswer : JSON.stringify(rawAnswer));
 
               return (
                 <div 
@@ -772,7 +788,7 @@ export default function ChatContainer({
                       <GptThinkingBox 
                         isFinished={true} 
                         secondsElapsed={msg.thinkingTime || 4.2} 
-                        queryText={typeof answerText === 'string' ? answerText : (responseObj?.answer || '')} 
+                        queryText={answerText} 
                       />
                     )}
 
@@ -786,7 +802,7 @@ export default function ChatContainer({
                         <p className="text-[13.5px] md:text-[14.5px] leading-relaxed whitespace-pre-wrap break-words">{msg.text}</p>
                       ) : (
                         <TypewriterText 
-                          text={typeof answerText === 'string' ? answerText : JSON.stringify(answerText)} 
+                          text={answerText} 
                           isLatest={idx === safeMessages.length - 1} 
                           onScrollToBottom={handleTypewriterScroll}
                         />
@@ -797,7 +813,7 @@ export default function ChatContainer({
                     {!isUser && (
                       <MessageActionBar
                         msgId={msg.id || idx}
-                        answerText={typeof answerText === 'string' ? answerText : ''}
+                        answerText={answerText}
                         copiedId={copiedId}
                         onCopyAnswer={onCopyAnswer}
                       />
